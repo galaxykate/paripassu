@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+	<title>Pari passu</title>
+
+
+	<link rel="icon" href="css/img/favicon.ico">
+	<link rel="stylesheet" href="css/page.css">
+	<link rel="stylesheet" href="css/paripassu.css">
+	<!-- <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/2.0.0-beta.3/peerjs.min.js"></script>
+
+
+
+
+	<script  src="js/utilities.js"></script>
+	<script  src="js/vendor/vue3.global.js"></script>
+	<script  src="js/vendor/simple-peer-wrapper.js"></script>
+	<script  src="js/vendor/vue.js"></script>
+	<script  src="js/paripassu.js" ></script>
+	<script  src="js/v-widgets.js" ></script>
+
+	<script  src="js/app.js" ></script>
+
+</head>
+<body>
+	<div id="app">
+		
+	</div>
+		
+		
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+	<script type="module">
+		// Firebase setup
+		const firebaseConfig = {
+			apiKey: "AIzaSyAlnze6bJCvcRD72nVGmmc6w0QfRsvtQNU",
+			authDomain: "metabox-eec95.firebaseapp.com",
+			databaseURL: "https://metabox-eec95.firebaseio.com",
+			projectId: "metabox",
+			storageBucket: "metabox.appspot.com",
+			messagingSenderId: "990184798969",
+			appId: "1:990184798969:web:5f98fb43fd515b90e64028"
+			};
+
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig)
+		firebase.isInitialized = true
+		room.connectFirebase()
+
+		console.log("Firebase loaded!!")
+	</script>
+</body>
+	
+</html>

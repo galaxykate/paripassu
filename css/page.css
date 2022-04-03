@@ -1,0 +1,229 @@
+
+
+:root {
+	--main-bg-color: hsl(35, 60%, 95%);
+}
+
+
+
+/*https://stackoverflow.com/questions/7439042/css-js-to-prevent-dragging-of-ghost-image*/
+img {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
+}
+
+/*https://www.tilingtextures.com/light-cork-board/*/
+/*https://www.toptal.com/designers/subtlepatterns/retina-wood/*/
+html,body {
+	background-image: url("img/retina_wood.png");
+	background-repeat: repeat;
+	font-family: basic, sans-serif;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+
+h1, h2, h3, h4 {
+	margin: 0px;
+}
+
+body {
+	flex-direction: column;
+	display: flex;
+}
+
+body {
+
+}
+
+
+#app {
+	width:  100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	border:  2px solid cyan;
+}
+
+.columns {
+	display: flex;
+	flex-direction: row;
+	flex:  1;
+	border:  2px solid pink;
+}
+
+.column {
+	flex: 1;
+	border:  2px solid cyan;
+}
+
+#app>#main-columns {
+	flex:  1;
+	display: flex;
+	flex-direction: row;
+	border:  2px solid pink;
+}
+
+#app>#main-columns>.main-column {
+	position: relative;
+	
+	border:  2px solid purple;
+	overflow: hidden;
+	display: flex;
+
+	flex-direction: column;
+}
+
+
+td:nth-child(1) {  
+  /* your stuff here */
+  font-weight: bold;
+}
+
+.overlay {
+	pointer-events: none;
+	z-index: 100;
+	position: absolute;
+	left:  0px;
+	top:  0px;
+	width:  100%;
+	height:  100%;
+	/*background-color: hsla(330, 100%, 60%, .8);*/
+}
+
+.widget {
+	padding:  4px;
+	background-color: hsla(30, 90%, 96%, 1);
+	border:  1px solid grey;
+	box-sizing: border-box;
+	position: relative;
+	flex:  1;
+	margin:  4px;
+}
+
+
+
+.fill-bar {
+	width:  100px;
+	height:  10px;
+	background-color: black;
+	
+}
+.fill-bar .fill {
+	width:  50%;
+	height:  100%;
+	background-color: hsla(230, 100%, 56%, 1);
+	
+}
+
+#app>header,#app>footer {
+	height: 10px;
+	background-color: cyan;
+}
+
+.icon-button {
+	font-size: 110%;
+	padding: 0px;
+	width:  1.5em;
+	height:  1.5em;
+}
+
+.tile {
+	z-index: 40;
+	box-sizing: border-box;
+	position: relative;
+	margin:  2px;
+	box-shadow: 1px 3px 3px rgba(0, 0, 0, .4);
+	background-color: hsla(30, 100%, 99%, 1);
+}
+
+.tile header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding:  2px;
+	position: relative;
+	z-index: 100;
+	box-shadow: 1px 3px 3px rgba(0, 0, 0, .4);
+	background-color: white;
+}
+
+.tile .content {
+	position: relative;
+	z-index: 50;
+	background-color: hsla(30, 100%, 99%, 1);
+}
+
+.uid {
+	font-family: monospace;
+}
+
+.uid-pin {
+	border-radius: 3em;
+	position: absolute;
+	top:  -5px;
+	right:  -10px;
+	padding:  2px 4px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, .5);
+}
+
+.detail {
+	font-size: 75%;
+}
+
+.ultradetail {
+	font-size: 60%;
+}
+
+.chip {
+	border-radius: 10px;
+	display: inline-block;
+	background-color: hsla(250, 100%, 90%, 1);
+	padding:  1px 2px;
+	margin:  2px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, .4);
+}
+
+.uid-chip {
+
+	font-size: 50%;
+}
+
+.origin-chip-self {
+	border:  3px solid grey;
+}
+
+.infobox {
+	position: absolute;
+	right:  0px;
+	top:  0px;
+	width:  100px;
+	height:  50px;
+	background-color: hsla(250, 100%, 100%, .8);
+	padding:  1px 2px;
+	margin:  2px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, .4);
+}
+
+.editable-field {
+	position: relative;
+	border:  1px solid grey;
+}
+
+.title {
+	font-weight: bold;
+}
+
+header {
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, .4);
+}
+
+.panel {
+	border:  3px solid grey;
+	
+	margin:  2px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, .4);
+}

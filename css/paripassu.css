@@ -1,0 +1,39 @@
+.event-chip {
+	width:  90%;
+	margin:  5px;
+}
+
+.event-chip-host {
+	background-color: hsla(150, 100%, 90%, 1);
+}
+
+.from-host {
+	border: 1px solid hsla(150, 100%, 40%, 1);
+	background-color: hsla(150, 100%, 80%, 1);
+}
+
+.event-chip-join {
+	background-color: hsla(150, 50%, 90%, 1);
+}
+
+
+.event-chip.unsent {
+	border: 2px solid grey ;
+}
+.event-chip.unsent {
+	border: 2px dashed grey ;
+}
+
+.event-chip header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.event-chip .event-type {
+	display: inline-block;
+	font-size: 70%;
+	padding: 2px 4px;
+	opacity: 50%;
+	font-style: italic;
+}
