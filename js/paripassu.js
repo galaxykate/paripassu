@@ -1,3 +1,4 @@
+const LOG_PREFIX = "pp_eventlog_"
 
 let peerServerSettings = {
 	host: 'peerjs.adamsmith.as',
@@ -5,6 +6,14 @@ let peerServerSettings = {
 	secure: true
 }
 
+// https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array
+function uniqBy(a, key) {
+    var seen = {};
+    return a.filter(function(item) {
+        var k = key(item);
+        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    })
+}
 
 class Room {
 
@@ -27,11 +36,29 @@ class Room {
 			}
 		})
 
+
+
 		this.hostConnection = undefined
 		this.guestConnections = []
 
 		this.events = []
 		this.handlers = {}
+
+
+		// this._loadFromLocalStorage()
+
+		this._postEvent("closeWindow")
+		window.onbeforeunload = function () {
+			this._postEvent("closeWindow")
+			return "eh?"
+		};
+
+		window.addEventListener("beforeunload", function(e){
+			this._postEvent("unload?")
+		   // Do something
+		}, false);
+
+
 
 	}
 
@@ -42,12 +69,57 @@ class Room {
 		return this
 	}
 
+	sendMessage(text, settings) {
+		this._postEvent("message", {
+			text: text,
+		})
+	}
+	
+
 
 	move(moveObj) {
-		this.postEvent("move", moveObj)
+		this._postEvent("move", moveObj)
 	}
 
+	get messages() {
+		return this.events.filter(ev => ev.type == "message")
+	}
 
+	get players() {
+
+	}
+
+	clearEvents() {
+		this.events.splice(0,this.events.length)
+
+		this._saveToLocalStorage()
+	}
+
+	//================================================================
+	// Private methods
+
+	_loadFromLocalStorage() {
+
+		// Load the log from localstorage
+		console.log("Load events from localstorage")
+		for (var key in localStorage){
+			if (key.startsWith(LOG_PREFIX)) {
+				let storedRoomID = key.substring(LOG_PREFIX.length)
+				console.log(key, storedRoomID)
+				if (storedRoomID === this.roomID) {
+					let storedEvents = JSON.parse(localStorage.getItem(key))
+					console.log(storedEvents)
+					this._addEvent(storedEvents)
+				}
+			}
+		}
+
+	}
+
+	_saveToLocalStorage() {
+		// Save this to localstorage
+		localStorage.setItem(LOG_PREFIX + this.roomID, JSON.stringify(this.events))
+	}
 
 	_addEvent(ev, isLocal) {
 		if (!Array.isArray(ev)) {
@@ -64,10 +136,15 @@ class Room {
 				this.handlers.move?.forEach(fxn => fxn(e.content))
 			}
 		})
+
+		this.events.sort((a, b) => a.date - b.date)
+		this._saveToLocalStorage()
 	}
 
-	postEvent(type, content) {
+
+	_postEvent(type, content) {
 		let ev = {
+			uid: uuidv4(),
 			type: type,
 			from: this.peerID,
 			date: Date.now(),
@@ -88,7 +165,7 @@ class Room {
 		// Make a connection to the host
 		this.hostConnection = this.peerServer.connect(this.roomID, {metadata:"hello!", serialization: "json"})
 		
-		this.postEvent("join", {text:`joined as ${this.peerID.slice(-4)}`})
+		this._postEvent("join", {text:`joined as ${this.peerID.slice(-4)}`})
 
 		this.hostConnection.on("open", () => {
 			console.log("Opened host connection!")
@@ -107,7 +184,7 @@ class Room {
 	_joinAsHost(id) {
 		this.peerID = id
 
-		this.postEvent("host", {text:`started hosting ${id}`})
+		this._postEvent("host", {text:`started hosting ${id}`})
 
 		// Deal with guest connections
 		this.peerServer.on("connection", (conn) => {
@@ -123,7 +200,7 @@ class Room {
 			}).on("close", () => {
 				console.log("Closed a connection")
 				conn.closedOn = Date.now()
-				this.postEvent("left", {text:`${conn.peer.slice(-4)} left`})
+				this._postEvent("left", {text:`${conn.peer.slice(-4)} left`})
 				
 
 			}).on("data", (data) => {

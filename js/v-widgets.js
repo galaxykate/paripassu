@@ -1,9 +1,19 @@
 const hostControls = {
 	template: `<div class="panel">
-		HOST CONTROLS
+		<button @click="clearEvents">clear events</button>
 	</div>
 	`,
-	props: ["room"]
+	methods: {
+		clearEvents() {
+			
+			this.room.clearEvents()
+		}
+	},
+	props: {
+		room:{
+			isRequired: true
+		}
+	}
 }
 
 

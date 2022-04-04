@@ -84,23 +84,25 @@ window.onload = (event) => {
 		}
 	}, 100) 
 
-	// if (navigator.geolocation) {
-	// 	navigator.geolocation.getCurrentPosition((pos) => {
-	// 		room.location = [pos.coords.latitude, pos.coords.longitude]
-	// 	});
-	// }
+	
 
 	const eventchip = {
 		template: `<div class="chip event-chip" :class="classes">
 			
 			<header>
-				<div class="chip" v-if="event.from" :class="{'from-host':fromHost}">{{event.from.slice(-4)}}</div>
-				<div>{{event.content.text}}</div>
+				<div class="microchip" v-if="event.uid">{{event.uid}}</div>
+				<div>{{outputTime}}</div>
+				<div>{{event.type}}</div><div class="chip" v-if="event.from" :class="{'from-host':fromHost}">{{event.from.slice(-4)}}</div>
+				<div v-if="event.content">{{event.content.text}}</div>
 			</header>
 			
 
 		</div>`,
 		computed: {
+			outputTime() {
+				let d = new Date(this.event.date)
+				return d.toLocaleTimeString()
+			},
 			classes() {
 				return {
 					["event-chip-" + this.event.type]: true
@@ -143,31 +145,24 @@ window.onload = (event) => {
 					
 					<event-log :events="room.events" class="widget" :room="room"/> 
 				</div>
-				<div class="main-column" style="flex:1">
+				<div class="main-column" style="flex:1;display:flex;flex-direction:row">
 					
-					<host-controls v-if="room.isHost" />
+					<host-controls v-if="room.isHost" :room="room" />
 
-					<div>
-					GEO:
-					{{room.location}}
+
+					<div class="panel column">
+						<input @keyup.enter="sendMessage" ref="message"></input><button @click="sendMessage">send</button>
+						
+						Messages {{room.messages.length}}
+						<div>
+							<div v-for="msg in room.messages">
+								<div class="chip">{{msg.from.slice(-4)}}</div>
+								<div class="message">{{msg.content.text}}</div>
+							</div>
+						</div>
 					</div>
-
-					<div>
-						{{gameState.moveCount}}
-						<div>last move:{{gameState.player}}</div>
-
-						<table>
-							<tr v-for="(val,key) in gameState.players">
-								<td>{{key}}</td>
-								<td>
-									<div class="fill-bar">
-										<div class="fill" :style="{width:(val*100) + '%'}"></div>
-									</div>
-								</td>
-								
-							</tr>
-						</table>
-
+					<div class="panel column">
+						<button @click="toggleGeo">enable geolocation 🌎</button>
 						
 					</div>
 				</div>
@@ -183,6 +178,22 @@ window.onload = (event) => {
 		},
 
 		methods: {
+
+			sendMessage() {
+				console.log(this.$refs)
+				let msg = this.$refs.message.value
+				console.log(msg)
+
+				this.$refs.message.value = ""
+				this.room.sendMessage(msg)
+			},
+			toggleGeo() {
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition((pos) => {
+						room.location = [pos.coords.latitude, pos.coords.longitude]
+					});
+				}
+			},
 			post() {
 				this.room.postMessage(words.getRandomWord())
 			}
