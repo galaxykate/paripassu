@@ -1,0 +1,2070 @@
+[
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/1868710752",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "825",
+                  "addr:postcode": "60201",
+                  "addr:street": "Noyes Street",
+                  "name": "D&D Finer Foods",
+                  "opening_hours": "Mo-Sa 08:00-20:00; Su 09:00-17:00",
+                  "shop": "supermarket"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6832252,
+                        42.0585487
+                  ]
+            },
+            "id": "node/1868710752"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/1949811289",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1000",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Bennison's Bakery",
+                  "opening_hours": "Mo-Fr 06:00-19:00; Sa 06:00-17:30; Su 07:00-16:00",
+                  "phone": "847-328-9434",
+                  "shop": "bakery",
+                  "website": "http://www.bennisonscakes.com/evanston.html"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6851927,
+                        42.0468618
+                  ]
+            },
+            "id": "node/1949811289"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2086267689",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1600",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "name": "Gearhead Outfitters",
+                  "opening_hours": "Mo-Sa 10:00-19:00; Su 11:00-18:00",
+                  "shop": "outdoor"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6821041,
+                        42.0471806
+                  ]
+            },
+            "id": "node/2086267689"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2086267702",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "921",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Church Street",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "brand": "Urban Outfitters",
+                  "brand:wikidata": "Q3552193",
+                  "brand:wikipedia": "en:Urban Outfitters",
+                  "name": "Urban Outfitters",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6843894,
+                        42.0485983
+                  ]
+            },
+            "id": "node/2086267702"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2087672892",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "950",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Church Street",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "note": "previously American Apparel",
+                  "shop": "vacant"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6845258,
+                        42.0483103
+                  ]
+            },
+            "id": "node/2087672892"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2087672894",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1755",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Maple Avenue",
+                  "addr:street:name": "Maple",
+                  "addr:street:type": "Avenue",
+                  "name": "Blick Art Materials",
+                  "shop": "craft",
+                  "wikidata": "Q5272692",
+                  "wikipedia": "en:Blick Art Materials"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6845823,
+                        42.0496468
+                  ]
+            },
+            "id": "node/2087672894"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2139418957",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "513",
+                  "addr:postcode": "60201",
+                  "addr:street": "Dempster Street",
+                  "addr:street:name": "Dempster",
+                  "addr:street:type": "Street",
+                  "name": "Murphy's Fit - Sports Footwear",
+                  "opening_hours": "Mo-Sa 10:00-18:00; Su 12:00-16:30",
+                  "phone": "+1 847-869-4101",
+                  "shop": "shoes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.67982,
+                        42.0413221
+                  ]
+            },
+            "id": "node/2139418957"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2139418966",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1304",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "PC Solutions",
+                  "phone": "847-475-9600",
+                  "shop": "hifi"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6807812,
+                        42.0414107
+                  ]
+            },
+            "id": "node/2139418966"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2154860770",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "628",
+                  "addr:postcode": "60201",
+                  "addr:street": "Church Street",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "name": "Fashion Nails",
+                  "phone": "424-1125",
+                  "shop": "salon"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6802348,
+                        42.0479546
+                  ]
+            },
+            "id": "node/2154860770"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2156436490",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "706",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Church Street",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "name": "Williams Next Door",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6812243,
+                        42.0482199
+                  ]
+            },
+            "id": "node/2156436490"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2202198115",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1510",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Town Cleaners",
+                  "shop": "laundry"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6803244,
+                        42.0454404
+                  ]
+            },
+            "id": "node/2202198115"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2202198400",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1524",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Comma Nail Spa",
+                  "shop": "salon"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6800492,
+                        42.0459494
+                  ]
+            },
+            "id": "node/2202198400"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2202198514",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1526",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Talia",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6799985,
+                        42.0460525
+                  ]
+            },
+            "id": "node/2202198514"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2202198669",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "606",
+                  "addr:postcode": "60201",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Comix Revolution",
+                  "phone": "866-8659",
+                  "shop": "books",
+                  "website": "http://www.online-revolution.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6803484,
+                        42.0462093
+                  ]
+            },
+            "id": "node/2202198669"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2210256089",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1623",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "BC Cleaners",
+                  "shop": "dry_cleaning"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.678999,
+                        42.0470071
+                  ]
+            },
+            "id": "node/2210256089"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2232639560",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1620",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "brand": "AT&T",
+                  "brand:wikidata": "Q298594",
+                  "brand:wikipedia": "en:AT&T Mobility",
+                  "name": "AT&T",
+                  "shop": "mobile_phone"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6796388,
+                        42.0467795
+                  ]
+            },
+            "id": "node/2232639560"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2232639629",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "601",
+                  "addr:postcode": "60201",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Accents Plus",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6798078,
+                        42.0463902
+                  ]
+            },
+            "id": "node/2232639629"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295218595",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1312",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Stumble & Relish",
+                  "shop": "gift",
+                  "website": "http://stumbleandrelish.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6807953,
+                        42.0416989
+                  ]
+            },
+            "id": "node/2295218595"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295218686",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1314",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Joe's Hair Salon",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6807949,
+                        42.0417392
+                  ]
+            },
+            "id": "node/2295218686"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295219193",
+                  "addr:city": "Evanston",
+                  "addr:housename": "Bucephalus Bikes",
+                  "addr:housenumber": "1424",
+                  "addr:postcode": "60201",
+                  "addr:street": "Lake Street",
+                  "addr:street:name": "Lake",
+                  "addr:street:type": "Street",
+                  "name": "Bucephalus Bikes",
+                  "payment:bitcoin": "yes",
+                  "phone": "(847) 864-0924",
+                  "shop": "bicycle",
+                  "website": "https://bucephalusbikes.com/",
+                  "wheelchair": "yes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6933691,
+                        42.0439539
+                  ]
+            },
+            "id": "node/2295219193"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295219838",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "605",
+                  "addr:postcode": "60201",
+                  "addr:street": "Dempster Street",
+                  "addr:street:name": "Dempster",
+                  "addr:street:type": "Street",
+                  "name": "Secret Treasures",
+                  "phone": "847-866-6889",
+                  "shop": "antiques"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.680957,
+                        42.0413116
+                  ]
+            },
+            "id": "node/2295219838"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295219841",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "607",
+                  "addr:postcode": "60201",
+                  "addr:street": "Dempster Street",
+                  "addr:street:name": "Dempster",
+                  "addr:street:type": "Street",
+                  "name": "Beauty Spot",
+                  "phone": "847-864-2167",
+                  "shop": "beauty"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6810322,
+                        42.041321
+                  ]
+            },
+            "id": "node/2295219841"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295219843",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "609",
+                  "addr:postcode": "60201",
+                  "addr:street": "Dempster Street",
+                  "addr:street:name": "Dempster",
+                  "addr:street:type": "Street",
+                  "name": "Amishcraft",
+                  "phone": "+1-847-475-7260",
+                  "shop": "cabinets",
+                  "website": "http://kenhazlettllc.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6810924,
+                        42.0413214
+                  ]
+            },
+            "id": "node/2295219843"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295219847",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "611",
+                  "addr:postcode": "60201",
+                  "addr:street": "Dempster Street",
+                  "addr:street:name": "Dempster",
+                  "addr:street:type": "Street",
+                  "name": "Finders Keepers",
+                  "phone": "847-905-0240",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6811465,
+                        42.0413217
+                  ]
+            },
+            "id": "node/2295219847"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295219851",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "613",
+                  "addr:postcode": "60201",
+                  "addr:street": "Dempster Street",
+                  "addr:street:name": "Dempster",
+                  "addr:street:type": "Street",
+                  "name": "Shaker Traditions",
+                  "shop": "gift"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6812097,
+                        42.041322
+                  ]
+            },
+            "id": "node/2295219851"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224932",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1005",
+                  "addr:postcode": "60201",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Frida Hair Studio",
+                  "phone": "847-332-2324",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.685263,
+                        42.0471938
+                  ]
+            },
+            "id": "node/2295224932"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224935",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1008",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "brand": "Ace Hardware",
+                  "brand:wikidata": "Q4672981",
+                  "brand:wikipedia": "en:Ace Hardware",
+                  "name": "Lemoi Ace Hardware",
+                  "operator": "Lemoi Ace Hardware",
+                  "shop": "doityourself"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6855335,
+                        42.0468679
+                  ]
+            },
+            "id": "node/2295224935"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224939",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1011",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Dream Bouttea",
+                  "shop": "tea"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6855117,
+                        42.047206
+                  ]
+            },
+            "id": "node/2295224939"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224943",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1015",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Center for Independent Futures",
+                  "shop": "wellness"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6857029,
+                        42.0472343
+                  ]
+            },
+            "id": "node/2295224943"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224954",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1031",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Technicolour",
+                  "phone": "847-328-2999",
+                  "shop": "beauty",
+                  "website": "http://technicolourevanston.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6865245,
+                        42.0472404
+                  ]
+            },
+            "id": "node/2295224954"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224963",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1104",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Not Fade Away",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6871917,
+                        42.0469204
+                  ]
+            },
+            "id": "node/2295224963"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295224965",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1106",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Avail & Company",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6872562,
+                        42.0469208
+                  ]
+            },
+            "id": "node/2295224965"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295225153",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1501A",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Kier of Home",
+                  "shop": "retail"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6798961,
+                        42.0451296
+                  ]
+            },
+            "id": "node/2295225153"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295225532",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1553",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Minuteman Press",
+                  "brand:wikidata": "Q64866081",
+                  "name": "Minuteman Press",
+                  "opening_hours": "Mo-Fr 09:00-17:00",
+                  "shop": "copyshop"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6816954,
+                        42.0456158
+                  ]
+            },
+            "id": "node/2295225532"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295225572",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1555",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "amenity": "post_office",
+                  "brand": "The UPS Store",
+                  "brand:wikidata": "Q7771029",
+                  "brand:wikipedia": "en:The UPS Store",
+                  "name": "The UPS Store",
+                  "operator": "The UPS Store",
+                  "operator:type": "private",
+                  "operator:wikidata": "Q7771029",
+                  "operator:wikipedia": "en:The UPS Store",
+                  "shop": "copyshop",
+                  "short_name": "UPS"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.681695,
+                        42.0456529
+                  ]
+            },
+            "id": "node/2295225572"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295225833",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1579",
+                  "addr:postcode": "60201",
+                  "addr:street": "Maple Avenue",
+                  "addr:street:name": "Maple",
+                  "addr:street:type": "Avenue",
+                  "name": "Jay's Barber Shop",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6847863,
+                        42.046639
+                  ]
+            },
+            "id": "node/2295225833"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295225853",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1590",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "OSKA Company Store",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820545,
+                        42.0466157
+                  ]
+            },
+            "id": "node/2295225853"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226053",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1608",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Xfinity",
+                  "brand:wikidata": "Q5151002",
+                  "brand:wikipedia": "en:Xfinity",
+                  "name": "Xfinity",
+                  "shop": "telecommunication"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6821195,
+                        42.0473416
+                  ]
+            },
+            "id": "node/2295226053"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226061",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1609",
+                  "addr:postcode": "60201",
+                  "addr:street": "Chicago Avenue",
+                  "addr:street:name": "Chicago",
+                  "addr:street:type": "Avenue",
+                  "name": "Edessa's Salon",
+                  "phone": "847-475-2727",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6792619,
+                        42.0464588
+                  ]
+            },
+            "id": "node/2295226061"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226205",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1613",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Solay Wellness",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6816005,
+                        42.0475738
+                  ]
+            },
+            "id": "node/2295226205"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226210",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1615",
+                  "addr:postcode": "60201",
+                  "addr:street": "Benson Avenue",
+                  "addr:street:name": "Benson",
+                  "addr:street:type": "Avenue",
+                  "beauty": "tanning",
+                  "name": "LA Tan",
+                  "shop": "beauty"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.683233,
+                        42.0476067
+                  ]
+            },
+            "id": "node/2295226210"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226227",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1616",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "JoS. A. Bank",
+                  "brand:wikidata": "Q6204078",
+                  "brand:wikipedia": "en:Jos. A. Bank",
+                  "name": "JoS. A. Bank",
+                  "official_name": "Jos. A. Bank Clothiers",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6821217,
+                        42.0477379
+                  ]
+            },
+            "id": "node/2295226227"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226259",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1616",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Target",
+                  "brand:wikidata": "Q1046951",
+                  "brand:wikipedia": "en:Target Corporation",
+                  "name": "Target",
+                  "shop": "department_store",
+                  "website": "https://www.target.com/sl/evanston-downtown/3283"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6821196,
+                        42.0476458
+                  ]
+            },
+            "id": "node/2295226259"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226293",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1626",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Orrington Avenue",
+                  "addr:street:name": "Orrington",
+                  "addr:street:type": "Avenue",
+                  "name": "Vincent & Company",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6813081,
+                        42.0477006
+                  ]
+            },
+            "id": "node/2295226293"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226316",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1630",
+                  "addr:postcode": "60201",
+                  "addr:street": "Maple Avenue",
+                  "addr:street:name": "Maple",
+                  "addr:street:type": "Avenue",
+                  "brand": "Edible Arrangements",
+                  "brand:wikidata": "Q5337996",
+                  "brand:wikipedia": "en:Edible Arrangements",
+                  "name": "Edible Arrangements",
+                  "shop": "gift"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.685334,
+                        42.0479208
+                  ]
+            },
+            "id": "node/2295226316"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226317",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1630",
+                  "addr:postcode": "60201",
+                  "addr:street": "Orrington Avenue",
+                  "addr:street:name": "Orrington",
+                  "addr:street:type": "Avenue",
+                  "name": "CloseKnit",
+                  "shop": "craft"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6812535,
+                        42.0478171
+                  ]
+            },
+            "id": "node/2295226317"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226327",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1631",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Francesca's",
+                  "brand:wikidata": "Q72982331",
+                  "clothes": "women;luxury",
+                  "name": "Francesca's",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815893,
+                        42.0481963
+                  ]
+            },
+            "id": "node/2295226327"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226332",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1632",
+                  "addr:postcode": "60201",
+                  "addr:street": "Orrington Avenue",
+                  "addr:street:name": "Orrington",
+                  "addr:street:type": "Avenue",
+                  "name": "Stepping Out of Faith",
+                  "phone": "847-733-0980",
+                  "shop": "consignment"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.681223,
+                        42.0478751
+                  ]
+            },
+            "id": "node/2295226332"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226436",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1704",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Hair Cuttery",
+                  "brand:wikidata": "Q5639484",
+                  "brand:wikipedia": "en:Hair Cuttery",
+                  "name": "Hair Cuttery",
+                  "opening_hours": "Mo-Fr 09:00-21:00; Sa 08:00-20:00; Su 09:00-17:00",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820721,
+                        42.0487252
+                  ]
+            },
+            "id": "node/2295226436"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226442",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1706",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Gap",
+                  "brand:wikidata": "Q420822",
+                  "brand:wikipedia": "en:Gap Inc.",
+                  "name": "Gap",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820911,
+                        42.0488001
+                  ]
+            },
+            "id": "node/2295226442"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226643",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "522",
+                  "addr:postcode": "60201",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Envy",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6791717,
+                        42.0459064
+                  ]
+            },
+            "id": "node/2295226643"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226650",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "529",
+                  "addr:postcode": "60201",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "name": "Hevanston Gallery",
+                  "opening_hours": "We-Su 13:00-17:30",
+                  "shop": "art"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6790992,
+                        42.0461982
+                  ]
+            },
+            "id": "node/2295226650"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226707",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "716",
+                  "addr:postcode": "60201",
+                  "addr:street": "Church Street",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "old_name": "RadioShack",
+                  "shop": "vacant"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815733,
+                        42.0483088
+                  ]
+            },
+            "id": "node/2295226707"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226725",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "812",
+                  "addr:postcode": "60201",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "brand": "GNC",
+                  "brand:wikidata": "Q4808595",
+                  "brand:wikipedia": "en:GNC (store)",
+                  "name": "GNC",
+                  "shop": "nutrition_supplements"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.682495,
+                        42.0468064
+                  ]
+            },
+            "id": "node/2295226725"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226729",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "817",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "brand": "7-Eleven",
+                  "brand:wikidata": "Q259340",
+                  "brand:wikipedia": "en:7-Eleven",
+                  "name": "7-Eleven",
+                  "shop": "convenience"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6831301,
+                        42.0471935
+                  ]
+            },
+            "id": "node/2295226729"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226730",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "819",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Davis Street",
+                  "addr:street:name": "Davis",
+                  "addr:street:type": "Street",
+                  "brand": "Great Clips",
+                  "brand:wikidata": "Q5598967",
+                  "brand:wikipedia": "en:Great Clips",
+                  "name": "Great Clips",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6832097,
+                        42.0471931
+                  ]
+            },
+            "id": "node/2295226730"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295226738",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "900",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Church Street",
+                  "addr:street:name": "Church",
+                  "addr:street:type": "Street",
+                  "name": "Second Time Around",
+                  "shop": "second_hand"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.683964,
+                        42.0482863
+                  ]
+            },
+            "id": "node/2295226738"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295262883",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "817",
+                  "addr:postcode": "60201",
+                  "addr:street": "Noyes Street",
+                  "addr:street:name": "Noyes",
+                  "addr:street:type": "Street",
+                  "name": "Good News Laundry, Inc",
+                  "self_service": "yes",
+                  "shop": "laundry",
+                  "website": "http://www.goodnewslaundry.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6826175,
+                        42.058602
+                  ]
+            },
+            "id": "node/2295262883"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295262903",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "821",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Noyes Street",
+                  "addr:street:name": "Noyes",
+                  "addr:street:type": "Street",
+                  "beauty": "nails",
+                  "name": "Evan's Nails",
+                  "shop": "beauty"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6827812,
+                        42.058602
+                  ]
+            },
+            "id": "node/2295262903"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295262993",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "916",
+                  "addr:postcode": "60201",
+                  "addr:street": "Noyes Street",
+                  "addr:street:name": "Noyes",
+                  "addr:street:type": "Street",
+                  "phone": "847-866-6565",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6838776,
+                        42.0583152
+                  ]
+            },
+            "id": "node/2295262993"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295262996",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "918",
+                  "addr:postcode": "60201",
+                  "addr:street": "Noyes Street",
+                  "addr:street:name": "Noyes",
+                  "addr:street:type": "Street",
+                  "name": "Noyes Cleaners",
+                  "phone": "847-733-0711",
+                  "shop": "dry_cleaning"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.683983,
+                        42.0583173
+                  ]
+            },
+            "id": "node/2295262996"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263050",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1000",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Foster Street",
+                  "addr:street:name": "Foster",
+                  "addr:street:type": "Street",
+                  "name": "Reese Barber Studio",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6848936,
+                        42.0537629
+                  ]
+            },
+            "id": "node/2295263050"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263122",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1121",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Emerson Street",
+                  "addr:street:name": "Emerson",
+                  "addr:street:type": "Street",
+                  "name": "Spotless Self-Serve Dog Wash",
+                  "shop": "pet"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6869961,
+                        42.0525159
+                  ]
+            },
+            "id": "node/2295263122"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263291",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1710",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Mattress Firm",
+                  "brand:wikidata": "Q6791878",
+                  "brand:wikipedia": "en:Mattress Firm",
+                  "name": "Mattress Firm",
+                  "shop": "bed"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.682083,
+                        42.0489545
+                  ]
+            },
+            "id": "node/2295263291"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263300",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1712",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Bookends & Beginnings",
+                  "shop": "books",
+                  "website": "bookendsandbeginnings.com"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820778,
+                        42.0490844
+                  ]
+            },
+            "id": "node/2295263300"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263327",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1716",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Coucou",
+                  "opening_hours": "Mo-Sa 10:00-18:00; Su 12:00-17:00",
+                  "phone": "847-869-8203",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820771,
+                        42.0491519
+                  ]
+            },
+            "id": "node/2295263327"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263335",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1717",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Campus Gear",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815613,
+                        42.0491277
+                  ]
+            },
+            "id": "node/2295263335"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263371",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1721",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Steven Papageorge Salon",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815601,
+                        42.0492491
+                  ]
+            },
+            "id": "node/2295263371"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263380",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1722",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Asinamali",
+                  "opening_hours": "Mo-Sa 10:00-18:00; Th 10:00-19:00; Su 12:00-17:00",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820797,
+                        42.049284
+                  ]
+            },
+            "id": "node/2295263380"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263393",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1724",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Kilwins",
+                  "brand:wikidata": "Q38250832",
+                  "brand:wikipedia": "en:Kilwins",
+                  "cuisine": "chocolate;ice_cream;popcorn",
+                  "name": "Kilwins",
+                  "shop": "confectionery"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.682068,
+                        42.0493584
+                  ]
+            },
+            "id": "node/2295263393"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263404",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1725",
+                  "addr:postcode": "60201",
+                  "addr:street": "Maple Avenue",
+                  "addr:street:name": "Maple",
+                  "addr:street:type": "Avenue",
+                  "brand": "World Market",
+                  "brand:wikidata": "Q5174750",
+                  "brand:wikipedia": "en:World Market (store)",
+                  "name": "World Market",
+                  "official_name": "Cost Plus World Market",
+                  "opening_hours": "Mo-Fr 10:00-21:00; Sa 09:00-21:00; Su 10:00-19:00",
+                  "shop": "interior_decoration"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6845237,
+                        42.0491103
+                  ]
+            },
+            "id": "node/2295263404"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263407",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1725",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Insomnia Cookies",
+                  "brand:wikidata": "Q16997024",
+                  "brand:wikipedia": "en:Insomnia Cookies",
+                  "name": "Insomnia Cookies",
+                  "shop": "bakery"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815595,
+                        42.0493627
+                  ]
+            },
+            "id": "node/2295263407"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263453",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1730",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Crossroads Trading",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820508,
+                        42.0495688
+                  ]
+            },
+            "id": "node/2295263453"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263467",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1732",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "T-Mobile",
+                  "brand:wikidata": "Q327634",
+                  "brand:wikipedia": "en:T-Mobile",
+                  "name": "T-Mobile",
+                  "operator": "T-Mobile",
+                  "shop": "mobile_phone"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820393,
+                        42.0496454
+                  ]
+            },
+            "id": "node/2295263467"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263517",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1735",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Maple Avenue",
+                  "addr:street:name": "Maple",
+                  "addr:street:type": "Avenue",
+                  "brand": "Sprint",
+                  "brand:wikidata": "Q301965",
+                  "brand:wikipedia": "en:Sprint Corporation",
+                  "name": "Sprint",
+                  "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-19:00; Su 11:00-17:00",
+                  "operator": "Sprint",
+                  "shop": "mobile_phone"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6845309,
+                        42.0492929
+                  ]
+            },
+            "id": "node/2295263517"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263542",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1739",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Tide Cleaners",
+                  "brand:wikidata": "Q66048841",
+                  "name": "Tide Cleaners",
+                  "shop": "dry_cleaning"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815509,
+                        42.0496789
+                  ]
+            },
+            "id": "node/2295263542"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263620",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1741",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Floyd's 99 Barbershop",
+                  "shop": "hairdresser",
+                  "website": "https://www.floydsbarbershop.com/evanston/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815504,
+                        42.0497299
+                  ]
+            },
+            "id": "node/2295263620"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295265253",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1911",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Green Bay Road",
+                  "addr:street:name": "Green Bay",
+                  "addr:street:type": "Road",
+                  "brand": "Sherwin-Williams",
+                  "brand:wikidata": "Q48881",
+                  "brand:wikipedia": "en:Sherwin-Williams",
+                  "name": "Sherwin-Williams",
+                  "shop": "paint"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6890455,
+                        42.0528099
+                  ]
+            },
+            "id": "node/2295265253"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295265470",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1942",
+                  "addr:postcode": "60201",
+                  "addr:street": "Maple Avenue",
+                  "addr:street:name": "Maple",
+                  "addr:street:type": "Avenue",
+                  "name": "Shop Now",
+                  "shop": "convenience"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6848956,
+                        42.0535701
+                  ]
+            },
+            "id": "node/2295265470"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295265940",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "716",
+                  "addr:postcode": "60201",
+                  "addr:street": "Clark Street",
+                  "addr:street:name": "Clark",
+                  "addr:street:type": "Street",
+                  "name": "Beck's",
+                  "opening_hours": "Mo-Th 10:00-18:00; Fr 10:00-17:00; Sa 10:00-15:00",
+                  "shop": "books"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6808889,
+                        42.0498318
+                  ]
+            },
+            "id": "node/2295265940"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295265997",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "822",
+                  "addr:postcode": "60201",
+                  "addr:street": "Clark Street",
+                  "addr:street:name": "Clark",
+                  "addr:street:type": "Street",
+                  "brand": "Sport Clips",
+                  "brand:wikidata": "Q7579310",
+                  "name": "Sport Clips",
+                  "shop": "hairdresser"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6830071,
+                        42.0498458
+                  ]
+            },
+            "id": "node/2295265997"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2412419375",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "816 1/2",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Church Street",
+                  "name": "Deka Lash",
+                  "shop": "beauty",
+                  "website": "dekalash.com"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6828812,
+                        42.0483093
+                  ]
+            },
+            "id": "node/2412419375"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/3443942870",
+                  "name": "Egea Spa",
+                  "shop": "beauty"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6816704,
+                        42.0452556
+                  ]
+            },
+            "id": "node/3443942870"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/3622587294",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1712",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "name": "Bookends and Beginnings",
+                  "shop": "books",
+                  "website": "http://www.bookendsandbeginnings.d7.indiebound.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.68228,
+                        42.0490948
+                  ]
+            },
+            "id": "node/3622587294"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/5951397913",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1317",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Emerson Street",
+                  "name": "Haliburton Funeral Chapel",
+                  "phone": "+1 847-864-6135",
+                  "shop": "funeral_directors",
+                  "website": "https://www.haliburtonfuneral.com/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6909553,
+                        42.0523994
+                  ]
+            },
+            "id": "node/5951397913"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/6699128969",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1701",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Sherman Avenue",
+                  "brand": "Sprint",
+                  "brand:wikidata": "Q301965",
+                  "brand:wikipedia": "en:Sprint Corporation",
+                  "name": "Sprint",
+                  "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-19:00; Su 11:00-17:00",
+                  "shop": "mobile_phone"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6816034,
+                        42.0486051
+                  ]
+            },
+            "id": "node/6699128969"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/9649368319",
+                  "addr:city": "Evanston",
+                  "addr:postcode": "60201",
+                  "addr:state": "IL",
+                  "addr:street": "Maple Avenue",
+                  "brand": "Zen Leaf",
+                  "brand:wikidata": "Q108911834",
+                  "name": "Zen Leaf",
+                  "shop": "cannabis"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6849908,
+                        42.0500129
+                  ]
+            },
+            "id": "node/9649368319"
+      }
+]

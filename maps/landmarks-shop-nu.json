@@ -1,0 +1,120 @@
+[
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263453",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1730",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Crossroads Trading",
+                  "shop": "clothes"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820508,
+                        42.0495688
+                  ]
+            },
+            "id": "node/2295263453"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263467",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1732",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "T-Mobile",
+                  "brand:wikidata": "Q327634",
+                  "brand:wikipedia": "en:T-Mobile",
+                  "name": "T-Mobile",
+                  "operator": "T-Mobile",
+                  "shop": "mobile_phone"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6820393,
+                        42.0496454
+                  ]
+            },
+            "id": "node/2295263467"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263542",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1739",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "brand": "Tide Cleaners",
+                  "brand:wikidata": "Q66048841",
+                  "name": "Tide Cleaners",
+                  "shop": "dry_cleaning"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815509,
+                        42.0496789
+                  ]
+            },
+            "id": "node/2295263542"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295263620",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "1741",
+                  "addr:postcode": "60201",
+                  "addr:street": "Sherman Avenue",
+                  "addr:street:name": "Sherman",
+                  "addr:street:type": "Avenue",
+                  "name": "Floyd's 99 Barbershop",
+                  "shop": "hairdresser",
+                  "website": "https://www.floydsbarbershop.com/evanston/"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6815504,
+                        42.0497299
+                  ]
+            },
+            "id": "node/2295263620"
+      },
+      {
+            "type": "Feature",
+            "properties": {
+                  "@id": "node/2295265940",
+                  "addr:city": "Evanston",
+                  "addr:housenumber": "716",
+                  "addr:postcode": "60201",
+                  "addr:street": "Clark Street",
+                  "addr:street:name": "Clark",
+                  "addr:street:type": "Street",
+                  "name": "Beck's",
+                  "opening_hours": "Mo-Th 10:00-18:00; Fr 10:00-17:00; Sa 10:00-15:00",
+                  "shop": "books"
+            },
+            "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                        -87.6808889,
+                        42.0498318
+                  ]
+            },
+            "id": "node/2295265940"
+      }
+]

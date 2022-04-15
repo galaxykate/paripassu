@@ -6,25 +6,32 @@
 <head>
 	<title>Pari passu</title>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
-
 	<link rel="icon" href="css/img/favicon.ico">
 	<link rel="stylesheet" href="css/page.css">
 	<link rel="stylesheet" href="css/paripassu.css">
-	<!-- <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/2.0.0-beta.3/peerjs.min.js"></script>
+	
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-
-
+	<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css">
 
 	<script  src="js/utilities.js"></script>
+	<!-- <script  src="js/vector.js"></script> -->
+	<!-- <script  src="js/vendor/ol.js"></script> -->
+	<!-- <script  src="js/vendor/jquery-ajax.js"></script> -->
+	<script  src="js/vendor/simplex-noise.js"></script>
+	<script  src="js/vendor/uuidv4.min.js"></script>
 	<script  src="js/vendor/vue3.global.js"></script>
 	<script  src="js/vendor/simple-peer-wrapper.js"></script>
 	<script  src="js/vendor/vue.js"></script>
+	<script  src="js/map.js" ></script>
 	<script  src="js/paripassu.js" ></script>
+	<script  src="js/v-eventlog.js" ></script>
 	<script  src="js/v-widgets.js" ></script>
-
-	<script  src="js/app.js" ></script>
+	
+	<script  src="js/pokemon-app.js" ></script>
+	<!-- <script  src="js/app.js" ></script> -->
 
 </head>
 <body>
@@ -33,26 +40,27 @@
 	</div>
 		
 		
-	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 	<script type="module">
-		// Firebase setup
-		const firebaseConfig = {
-			apiKey: "AIzaSyAlnze6bJCvcRD72nVGmmc6w0QfRsvtQNU",
-			authDomain: "metabox-eec95.firebaseapp.com",
-			databaseURL: "https://metabox-eec95.firebaseio.com",
-			projectId: "metabox",
-			storageBucket: "metabox.appspot.com",
-			messagingSenderId: "990184798969",
-			appId: "1:990184798969:web:5f98fb43fd515b90e64028"
+		if (ALLOW_FIREBASE) {
+
+			// Firebase setup
+			// Your web app's Firebase configuration
+			const firebaseConfig = {
+				
 			};
 
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig)
-		firebase.isInitialized = true
-		room.connectFirebase()
+			try {
+				// Initialize Firebase
+				firebase.initializeApp(firebaseConfig)
+				firebase.isInitialized = true
+				io.room.connectFirebase(firebase)
+				console.log("Firebase loaded!!")
+			} catch(err) {
+				console.warn(err)
+			}
+		}
 
-		console.log("Firebase loaded!!")
+		
 	</script>
 </body>
 	

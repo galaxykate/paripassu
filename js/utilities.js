@@ -59,6 +59,57 @@ function forIntersection({a, b, fxnA, fxnBoth, fxnB}) {
 }
 
 
+function lerpBetween({x, x0, x1, y0, y1, pow=1}) {
+	let pct = Math.min(1, Math.max(0, (x - x0)/(x1 - x0)))
+	pct = Math.pow(pct, 1)
+	return y0 + pct*(y1 - y0)	
+}
+
+// Colors
+function colorToRGB(v) {
+	// https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+	
+	let h = v[0]
+	let s = v[1]
+	let l = v[2]
+	var r, g, b;
+
+	if(s == 0){
+		r = g = b = l; // achromatic
+	} else {
+		var hue2rgb = function hue2rgb(p, q, t){
+			if(t < 0) t += 1;
+			if(t > 1) t -= 1;
+			if(t < 1/6) return p + (q - p) * 6 * t;
+			if(t < 1/2) return q;
+			if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+			return p;
+		}
+
+		var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+		var p = 2 * l - q;
+		r = hue2rgb(p, q, h + 1/3);
+		g = hue2rgb(p, q, h);
+		b = hue2rgb(p, q, h - 1/3);
+	}
+
+	return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+
+}
+
+function colorToHex(v) {
+	let rgb = colorToRGB(v)
+	function componentToHex(c) {
+		var hex = c.toString(16);
+		return hex.length == 1 ? "0" + hex : hex;
+	}
+
+	return "#" + componentToHex(rgb[0]) + componentToHex(rgb[1]) + componentToHex(rgb[2]);
+}
+
+	
+
+
 function distanceBetween(v0, v1) {
 	return Math.sqrt((v1[0] - v0[0])**2 + (v1[1] - v0[1])**2)
 }

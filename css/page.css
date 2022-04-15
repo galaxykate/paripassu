@@ -41,12 +41,19 @@ body {
 
 
 .microchip {
-	position: absolute;
 	background-color: white;
-	opacity:  50%;
-	font-size: 9px;
-	top:  -10px;
+	
+	font-size: 70%;
+}
 
+.microheader {
+
+	position: absolute;
+	width:  100%;
+	top:  -10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 #app {
