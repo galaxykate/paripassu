@@ -23,25 +23,7 @@ let map = new InteractiveMap({
 	
 	update: (frameCount) => {
 		// Do something every frame
-		if (map.automove) {
-			moveMarker({
-				marker:map.playerMarker,
-				r: 40,
-				theta: 10*noise.noise2D(frameCount*.1, 1),
-				lerpTo:NU_CENTER,
-				lerpAmt: .01
-			})
-		}
-
-		if (map.useLocation) {
-			if (frameCount % 10 == 0) {
-				console.log("CHECK LOCATION", frameCount)
-			
-				// Check location every N ticks
-				// Checking lcoation uses a lot of battery!
-				map.requestLocation()
-			}
-		}
+		
 	}
 })
 

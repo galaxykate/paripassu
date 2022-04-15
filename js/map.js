@@ -87,6 +87,8 @@ class InteractiveMap {
 		setInterval(() => {
 			if (!this.paused) {
 				count++
+
+				this.baseUpdate(count)
 				this.update(count)
 			}
 		}, 100) 
@@ -194,11 +196,36 @@ class InteractiveMap {
 		})
 	}
 
+	baseUpdate() {
+		if (map.automove) {
+			moveMarker({
+				marker:map.playerMarker,
+				r: 40,
+				theta: 10*noise.noise2D(frameCount*.1, 1),
+				lerpTo:NU_CENTER,
+				lerpAmt: .01
+			})
+		}
+
+		if (map.useLocation) {
+			if (frameCount % 10 == 0) {
+				console.log("CHECK LOCATION", frameCount)
+			
+				// Check location every N ticks
+				// Checking lcoation uses a lot of battery!
+				map.requestLocation()
+			}
+		}
+	}
+
 	requestLocation() {
 
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((pos) => {
 				console.log("Geolocation", pos)
+				let coords = [pos.coords.latitude, pos.coords.longitude]
+				console.log("geo pos", coords)
+				console.log("marker", this.playerMarker.getGeometry().getCoordinates())
 			});
 		} else {
 			console.warn("Geolocation is not supported by this browser.")
