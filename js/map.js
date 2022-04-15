@@ -75,6 +75,8 @@ class InteractiveMap {
 	constructor({mapCenter, landmarks, landmarkToMarker, update}) {
 		this.update = update
 		this.center = mapCenter
+		this.useLocation = false
+		this.automove = false
 
 		this.landmarkToMarker = landmarkToMarker
 		
@@ -129,14 +131,25 @@ class InteractiveMap {
 				// console.log(d)
 				let scale = lerpBetween({
 					x: d, 
-					y0: .3,
-					y1: .03,
+					y0: .2,
+					y1: .07,
 					x0: 0,
-					x1: 400,
+					x1: 100,
 					pow: 1
 				})
 				
+				var iconBG = new ol.style.Style({
+					image: new ol.style.Icon({
+						color: feature.color?colorToHex(feature.color):"#FFF",
+      					anchor: [.5, 1],
+						anchorXUnits: 'fraction',
+						anchorYUnits: 'fraction',
+						src: 'img/icons/lens_white_24dp.svg',
+						// src: 'icon2.png',
+						scale: scale*14
+					})
 
+				});
 
 				// How do we style this feature?
 				// https://stackoverflow.com/questions/64529695/openlayers-6-add-maker-labels-or-text
@@ -152,6 +165,10 @@ class InteractiveMap {
 					})
 
 				});
+
+				// How do we style this feature?
+				// https://stackoverflow.com/questions/64529695/openlayers-6-add-maker-labels-or-text
+				
 				
 
 				// The label style is its name
@@ -167,14 +184,27 @@ class InteractiveMap {
 							color: '#fff',
 							width: 3
 						}),
-						offsetY: -12
+						offsetY: -scale*40
 					})
 				});
 
 				labelStyle.getText().setText(feature.get('name'));
-				return [iconStyle, labelStyle];
+				return [iconBG, iconStyle,labelStyle];
 			}
 		})
+	}
+
+	requestLocation() {
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((pos) => {
+				console.log("Geolocation", pos)
+			});
+		} else {
+			console.warn("Geolocation is not supported by this browser.")
+			this.errorMessage = "Geolocation is not supported by this browser.";
+		}
+		
 	}
 
 	toggleRandomWalk() {

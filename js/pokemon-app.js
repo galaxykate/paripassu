@@ -8,6 +8,7 @@ const NU_CENTER = ol.proj.fromLonLat([-87.6753, 42.056])
  If its vertical, the columns can become sections in one column
  */
 
+
 let landmarkCount = 0
 let map = new InteractiveMap({
 	mapCenter: NU_CENTER,
@@ -22,13 +23,25 @@ let map = new InteractiveMap({
 	
 	update: (frameCount) => {
 		// Do something every frame
-		moveMarker({
-			marker:map.playerMarker,
-			r: 40,
-			theta: 10*noise.noise2D(frameCount*.1, 1),
-			lerpTo:NU_CENTER,
-			lerpAmt: .01
-		})
+		if (map.automove) {
+			moveMarker({
+				marker:map.playerMarker,
+				r: 40,
+				theta: 10*noise.noise2D(frameCount*.1, 1),
+				lerpTo:NU_CENTER,
+				lerpAmt: .01
+			})
+		}
+
+		if (map.useLocation) {
+			if (frameCount % 10 == 0) {
+				console.log("CHECK LOCATION", frameCount)
+			
+				// Check location every N ticks
+				// Checking lcoation uses a lot of battery!
+				map.requestLocation()
+			}
+		}
 	}
 })
 
