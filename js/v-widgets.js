@@ -45,7 +45,7 @@ const locationWidget = {
 
 		<div class="map" id="map"></div>
 
-		<div class="popup" ref="popup">popup</div>
+		<div class="popup" ref="popup"></div>
 
 
 	</div>`,

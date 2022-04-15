@@ -10,8 +10,17 @@ const NU_CENTER = ol.proj.fromLonLat([-87.6753, 42.056])
 
 
 let landmarkCount = 0
+
+let gameState = {
+	points: 0,
+	captured: []
+}
+
 let map = new InteractiveMap({
 	mapCenter: NU_CENTER,
+
+	range: 100,
+
 	landmarks:[
 		// Custom landmarks
 	], 
@@ -20,6 +29,14 @@ let map = new InteractiveMap({
 		landmark.color = [Math.random(), 1, .5]
 		return landmark
 	}, 
+
+	onEnterRange: (landmark, dist) => {
+
+	},
+
+	onExitRange: (landmark, dist) => {
+
+	},
 	
 	update: (frameCount) => {
 		// Do something every frame
@@ -27,10 +44,14 @@ let map = new InteractiveMap({
 	}
 })
 
-// map.loadLandmarks("landmarks-interesting-nu", (landmark) => {
-// 	// Keep this landmark?
-// 	return landmark.properties.amenity || landmark.properties.store
-// })
+map.loadLandmarks("landmarks-natural-nu", (landmark) => {
+	// Keep this landmark?
+	return true
+	// return landmark.properties.amenity || landmark.properties.store
+})
+
+
+
 
 window.onload = (event) => {
 
@@ -42,19 +63,11 @@ window.onload = (event) => {
 			<div id="main-columns">
 
 				<div class="main-column" style="width:290px">
-
-					<div class="panel">
-						<user-widget :user="io.user" />
-						<room-widget :room="io.room" />
-					</div>
+					{{gameState}}
 					
-					<event-log :eventLog="io.room.eventLog" class="widget"/> 
-
-					<button @click="io.post({type:'test'})">test post</button>
 				</div>
 
 				<div class="main-column" style="flex:1">
-					<button>enable geolocation 🌎</button>
 					<location-widget :map="map" />
 				
 				</div>
@@ -66,7 +79,8 @@ window.onload = (event) => {
 			return {
 				// gameState: gameState,
 				io:io,
-				map: map
+				map: map,
+				gameState: gameState
 			}
 		},
 

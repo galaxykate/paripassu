@@ -72,7 +72,7 @@ function getDistance(p0, p1) {
 // A map made out of openlayers data and ..landmarks?
 
 class InteractiveMap {
-	constructor({mapCenter, landmarks, landmarkToMarker, update}) {
+	constructor({mapCenter, landmarks, landmarkToMarker, update, onEnterRange, onExitRange}) {
 		this.update = update
 		this.center = mapCenter
 		this.useLocation = false
@@ -217,15 +217,20 @@ class InteractiveMap {
 			}
 		}
 
-		// this.setUserPosFromLatLon()
+	}
+
+	get playerCoords() {
+		return this.playerMarker.getGeometry().getCoordinates()
 	}
 
 	setUserPosFromLatLon(coords) {
+		if (!Array.isArray(coords) || coords.length != 2)
+			throw("incorrect coordinates")
+
 		// coords = [ -87.6889967, 42.0519228]
 		let coords2 = ol.proj.fromLonLat(coords)
-		console.log("marker", this.playerMarker.getGeometry().getCoordinates())
-		console.log(coords, coords2)
 		this.playerMarker.getGeometry().setCoordinates(coords2)
+		console.log("Set playerMarker coords", this.playerCoords)
 	}
 	requestLocation() {
 

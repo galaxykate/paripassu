@@ -61,32 +61,32 @@ body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	border:  2px solid cyan;
+	/*border:  2px solid cyan;*/
 }
 
 .columns {
 	display: flex;
 	flex-direction: row;
 	flex:  1;
-	border:  2px solid pink;
+	/*border:  2px solid pink;*/
 }
 
 .column {
 	flex: 1;
-	border:  2px solid cyan;
+	/*border:  2px solid cyan;*/
 }
 
 #app>#main-columns {
 	flex:  1;
 	display: flex;
 	flex-direction: row;
-	border:  2px solid pink;
+	/*border:  2px solid pink;*/
 }
 
 #app>#main-columns>.main-column {
 	position: relative;
 	
-	border:  2px solid purple;
+	/*border:  2px solid purple;*/
 	overflow: hidden;
 	display: flex;
 
@@ -137,7 +137,7 @@ td:nth-child(1) {
 
 #app>header,#app>footer {
 	height: 10px;
-	background-color: cyan;
+	/*background-color: cyan;*/
 }
 
 .icon-button {
