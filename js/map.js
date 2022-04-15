@@ -196,7 +196,7 @@ class InteractiveMap {
 		})
 	}
 
-	baseUpdate() {
+	baseUpdate(frameCount) {
 		if (map.automove) {
 			moveMarker({
 				marker:map.playerMarker,
