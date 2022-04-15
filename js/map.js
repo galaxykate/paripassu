@@ -226,6 +226,8 @@ class InteractiveMap {
 				let coords = [pos.coords.latitude, pos.coords.longitude]
 				console.log("geo pos", coords)
 				console.log("marker", this.playerMarker.getGeometry().getCoordinates())
+				let coords2 = ol.proj.fromLonLat(coords)
+				this.playerMarker.getGeometry().setCoordinates(coords2)
 			});
 		} else {
 			console.warn("Geolocation is not supported by this browser.")
