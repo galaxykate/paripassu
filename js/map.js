@@ -216,18 +216,24 @@ class InteractiveMap {
 				map.requestLocation()
 			}
 		}
+
+		// this.setUserPosFromLatLon()
 	}
 
+	setUserPosFromLatLon(coords) {
+		// coords = [ -87.6889967, 42.0519228]
+		let coords2 = ol.proj.fromLonLat(coords)
+		console.log("marker", this.playerMarker.getGeometry().getCoordinates())
+		console.log(coords, coords2)
+		this.playerMarker.getGeometry().setCoordinates(coords2)
+	}
 	requestLocation() {
 
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((pos) => {
 				console.log("Geolocation", pos)
-				let coords = [pos.coords.latitude, pos.coords.longitude]
-				console.log("geo pos", coords)
-				console.log("marker", this.playerMarker.getGeometry().getCoordinates())
-				let coords2 = ol.proj.fromLonLat(coords)
-				this.playerMarker.getGeometry().setCoordinates(coords2)
+				let coords = [pos.coords.longitude, pos.coords.latitude]
+				this.setUserPosFromLatLon(coords)
 			});
 		} else {
 			console.warn("Geolocation is not supported by this browser.")
