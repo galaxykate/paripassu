@@ -1,7 +1,53 @@
 
 
+//==============================================================================
+// Utilities
 
-let noise = new SimplexNoise()
+function labelStyle({label, stroke="#000", color="#fff", icon, fontSize=12, scale=20}) {
+	if (stroke && !(typeof stroke == "string" && stroke[0] == "#"))
+		stroke = colorToHex(stroke)
+
+	if (color && !(typeof color == "string" && color[0] == "#"))
+		color = colorToHex(color)
+
+	let labelStyle = new ol.style.Style({
+		text: new ol.style.Text({
+			font: `${fontSize}px Calibri,sans-serif`,
+			overflow: true,
+			fill: new ol.style.Fill({
+				color: 	color
+			}),
+			stroke: new ol.style.Stroke({
+				color: stroke,
+				width: 3
+			}),
+			offsetY: -scale
+		})
+	})
+	labelStyle.getText().setText(label);
+	return labelStyle
+}
+
+
+function iconStyle({color="#000", icon, scale}) {
+	if (color && !(typeof color == "string" && color[0] == "#"))
+		color = colorToHex(color)
+
+	
+	return new ol.style.Style({
+		image: new ol.style.Icon({
+			color: color,
+			anchor: [.5, 1],
+			anchorXUnits: 'fraction',
+			anchorYUnits: 'fraction',
+			src: `img/icons/${icon}_white_24dp.svg`,
+			// src: 'icon2.png',
+			scale: scale
+		})
+	});
+}
+
+
 
 // Given an OpenLayers marker, move it to a new position (or offset from its current)
 function moveMarker({marker, x=0, y=0, r=0, theta=0, pos, lerpTo, lerpAmt}) {
@@ -44,43 +90,29 @@ function getDistance(p0, p1) {
 	return Math.sqrt(Math.pow(p1[0] - p0[0], 2) + Math.pow(p1[1] - p0[1], 2))
 }
 
-// function lerp
 
-// function animatePos(pos, center) {
-// 	let count = 0
-// 	return setInterval(() => {
-// 		count++
-		
-// 		let r = 10
-// 		let theta = 10*noise.noise2D(count*.01)
-// 		let x = pos[0]+ r*Math.cos(theta)
-// 		let y = pos[1]+ r*Math.sin(theta)
-		
-// 		// console.log(pos)
-// 		let lerp = .99
-// 		if (center) {
-// 			x = x*(1-lerp) + center[0]*lerp
-// 			y = y*(1-lerp) + center[1]*lerp
-// 		}
-// 		Vue.set(pos, 0, x)
-// 		Vue.set(pos, 1, x)
-// 		// console.log(pos)
-// 	}, 100)
-// }
+
+let noise = new SimplexNoise()
 
 
 // A map made out of openlayers data and ..landmarks?
 
 class InteractiveMap {
-	constructor({mapCenter, landmarks, landmarkToMarker, update, onEnterRange, onExitRange}) {
+	constructor({ranges, featureToStyle, mapCenter, landmarks, initializeMap, initializeLandmark, update, onEnterRange, onExitRange}) {
 		this.update = update
 		this.center = mapCenter
+		this.ranges = ranges
 		this.useLocation = false
 		this.automove = false
+		this.featureToStyle = featureToStyle
+		this.initializeLandmark = initializeLandmark
+		this.onEnterRange = onEnterRange
+		this.onExitRange = onExitRange
 
-		this.landmarkToMarker = landmarkToMarker
+		// this.landmarkToMarker = landmarkToMarker
 		
-		
+		this.landmarks = []
+
 		this.randomWalk = true
 
 		let count = 0; 
@@ -91,117 +123,85 @@ class InteractiveMap {
 				this.baseUpdate(count)
 				this.update(count)
 			}
-		}, 100) 
+		}, UPDATE_RATE) 
 
-		landmarks = []
-		for (var i = 0; i < 10; i++) {
-			let p2 = clonePolarOffset(NU_CENTER, 400*Math.random() + 300, 20*Math.random())
-			landmarks.push({
-				name: words.getRandomWord(),
-				pos: p2
-			})
-		}
+		
+		// 
+		this.markerLayer = new ol.layer.Vector({
 
-		// Starting landmarks
-		this.features = landmarks.map(landmark => {
-			let marker = new ol.Feature({
-				geometry: new ol.geom.Point(landmark.pos),
-				name: landmark.name,
-			})
-			landmarkToMarker(marker)
-			return marker
+			source: new ol.source.Vector({
+				features: []
+			}),
+
+			style: (marker) => {
+
+				// How far is the player?
+				let d = getDistance(marker, this.playerMarker)
+				// console.log(d)
+				let scale = lerpBetween({
+					x: d, 
+					y0: .12,
+					y1: .07,
+					x0: 0,
+					x1: 100,
+					pow: 2
+				})*10	
+
+				let styles = []
+				let settings = this.featureToStyle(marker.landmark)
+				
+				// Add the bg icon
+				if (!settings.noBG) {
+					styles.push(iconStyle({
+						color: settings.bgColor,
+						icon: "lens",
+						scale: scale
+					}))
+				}
+		
+
+				if (settings.icon) {
+					// Add the bg icon
+					styles.push(iconStyle({
+						color: settings.iconColor,
+						icon: settings.icon,
+						scale: scale
+					}))
+				}
+
+	
+				if (settings.label) {
+					styles.push(labelStyle({
+						label: settings.label,
+						fontSize: settings.fontSize,
+
+					}))
+				}
+
+				
+				return styles;
+			}
 		})
 
 		// Player location
 		this.userLocation = this.center.slice()
-		this.playerMarker = new ol.Feature({
-			geometry: new ol.geom.Point(this.userLocation),
-			name: "PLAYER",
-		})
-		this.features.push(this.playerMarker)
 
 
-		this.markerLayer = new ol.layer.Vector({
+		this.playerMarker = this._placeMarker({
+			pos: this.userLocation
+		}, true)
 
-			source: new ol.source.Vector({
-				features: this.features
-			}),
 
-			style: (feature) => {
-				// How far is the player?
-				let d = getDistance(feature, this.playerMarker)
-				// console.log(d)
-				let scale = lerpBetween({
-					x: d, 
-					y0: .2,
-					y1: .07,
-					x0: 0,
-					x1: 100,
-					pow: 1
-				})
-				
-				var iconBG = new ol.style.Style({
-					image: new ol.style.Icon({
-						color: feature.color?colorToHex(feature.color):"#FFF",
-      					anchor: [.5, 1],
-						anchorXUnits: 'fraction',
-						anchorYUnits: 'fraction',
-						src: 'img/icons/lens_white_24dp.svg',
-						// src: 'icon2.png',
-						scale: scale*14
-					})
-
-				});
-
-				// How do we style this feature?
-				// https://stackoverflow.com/questions/64529695/openlayers-6-add-maker-labels-or-text
-				var iconStyle = new ol.style.Style({
-					image: new ol.style.Icon({
-						color: '#000000',
-      					anchor: [.5, 1],
-						anchorXUnits: 'fraction',
-						anchorYUnits: 'fraction',
-						src: 'img/icons/local_cafe_white_24dp.svg',
-						// src: 'icon2.png',
-						scale: scale*10
-					})
-
-				});
-
-				// How do we style this feature?
-				// https://stackoverflow.com/questions/64529695/openlayers-6-add-maker-labels-or-text
-				
-				
-
-				// The label style is its name
-
-				let labelStyle = new ol.style.Style({
-					text: new ol.style.Text({
-						font: '12px Calibri,sans-serif',
-						overflow: true,
-						fill: new ol.style.Fill({
-							color: 	feature.color?colorToHex(feature.color):"#000"
-						}),
-						stroke: new ol.style.Stroke({
-							color: '#fff',
-							width: 3
-						}),
-						offsetY: -scale*40
-					})
-				});
-
-				labelStyle.getText().setText(feature.get('name'));
-				return [iconBG, iconStyle,labelStyle];
-			}
-		})
+		initializeMap.call(this)
 	}
+
 
 	baseUpdate(frameCount) {
 		if (map.automove) {
 			moveMarker({
 				marker:map.playerMarker,
-				r: 40,
-				theta: 10*noise.noise2D(frameCount*.1, 1),
+				r: AUTOMOVE_SPEED,
+				theta: 10*noise.noise2D(frameCount*.01, 1),
 				lerpTo:NU_CENTER,
 				lerpAmt: .01
 			})
@@ -216,6 +216,35 @@ class InteractiveMap {
 				map.requestLocation()
 			}
 		}
+
+		this.landmarks.forEach(landmark => {
+				if (!landmark.isPlayer) {
+				let d = getDistance(landmark.marker, this.playerMarker)
+				landmark.distanceToPlayer = Math.round(d)
+
+				let maxLevel = -1
+				this.ranges.forEach((range, index) => {
+					if (landmark.distanceToPlayer < range) {
+						maxLevel = index
+						// console.log(landmark.name, range, landmark.distanceToPlayer)
+					}
+				})
+
+				if (maxLevel < landmark._level) {
+					// Leaving the level
+					this.onExitRange(landmark, maxLevel, landmark._level, landmark.distanceToPlayer)
+				}
+				if (maxLevel > landmark._level) {
+					// Leaving the level
+					this.onEnterRange(landmark, maxLevel, landmark._level, landmark.distanceToPlayer)
+				}
+				landmark._level = maxLevel
+			}
+		})
+
+
+
+		// console.log(this.landmarks.map(l => l.distanceToPlayer))
 
 	}
 
@@ -247,33 +276,56 @@ class InteractiveMap {
 		
 	}
 
+	
+
 	toggleRandomWalk() {
 		this.randomWalk = !this.randomWalk
 	}
 
+	_placeMarker(landmark, isPlayer=false) {
+		// Create a marker (landmark + geometry)
+		var marker = new ol.Feature({
+			geometry: new ol.geom.Point(landmark.pos)
+		});
+
+		landmark._level = -1
+		landmark.isPlayer = isPlayer
+		this.initializeLandmark(landmark, isPlayer)
+		marker.landmark = landmark
+		landmark.marker = marker
+		this.markerLayer.getSource().addFeature(marker);
+		this.landmarks.push(landmark)
+
+		return marker
+	}
+
+	createLandmark(landmark) {
+		this._placeMarker(landmark)
+	}
+
+
 	loadLandmarks(landmark_set, filterLandmarks) {
+
+		// Fetch a set of landmarks and create markers from them
 		fetch(`maps/${landmark_set}.json`)
 		.then(response => response.json())
 		.then(json => {
 
 			// Deal with the loaded landmarks
-			json.forEach(landmark => {
-				// console.log(landmark)
-				var marker = new ol.Feature({
-					name: "TEST",
-					// Convert to non-latlon
-					geometry: new ol.geom.Point(ol.proj.fromLonLat(landmark.geometry.coordinates))
-				});
-
-				// Decorate the marker
-				this.landmarkToMarker(landmark, marker)
-
+			json.forEach(data => {
+				
+				let landmark = {
+					pos: ol.proj.fromLonLat(data.geometry.coordinates),
+					src: landmark_set
+				}
+				
+				landmark.openMapData = data.properties
+				
 				// Add the marker
 				if (filterLandmarks(landmark)) {
-					this.markerLayer.getSource().addFeature(marker);
+					// Decorate the marker
+					this._placeMarker(landmark)
 				}
-
-
 			})
 			
 		});
@@ -285,12 +337,13 @@ class InteractiveMap {
 		// https://openlayers.org/en/latest/doc/quickstart.html
 
 		
-		
 		// Make a map with a layer for the base map
 		// and a layer for icons
 
 		this.layerMap = new ol.Map({
 			target: el,
+
+			// Layers: map tile and 
 			layers: [
 				// Map tile (drawn streets, etc)
 				new ol.layer.Tile({
@@ -312,8 +365,6 @@ class InteractiveMap {
 				marker: this.playerMarker,
 				pos:evt.coordinate
 			})
-			
-
 		})
 
 		// const popup = new ol.Overlay({

@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+	<title>Pari passu</title>
+
+	<link rel="icon" href="css/img/favicon.ico">
+	<link rel="stylesheet" href="css/page.css">
+	<link rel="stylesheet" href="css/paripassu.css">
+	
+
+	
+	<!-- <script  src="js/app.js" ></script> -->
+
+</head>
+<body>
+	<div id="app">
+		<button onclick="saySomething('test')">SPEAK</button>
+	</div>
+		
+		
+
+	<script>
+		// const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+		// const recognition = new SpeechRecognition();
+
+		// recognition.start();
+		// recognition.onresult = function(event) {
+		// 	const answer = event.results[0][0].transcript
+		// 	const confidence = 'Confidence: ' + event.results[0][0].confidence
+		// 	console.log(answer, confidence);
+		// }
+		
+		const synth = window.speechSynthesis;
+		let voices = []
+		if (speechSynthesis.onvoiceschanged !== undefined) {
+			speechSynthesis.onvoiceschanged = () => {
+				voices = synth.getVoices()
+			};
+		}
+
+		function saySomething(text, voice) {
+			// Only works AFTER the user interacts with the page
+			const utterance = new SpeechSynthesisUtterance(text)
+			utterance.pitch = 1; 	// 0: lowest, 2: highest 
+ 			utterance.rate = .1; 	// .1: slowest, 10: fastest 
+  			utterance.volume = 1; 	// 0: silent, 1: max volume
+  			utterance.voice = voices[0]
+  			synth.speak(utterance);
+
+  			return utterance
+		}
+
+		
+	</script>
+
+</body>
+	
+</html>

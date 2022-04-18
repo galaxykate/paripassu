@@ -1,6 +1,10 @@
-.map {
-	width:  400px;
-	height:  400px;
+.widget-location {
+	display: flex;
+	flex-direction: column;
+}
+
+.widget-location .map {
+	flex:  1;
 }
 
 .event-chip {

@@ -35,9 +35,7 @@ body {
 	display: flex;
 }
 
-body {
 
-}
 
 
 .microchip {
@@ -64,12 +62,7 @@ body {
 	/*border:  2px solid cyan;*/
 }
 
-.columns {
-	display: flex;
-	flex-direction: row;
-	flex:  1;
-	/*border:  2px solid pink;*/
-}
+
 
 .column {
 	flex: 1;
@@ -92,6 +85,21 @@ body {
 
 	flex-direction: column;
 }
+
+
+@media screen and (max-width : 800px) {
+	#app>#main-columns  {
+		display: flex;
+		flex-direction: column;
+		flex:  1;
+		/*background-color: magenta;*/
+	}
+
+	body {
+		/*border: 3px solid pink;*/
+	}
+}
+
 
 
 td:nth-child(1) {  
