@@ -1,6 +1,8 @@
 const MAP_SIZE = 500
-// const NU_CENTER = ol.proj.fromLonLat([-87.6753, 42.056])
-const NU_CENTER = ol.proj.fromLonLat([-87.6813, 42.049])
+const NU_CENTER = ol.proj.fromLonLat([-87.6753, 42.056])
+
+// downtown center, uncomment to use downtown instead, or make your own
+// const NU_CENTER = ol.proj.fromLonLat([-87.6813, 42.049])
 const AUTOMOVE_SPEED = 1
 const UPDATE_RATE = 100
 /*
@@ -14,41 +16,43 @@ let landmarkCount = 0
 
 let gameState = {
 	points: 0,
-	captured: []
+	captured: [],
+	messages: []
 }
 
 // Create an interactive map
+// Change any of these functions
+
 let map = new InteractiveMap({
 	mapCenter: NU_CENTER,
 
 	// Ranges
 	ranges: [500, 200, 90, 1], // must be in reverse order
 
-	landmarks:[
-		// Custom landmarks
-	], 
-
 	initializeMap() {
+		// A good place to load landmarks
 		this.loadLandmarks("landmarks-shop-evanston", (landmark) => {
 			// Keep this landmark?
+
+			// Keep all landmarks in the set
 			return true
 
-			// Only keep this landmark if its a store or amenity
+			// Only keep this landmark if its a store or amenity, e.g.
 			// return landmark.properties.amenity || landmark.properties.store
 		})
 
-		
 		// Create random landmarks
-		// for (var i = 0; i < 10; i++) {
+		// You can also use this to create trails or clusters for the user to find
+		for (var i = 0; i < 10; i++) {
 
-		// 	// make a polar offset (radius, theta) 
-		// 	// from the map's center (units are *approximately* meters)
-		// 	let position = clonePolarOffset(NU_CENTER, 400*Math.random() + 300, 20*Math.random())
-		// 	this.createLandmark({
-		// 		pos: position,
-		// 		name: words.getRandomWord(),
-		// 	})
-		// }
+			// make a polar offset (radius, theta) 
+			// from the map's center (units are *approximately* meters)
+			let position = clonePolarOffset(NU_CENTER, 400*Math.random() + 300, 20*Math.random())
+			this.createLandmark({
+				pos: position,
+				name: words.getRandomWord(),
+			})
+		}
 	},
 
 	update() {
@@ -64,7 +68,8 @@ let map = new InteractiveMap({
 			landmark.name = landmark.openMapData.name
 		}
 		
-		// You decide how to create a marker
+		// *You* decide how to create a marker
+		// These aren't used, but could be examples
 		landmark.idNumber = landmarkCount++
 		landmark.color = [Math.random(), 1, .5]
 
@@ -81,13 +86,15 @@ let map = new InteractiveMap({
 		if (newLevel == 2) {
 
 			// Add points to my gamestate
-			gameState.points += 1
+			gameState.points += landmark.points
 
-			landmark.points += 1
+			
 
 			// Have we captured this?
 			if (!gameState.captured.includes(landmark.name)) {
 				gameState.captured.push(landmark.name)
+				// Add a message
+				gameState.messages.push(`You captured ${landmark.name} for ${landmark.points} points`)
 			}
 
 		}
@@ -142,13 +149,13 @@ window.onload = (event) => {
 		<header></header>
 			<div id="main-columns">
 
-				<div class="main-column" style="flex:1">
+				<div class="main-column" style="flex:1;overflow:scroll;max-height:200px">
 					(TODO, add your own gamestate)
 					{{gameState}}
 					
 				</div>
 
-				<div class="main-column" style="width:${MAP_SIZE}px;height:${MAP_SIZE}px">
+				<div class="main-column" style="overflow:hidden;width:${MAP_SIZE}px;height:${MAP_SIZE}px">
 					<location-widget :map="map" />
 				
 				</div>
@@ -156,35 +163,13 @@ window.onload = (event) => {
 			</div>	
 		<footer></footer>
 		</div>`,
+
 		data() {
 			return {
-				// gameState: gameState,
-				io:io,
+			
 				map: map,
 				gameState: gameState
 			}
-		},
-
-		methods: {
-
-			sendMessage() {
-				console.log(this.$refs)
-				let msg = this.$refs.message.value
-				console.log(msg)
-
-				this.$refs.message.value = ""
-				this.room.sendMessage(msg)
-			},
-			
-			post() {
-				this.room.postMessage(words.getRandomWord())
-			}
-		},
-		
-		props: [],
-
-		mounted() {
-			
 		},
 
 		// Get all of the intarsia components, plus various others
