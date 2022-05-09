@@ -53,7 +53,10 @@ window.onload = (event) => {
 		
 		data() {
 			return {
+				// All the social stuff
 				room: room,
+
+				// Gameplay?
 				game: game,
 			}
 		},

@@ -61,6 +61,7 @@ class Room {
 		let eventListRef = this.ref.child('events');
 		let eventRef = eventListRef.push();
 		eventRef.set(event);
+		console.log("Set successfully?")
 	}
 
 
@@ -74,7 +75,7 @@ class Room {
 		this.user.id = uid
 		
 
-		console.log("Joined with ID", this.authID)
+		console.log("Joined with ID", uid)
 
 		console.log(`${this}: checking to see if this room exists`)
 		this.connectToRoom()
@@ -87,6 +88,7 @@ class Room {
 		this.ref.get().then((snapshot) => {
 
 			if (snapshot.exists()) {
+				console.log(`${this}: exists!`)		
 				// This room exists!
 				const data = snapshot.val();
 				// Copy over all the room data (TODO, do better)
@@ -100,20 +102,20 @@ class Room {
 					// Record our UID
 					createdBy: this.user.uid, 
 					id: this.id,
-					log: []
+					
 				})
 
 			}
 		})
 
-		this.ref.child("userStatus/" + this.user.uid).set({
-			connected: true,
-			time: Date.now()
-		})
-		this.ref.child("userStatus/" + this.user.uid).onDisconnect().set({
-			connected: false,
-			time: Date.now()
-		})
+		// this.ref.child("userStatus/" + this.user.uid).set({
+		// 	connected: true,
+		// 	time: Date.now()
+		// })
+		// this.ref.child("userStatus/" + this.user.uid).onDisconnect().set({
+		// 	connected: false,
+		// 	time: Date.now()
+		// })
 
 		// Pubsub! Subscribe to changes in the value
 		this.ref.on('value', (snapshot) => {
