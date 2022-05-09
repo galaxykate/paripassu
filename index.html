@@ -10,9 +10,35 @@
 	<link rel="stylesheet" href="css/page.css">
 	<link rel="stylesheet" href="css/paripassu.css">
 	
-	<!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
- -->
+    <script type="module">
+	// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+
+		console.log("CONNECTING TO FIREBASE")
+		// TODO: Add SDKs for Firebase products that you want to use
+		// https://firebase.google.com/docs/web/setup#available-libraries
+
+		// Your web app's Firebase configuration
+		// It's ok for this to be public! Its visible in any web page
+		const firebaseConfig = {
+			apiKey: "AIzaSyDZO5KrCfUsyg3-H25kUAZ_Z6aDv8KZAHA",
+			authDomain: "paripassu-e9c1b.firebaseapp.com",
+			databaseURL: "https://paripassu-e9c1b-default-rtdb.firebaseio.com",
+			projectId: "paripassu-e9c1b",
+			storageBucket: "paripassu-e9c1b.appspot.com",
+			messagingSenderId: "395560885213",
+			appId: "1:395560885213:web:3844e290560d34f46b7434"
+		};
+
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+
+		console.log("CONNECTED TO FIREBASE")
+	</script>
+
+
 	<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css">
 
@@ -40,28 +66,6 @@
 		
 		
 
-	<script type="module">
-		if (ALLOW_FIREBASE) {
-
-			// Firebase setup
-			// Your web app's Firebase configuration
-			const firebaseConfig = {
-				
-			};
-
-			try {
-				// Initialize Firebase
-				firebase.initializeApp(firebaseConfig)
-				firebase.isInitialized = true
-				io.room.connectFirebase(firebase)
-				console.log("Firebase loaded!!")
-			} catch(err) {
-				console.warn(err)
-			}
-		}
-
-		
-	</script>
 
 </body>
 	

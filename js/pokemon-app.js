@@ -31,7 +31,7 @@ let map = new InteractiveMap({
 
 	initializeMap() {
 		// A good place to load landmarks
-		this.loadLandmarks("landmarks-shop-evanston", (landmark) => {
+		this.loadLandmarks("landmarks-natural-evanston", (landmark) => {
 			// Keep this landmark?
 
 			// Keep all landmarks in the set
@@ -122,11 +122,12 @@ let map = new InteractiveMap({
 		// Pick out a hue, we can reuse it for foreground and background
 		let hue = landmark.points*.1
 		return {
-			label: landmark.name + "\n" + landmark.distanceToPlayer +"m",
+			// label: landmark.name + "\n" + landmark.distanceToPlayer +"m",
+			label: "TESTETESETWS",
 			fontSize: 8,
 
 			// Icons (in icon folder)
-			icon: "person_pin_circle",
+			icon: "lightbulb",
 
 			// Colors are in HSL (hue, saturation, lightness)
 			iconColor: [hue, 1, .5],
