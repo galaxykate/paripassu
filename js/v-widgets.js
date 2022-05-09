@@ -103,7 +103,7 @@ Vue.component("user-view", {
 	
 		<table>
 			<tr v-for="user in room.users" :class="{'user-row':true,active:user.status.connected}">
-				<td><user-chip :user="user" /></td>
+				<td><user-chip v-if="user" :user="user" /></td>
 				<td>{{new Date(user.status.time).toLocaleString()}}</td>
 			</tr>
 		</table>
@@ -114,7 +114,7 @@ Vue.component("user-view", {
 
 Vue.component("chat-message", {
 	template: `<div class="chat-message">
-		<user-chip :user="user" />
+		<user-chip  v-if="user" :user="user" />
 		<div class="chat-message-bubble">{{msg.data}}</div>
 
 	</div>`,
