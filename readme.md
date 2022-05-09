@@ -16,7 +16,6 @@
 	
 
 Things you can modify:
-* THINGS IN POKEMON-APP.JS
 * The Vue gamestate display in pokemon-app.js (search "TODO")
 * What is recorded in gamestate
 * Any of the InteractiveMap handlers:
@@ -25,9 +24,3 @@ Things you can modify:
 	- initializeLandmark: add data to every landmark in your game. Are coffee shops worth 10 points?
 	- onEnterRange, onExitRange: what to do if the player enters or exits the region around a landmark. Different levels mean you can give different points for proximity
 	- featureToStyle: How a landmark is displayed
-
-Goal: build something INTERESTING ENOUGH that you can get people outside, playing it, and watch their (your) experience
-
-TODO
-Control distance from text
-Better way to get landmark location

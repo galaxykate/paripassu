@@ -3,22 +3,19 @@
 	A "place" with many users
 */
 
-
-class User {
-	constructor(isSelf, uid) {
-		this.uid = uid
-		this.isSelf = isSelf
-		this.displayName = "okapi"
-	}
-}
-
+basicColors = ["#ff66ff", "#6699ff", "#3399ff", "#33ccff", "#66ffcc", "#66ff66", "#ccff66", "#ffcc66", "#ff9966", "#ff6699", "#ff66cc"]
 
 class Room {
 	constructor(id) {
+		this.authID = undefined
 		console.log("Created room:", id)
 		this.id = id
-		this.user = new User(true)
-		this.users = {}
+		
+		this.user = {
+			displayName: words.getUserName(),
+			color: getRandom(basicColors)
+
+		}
 		this.exists = false
 		this.createdOn = undefined
 		this.createdBy = undefined
@@ -28,13 +25,26 @@ class Room {
 	//===========================================
 	// Constructing sublists
 	
+	users() {
+		let users = {
+
+		}
+		return users
+
+	}
+	
+
 	get messages() {
+		return this.getEventsByType("chat")
+	}
+	
+	getEventsByType(type) {
 		return Object.entries(this.events)
 			.map(ev => {
 				ev[1].id = ev[0]
 				return ev[1]
 			})
-			.filter(ev => ev.type == "chat")
+			.filter(ev => ev.type == type)
 	}
 	
 	
@@ -42,7 +52,7 @@ class Room {
 	// Events
 	
 	postEvent(event) {
-		event.from = this.user.uid
+		event.from = this.user.id
 		event.time = Date.now()
 		console.log(`${this} posts an event:`, event)
 	
@@ -53,14 +63,18 @@ class Room {
 		eventRef.set(event);
 	}
 
+
+
 	//===========================================
 	// Setup
 
 	setFirebaseAuthUser(uid, userData) {
-		console.log(uid)
-		// console.log(userData)
-		this.user.uid = uid
+		// Logged in. with this authid
+		
+		this.user.id = uid
+		
 
+		console.log("Joined with ID", this.authID)
 
 		console.log(`${this}: checking to see if this room exists`)
 		this.connectToRoom()
@@ -113,7 +127,8 @@ class Room {
 			type: "join",
 			data: {
 				displayName: this.user.displayName,
-				uid: this.user.uid
+				color: this.user.color,
+				uid: this.user.id
 			}
 		})
 	}
@@ -128,24 +143,36 @@ class Room {
 		// console.log(`${Object.values(data.userStatus).length} users`)
 	
 		// Deal with user updates
-		let newUsers = missingKeys(data.userStatus, this.users)
-		console.log("New users", newUsers)
-		
-		newUsers.forEach(id => {
-			Vue.set(this.users, id, {
-				id: id,
-				displayName: "anon",
-				status: data.userStatus[id]
-			})
-		})
-		console.log("USERS", this.users)
+		if (data.userStatus) {
+			let newUsers = missingKeys(data.userStatus, this.users)
+			
+			newUsers.forEach(id => {
+				// Add this user to the user registry
+				// let newRecord = {
+				// 	id: id,
+				// 	displayName: "anon",
+				// 	color: getRandom(basicColors),
+				// 	status: data.userStatus[id]
+				// }
 
-		// Deal with events
-		let newEvents = missingKeys(data.events, this.events)
-		console.log("New events", newEvents)
-		
-		// Add and handle this event
-		newEvents.forEach(id => this.handleEvent(data.events[id], id))
+				// if (id === this.authID) {
+				// 	console.log("Found user!")
+				// 	newRecord = this.user
+				// } 
+				// console.log("NEW", newRecord)
+
+				// Vue.set(this.users, id, newRecord)
+
+			})
+		}
+		if (data.events) {
+			// Deal with events
+			let newEvents = missingKeys(data.events, this.events)
+			// console.log("New events", newEvents)
+			
+			// Add and handle this event
+			newEvents.forEach(id => this.handleEvent(data.events[id], id))
+		}
 	}
 
 	handleEvent(ev, id) {

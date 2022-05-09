@@ -1,5 +1,13 @@
+.chat-widget {
+	flex:  1;
+	display: flex;
+	flex-direction: column;
+}
 .chat-messages {
-
+	flex:  1;
+	border:  1px solid green;
+	max-height: 100px;
+	overflow: scroll;
 }
 
 .chat-message {
@@ -20,4 +28,22 @@
 
 .user-row.active {
 	opacity: 1;
+}
+
+
+.user-chip .microchip {
+	position: absolute;
+	top:  -3px;
+	display: none;
+}
+
+.user-chip:focus .microchip {
+	
+	display: inline-block;
+}
+
+.game {
+	border: 3px solid magenta;
+	flex:  1;
+
 }
