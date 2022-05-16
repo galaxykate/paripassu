@@ -59,3 +59,36 @@
 	opacity: 50%;
 	font-style: italic;
 }
+
+.blackboard-array {
+	margin:  2px;
+	border:  1px solid cyan;
+	display: inline-block;
+	vertical-align: top;
+}
+.blackboard-array-item {
+	margin:  2px;
+	border:  1px solid green;
+	display: inline-block;
+	vertical-align: bottom;
+}
+.blackboard-val {
+	margin:  2px;
+	border:  1px solid purple;
+	display: inline-block;
+}
+
+.blackboard-dict {
+	margin:  2px;
+	border:  1px solid red;
+	display: inline-block;
+}
+
+
+.user-row {
+
+}
+
+.user-row.self {
+	background-color:  pink;
+}

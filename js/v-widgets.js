@@ -38,7 +38,11 @@ Vue.component("room-debug", {
 })
 
 Vue.component("user-widget", {
-	template: `<div class="widget user-widget">
+	/*
+	Display data about this user
+	If they haven't logged in yet..?
+	*/
+	template: `<div class="widget user-widget" v-if="room.user">
 		<div v-if="false">
 			<span ref="displayname">{{room.user.displayName}}</span>
 			<button @click="editName=true">🖋</button>
@@ -74,6 +78,8 @@ Vue.component("user-widget", {
 	},
 	data() {
 		return {
+			// name: words.getUserName(),
+			// color: getRandom(colors)
 			editName: false
 		}
 	},
@@ -100,6 +106,7 @@ Vue.component("user-chip", {
 Vue.component("user-view", {
 	template: `<div class="widget">
 	Users:
+		{{room.users}}
 	
 		<table>
 			<tr v-for="user in room.users" :class="{'user-row':true,active:user.status.connected}">

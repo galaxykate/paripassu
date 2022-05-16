@@ -1,3 +1,27 @@
+try {
+	const simplex = new SimplexNoise()
+
+	function noise() {
+
+		switch(arguments.length) {
+			case 0: return 0
+			case 1: return simplex.noise2D(arguments[0], 100)
+			case 2: return simplex.noise2D(...arguments)
+			case 3: return simplex.noise3D(...arguments)
+			case 4: return simplex.noise4D(...arguments)
+			default: console.warn("Too many arguments for noise, max 4", arguments)
+		}
+	}
+} catch (err) {
+	console.warn(err)
+	console.warn("No noise implementation included")
+}
+
+
+function missingKeys(newObj, oldObj) {
+	return Object.keys(newObj).filter(key => oldObj[key] === undefined)
+}
+
 
 function polarOffset(p, r, theta) {
 		return [p[0] + r*Math.cos(theta), p[1] + r*Math.sin(theta)]

@@ -44,10 +44,11 @@
 
 
    /** Class representing a point in space
-	*  which is an extended Array (see https://javascript.info/extend-natives)
+	*  which is NOT an extended Array (see https://javascript.info/extend-natives)
 	* @memberof Vector
 	* */
-	class Vector extends Array {
+	
+	class Vector {
 
 
  		constructor() {
@@ -71,10 +72,15 @@
 				arr = arguments[0]
 			}
 
-			super(...arr);
-			if (this.length == 0) {
-				this.push(0)
-				this.push(0)
+
+			this.v = []
+			if (arr.length == 0) {
+				this.v.push(0)
+				this.v.push(0)
+			} else {
+				for (var i =0; i < arr.length; i++) {
+					this.v[i] = arr[i] || 0
+				}
 			}
 
 			// Check for validity
@@ -100,7 +106,7 @@
 			*	foo('hello')
 			*/
 			for (var i = 0; i < this.length; i++) {
-				if (this[i] === undefined || this[i] === null|| isNaN(this[i]))
+				if (this.v[i] === undefined || this.v[i] === null|| isNaN(this.v[i]))
 					return false
 			}
 			return true
@@ -111,7 +117,7 @@
 			* Throws an error if this is not valid
 			*/
 			for (var i = 0; i < this.length; i++) {
-				if (this[i] === undefined || this[i] === null|| isNaN(this[i]))
+				if (this.v[i] === undefined || this.v[i] === null|| isNaN(this.v[i]))
 					throw(`Invalid vector: ${this}`)
 			}
 		}
@@ -120,18 +126,27 @@
 			console.log(this.toString())
 		}
 
+		toArray() {
+			return this.v.slice()
+		}
+
 		toString() {
 			return "(" + this.toFixed(2) + ")"
 		}
 		
 		toFixed(length) {
-			return this.map(s => s.toFixed(length)).join(",")
+			return this.v.map(s => s.toFixed(length)).join(",")
 		}
 
 		toAFrame() {
-			let s = this.map(v => v.toFixed(2)).join(" ")
-			console.log("AFRAME", s)
+			let s = this.v.map(v => v.toFixed(2)).join(" ")
 			return s
+		}
+
+		vueUpdate() {
+			Vue.set(this.v, 0, this.v[0])
+			Vue.set(this.v, 1, this.v[1])
+			Vue.set(this.v, 2, this.v[2])
 		}
 
 		//=============================================================
@@ -139,7 +154,7 @@
 
 		
 		clone() {
-			let v = new Vector(this)
+			let v = new Vector(this.v)
 			return v
 		}
 
@@ -150,6 +165,15 @@
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			let v = new Vector(this)
 			v.addPolar(r, theta)
+			return v
+		}
+
+		cloneOffset(x, y, z) {
+			if (isNaN(x))
+				throw(`Non-number x: '${x}' type:${typeof x}`)
+			
+			let v = new Vector(this)
+			v.add(x, y, z)
 			return v
 		}
 
@@ -169,11 +193,18 @@
 		// Setting this vector
 
 		setTo() {
+			// Deal with getting an array as an argument, rather than arg-style
 			let arr = Array.isArray(arguments[0])?arguments[0]:arguments
 			
-			for (var i = 0; i < Math.max(this.length, arr.length); i++) {
-				this[i] = arr[i]
-			}
+			// for (var i = 0; i < Math.max(this.length, arr.length); i++) {
+			// 	// Splice so that Vue can track
+			// 	this.v.splice(i, 1, arr[i])
+			// 	// this.v[i] = arr[i]
+			// }
+
+			// https://michaelnthiessen.com/debugging-guide-why-your-component-isnt-updating/
+			// Splice to handle Vue2 not tracking arrays
+			this.v.splice(0, arr.length, ...arr)
 			this.checkIfValid()
 			return this
 		}
@@ -187,7 +218,7 @@
 			
 
 			for (var i = 0; i < Math.min(v0.length, v1.length); i++) {
-				this[i] = lerp(v0[i], v1[i], pct)
+				this.v[i] = lerp(v0[i], v1[i], pct)
 			}
 			return this
 		}
@@ -199,7 +230,7 @@
 				throw(`Non-array v1: '${v1}' type:${typeof v1}`)
 			
 			for (var i = 0; i < Math.min(v0.length, v1.length); i++) {
-				this[i] = v1[i] - v0[i] 
+				this.v[i] = v1[i] - v0[i] 
 			}
 			this.checkIfValid()
 			return this
@@ -212,7 +243,7 @@
 				throw(`Non-number m: '${m}' type:${typeof m} `)
 			
 			for (var i = 0; i < v.length; i++) {
-				this[i] = v[i]*m			
+				this.v[i] = v[i]*m			
 			}
 			this.checkIfValid()
 			return this
@@ -220,7 +251,7 @@
 
 		setToAddMultiples( ) {
 			for (var j = 0; j < this.length; j++) {
-				this[j] = 0
+				this.v[j] = 0
 				for (var i = 0; i < arguments.length/2; i++) {
 					let v = arguments[i*2] || arguments[i*2]
 					let m = arguments[i*2 + 1]
@@ -229,7 +260,7 @@
 					if (isNaN(m))
 						throw(`Non-number m: '${m}' type:${typeof m} `)
 					
-					this[j] += v[j]*m	
+					this.v[j] += v[j]*m	
 				}
 			}
 			this.checkIfValid()
@@ -242,10 +273,8 @@
 					
 			v = v.coords || v
 			let m = Math.sqrt(v[0]*v[0] + v[1]*v[1])
-			this[0] = v[1]/m
-			this[1] = -v[0]/m
-			this.checkIfValid()
-			return this
+			return this.setTo(v[1]/m, -v[0]/m)
+		
 		}
 
 		setToAverage() {
@@ -273,11 +302,20 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
-			this[0] = r*Math.cos(theta)
-			this[1] = r*Math.sin(theta)
+			
+			return this.setTo(r*Math.cos(theta), r*Math.sin(theta))
+			
+		}
 
-			this.checkIfValid()
-			return this
+		setToZPolar(r, theta) {
+			if (isNaN(r) || r === undefined)
+				throw(`Non-number radius: '${r}' type:${typeof r}`)
+			if (isNaN(theta) ||  theta === undefined)
+				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
+			
+			
+			return this.setTo(r*Math.cos(theta), this.v[1], r*Math.sin(theta))
+			
 		}
 
 
@@ -287,14 +325,24 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
-			this[0] = v[0] + r*Math.cos(theta)
-			this[1] = v[1] + r*Math.sin(theta)
-			for (var i = 2; i < v.length; i++) {
-				this[i] = v[i]
-			}
-			this.checkIfValid()
+			return this.setTo(v[0] + r*Math.cos(theta), v[1] + r*Math.sin(theta) )
+		}
+
+		setToSpherical(r, theta, phi) {
+			if (isNaN(r) || r === undefined)
+				throw(`Non-number radius: '${r}' type:${typeof r}`)
+			if (isNaN(theta) ||  theta === undefined)
+				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
+			if (isNaN(phi) ||  phi === undefined)
+				throw(`Non-number phi: '${phi}' type:${typeof phi} `)
+			
+			this.setTo(r*Math.cos(theta)*Math.cos(phi),
+				r*Math.cos(theta)*Math.cos(phi),
+				r*Math.sin(phi))
+
 			return this
 		}
+
 		
 		
 		//=============================================================
@@ -305,7 +353,7 @@
 				throw(`Invalid NaN multiplier ${m}`)
 
 			for (var i = 0; i < this.length; i++) {
-				this[i] *= m
+				this.v[i] *= m
 			}
 			this.checkIfValid()
 			return this
@@ -319,7 +367,7 @@
 			}
 
 			for (var i = 0; i < this.length; i++) {
-				this[i] /= m
+				this.v[i] /= m
 			}
 			this.checkIfValid()
 			return this
@@ -332,8 +380,38 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
-			this[0] += r*Math.cos(theta)
-			this[1] += r*Math.sin(theta)
+			this.v[0] += r*Math.cos(theta)
+			this.v[1] += r*Math.sin(theta)
+			
+			this.checkIfValid()
+			return this
+		}
+
+		addSpherical(r, theta, phi) {
+			if (isNaN(r) || r === undefined)
+				throw(`Non-number radius: '${r}' type:${typeof r}`)
+			if (isNaN(theta) ||  theta === undefined)
+				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
+			if (isNaN(phi) ||  phi === undefined)
+				throw(`Non-number phi: '${phi}' type:${typeof phi} `)
+			
+			this.v[0] += r*Math.cos(theta)*Math.cos(phi)
+			this.v[1] += r*Math.sin(theta)*Math.cos(phi)
+			this.v[2] += r*Math.sin(phi)
+			
+			this.checkIfValid()
+			return this
+		}
+
+		addCylindrical(r, theta, z) {
+			if (isNaN(r) || r === undefined)
+				throw(`Non-number radius: '${r}' type:${typeof r}`)
+			if (isNaN(theta) ||  theta === undefined)
+				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
+			
+			this.v[0] += r*Math.cos(theta)
+			this.v[1] += r*Math.sin(theta)
+			this.v[2] += z
 			
 			this.checkIfValid()
 			return this
@@ -348,7 +426,7 @@
 				
 				// Only add what dimensions we both have
 				for (var j = 0; j < Math.min(this.length, v.length); j++) {
-					this[j] += v[j]
+					this.v[j] += v[j]
 				}
 			}
 			
@@ -366,7 +444,7 @@
 				
 				// Only add what dimensions we both have
 				for (var j = 0; j < Math.min(this.length, v.length); j++) {
-					this[j] -= v[j]
+					this.v[j] -= v[j]
 				}
 			}
 			
@@ -397,7 +475,7 @@
 							console.log(v, v[i])
 							throw(`addMultiples: NaN element of vector ${v}`)
 						}
-						this[i] += v[i] * m
+						this.v[i] += v[i] * m
 					}
 				}
 			}
@@ -412,14 +490,14 @@
 		get magnitude() {
 			let sum = 0
 			for (var i = 0; i < this.length; i++) {
-				sum += this[i]**2
+				sum += this.v[i]**2
 			}
 			
 			return Math.sqrt(sum)
 		}
 
 		get angle() {
-			return Math.atan2(this[1], this[0])
+			return Math.atan2(this.v[1], this.v[0])
 		}
 
 		getDistanceTo(v){
@@ -434,14 +512,14 @@
 
 		angleTo(v) {
 			v = v.coords || v
-			return Math.atan2(this[1] - v[1], this[0] - v[0])
+			return Math.atan2(this.v[1] - v[1], this.v[0] - v[0])
 		}
 
 		normalize() {
 			let m = this.magnitude
 			if (m  > 0) {
 				for (var i = 0; i < this.length; i++) {
-					this[i] /= m
+					this.v[i] /= m
 				}
 				
 				this.checkIfValid()
@@ -457,30 +535,44 @@
 		}
 
 		wrap(x0, x1, y0, y1, z0, z1) {
-			if (this[0] < x0) {
+			let x = this.v[0]
+			let y = this.v[1]
+			let z = this.v[2]
+			
+
+			if (x < x0) {
 				// Teleport to x1
-				this[0] = x1
-			} else if (this[0] > x1) {
+				x = x1
+			} else if (x > x1) {
 				// Teleport to x1
-				this[0] = x0
+				x = x0
 			}
 
-			if (this[1] < y0) {
-				// Teleport to x1
-				this[1] = y1
-			} else if (this[1] > y1) {
-				// Teleport to x1
-				this[1] = y0
+			if (y0 !== undefined) {
+				if (y < y0) {
+					y = y1
+				} else if (y > y1) {
+					y = y0
+				}
 			}
 
-			return this
+			if (z0 !== undefined) {
+				if (z < z0) {
+					z = z1
+				} else if (z > z1) {
+					z = z0
+				}
+			}
+
+			return this.setTo(x, y, z)
 		}
 
 		clamp() {
+			let v = []
 			for (let i = 0; i < arguments.length/2; i++) {
-				this[i] = Math.max(arguments[i*2], Math.min(arguments[i*2 + 1], this[i]))
+				v[i] = Math.max(arguments[i*2], Math.min(arguments[i*2 + 1], this.v[i]))
 			}	
-			return this
+			return this.setTo(v)
 		}
 
 		//=============================================================
@@ -518,7 +610,7 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
-			p.vertex(this[0] + r*Math.cos(theta), this[1] + r*Math.sin(theta))
+			p.vertex(this.v[0] + r*Math.cos(theta), this.v[1] + r*Math.sin(theta))
 		}
 
 		polarOffsetCurveVertex(p, r, theta) {
@@ -530,7 +622,7 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
-			p.curveVertex(this[0] + r*Math.cos(theta), this[1] + r*Math.sin(theta))
+			p.curveVertex(this.v[0] + r*Math.cos(theta), this.v[1] + r*Math.sin(theta))
 		}
 
 		draw(p, radius = 1) {
@@ -548,7 +640,7 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 
-			p.circle(this[0]+r*Math.cos(theta),this[1]+r*Math.sin(theta), radius)
+			p.circle(this.v[0]+r*Math.cos(theta),this.v[1]+r*Math.sin(theta), radius)
 		}
 
 		drawLine({p, 
@@ -563,17 +655,17 @@
 				throw("Remember to include P5 object as the p argument")
 
 			let mag = this.magnitude
-			let nx = this[1]*offsetNormal/mag
-			let ny = -this[0]*offsetNormal/mag
+			let nx = this.v[1]*offsetNormal/mag
+			let ny = -this.v[0]*offsetNormal/mag
 
-			let mx = this[0]/mag
-			let my = this[1]/mag
+			let mx = this.v[0]/mag
+			let my = this.v[1]/mag
 
 			p.line(
 				center[0] + nx + mx*paddingStart,
 				center[1] + ny + my*paddingStart,
-				center[0] + this[0]*multiple + nx - mx*paddingEnd,
-				center[1] + this[1]*multiple + ny - my*paddingEnd
+				center[0] + this.v[0]*multiple + nx - mx*paddingEnd,
+				center[1] + this.v[1]*multiple + ny - my*paddingEnd
 			)
 		}
 
@@ -587,8 +679,8 @@
 			if (p== undefined || !p.line)
 				throw("Remember to include P5 object as the p argument")
 
-			let x = v[0] - this[0]
-			let y = v[1] - this[1]
+			let x = v[0] - this.v[0]
+			let y = v[1] - this.v[1]
 
 			let mag = Math.sqrt(x*x+ y*y)
 			x/= mag
@@ -596,12 +688,12 @@
 			let nx = y*offsetNormal
 			let ny = -x*offsetNormal
 
-			let mx = this[0]/mag
-			let my = this[1]/mag
+			let mx = this.v[0]/mag
+			let my = this.v[1]/mag
 
 			p.line(
-				this[0] + nx - mx*paddingStart,
-				this[1] + ny - my*paddingStart,
+				this.v[0] + nx - mx*paddingStart,
+				this.v[1] + ny - my*paddingStart,
 				v[0] + nx + mx*paddingEnd,
 				v[1] + ny + my*paddingEnd
 			)
@@ -666,63 +758,69 @@
 			}
 		}
 
-	shade(shadeAmt, fadeAmt) {
-		let targetL = shadeAmt>0?100:0
-		let targetS = fadeAmt>0?100:0
-		let h = this.v[0]
-		let s = this.v[1]
-		let l = this.v[2]
-		let l2 = lerp(l, targetL, abs(shadeAmt))
-		let s2 = lerp(s, targetS, abs(fadeAmt))
-		return [h, s2, l2]
-	}
+		//==========================================
+		// Colors (represents h[0-360] s[0-100] l[0-100])
+		
+		shade(shadeAmt=0, fadeAmt=0) {
+			let targetL = shadeAmt>0?100:0
+			let targetS = fadeAmt>0?100:0
+			let h = this.v[0]
+			let s = this.v[1]
+			let l = this.v[2]
+			let l2 = lerp(l, targetL, Math.abs(shadeAmt))
+			let s2 = lerp(s, targetS, Math.abs(fadeAmt))
 
-	toCSSColor(shadeAmt, fadeAmt) {
-		let c = this.shade(shadeAmt, fadeAmt)
-		return `hsl(${c[0].toFixed(2)},${c[1].toFixed(2)}%,${c[2].toFixed(2)}%)`
-	}
+			return [h, s2, l2]
+		}
 
-	// Colors
-	toRGB() {
-		// https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
-		// Adjusting to 360
-		let h = this[0]/360
-		let s = this[1]/100
-		let l = this[2]/100
-		var r, g, b;
+		toCSSColor(shadeAmt, fadeAmt) {
+			let c = this.shade(shadeAmt, fadeAmt)
+			return `hsl(${c[0].toFixed(2)},${c[1].toFixed(2)}%,${c[2].toFixed(2)}%)`
+		}
 
-		if(s == 0){
-			r = g = b = l; // achromatic
-		} else {
-			var hue2rgb = function hue2rgb(p, q, t){
-				if(t < 0) t += 1;
-				if(t > 1) t -= 1;
-				if(t < 1/6) return p + (q - p) * 6 * t;
-				if(t < 1/2) return q;
-				if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-				return p;
+
+
+		toRGB(shadeAmt, fadeAmt) {
+			// https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+			let c = this.shade(shadeAmt, fadeAmt)
+			
+			let h = c[0]/360
+			let s = c[1]/100
+			let l = c[2]/100
+			var r, g, b;
+
+			if(s == 0){
+				r = g = b = l; // achromatic
+			} else {
+				var hue2rgb = function hue2rgb(p, q, t){
+					if(t < 0) t += 1;
+					if(t > 1) t -= 1;
+					if(t < 1/6) return p + (q - p) * 6 * t;
+					if(t < 1/2) return q;
+					if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+					return p;
+				}
+
+				var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+				var p = 2 * l - q;
+				r = hue2rgb(p, q, h + 1/3);
+				g = hue2rgb(p, q, h);
+				b = hue2rgb(p, q, h - 1/3);
 			}
 
-			var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-			var p = 2 * l - q;
-			r = hue2rgb(p, q, h + 1/3);
-			g = hue2rgb(p, q, h);
-			b = hue2rgb(p, q, h - 1/3);
+			return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+
 		}
+		
+		toHex(shadeAmt, fadeAmt) {
+			let rgb = this.toRGB(shadeAmt, fadeAmt)
+			function componentToHex(c) {
+				var hex = c.toString(16);
+				return hex.length == 1 ? "0" + hex : hex;
+			}
 
-		return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
-
-	}
-	
-	toHex() {
-		let rgb = this.toRGB()
-		function componentToHex(c) {
-			var hex = c.toString(16);
-			return hex.length == 1 ? "0" + hex : hex;
+			return "#" + componentToHex(rgb[0]) + componentToHex(rgb[1]) + componentToHex(rgb[2]);
 		}
-
-		return "#" + componentToHex(rgb[0]) + componentToHex(rgb[1]) + componentToHex(rgb[2]);
-	}
 
 	}
 

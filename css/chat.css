@@ -21,29 +21,3 @@
 	border-radius: 7px;
 	padding:  2px ;
 }
-
-.user-row {
-	opacity: .3;
-}
-
-.user-row.active {
-	opacity: 1;
-}
-
-
-.user-chip .microchip {
-	position: absolute;
-	top:  -3px;
-	display: none;
-}
-
-.user-chip:focus .microchip {
-	
-	display: inline-block;
-}
-
-.game {
-	border: 3px solid magenta;
-	flex:  1;
-
-}
