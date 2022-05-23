@@ -118,34 +118,22 @@ class Room {
 	onBodyUpdate(id, bodyData) {
 		// Is this new?
 		if (this.bodies[id] === undefined) {
-			// console.log(JSON.stringify(bodyData, null, 2))
-			// console.log("Body data", typeof bodyData.hands[0].pos)
-
 			Vue.set(this.bodies, id, copyObject(bodyData, {toVector:true}))
 
 			// Default values
 			this.bodies[id].color = new Vector(100, 50, 50)
 			this.bodies[id].headSize = .2
-			// console.log(this.bodies[id])
-			// console.log(this.bodies[id])
+			this.bodies[id].id = id
+			
 		}
 
 		// Do we have new body data?
+		// Copy it over
 		else {
 			let body = this.bodies[id]
-
-			// body.pos.setTo(bodyData.pos)
-			// Copy over all the values
-			// vueCopyKey(body, bodyData, "pos")
-			// console.log("Copy over pos", body)
-
 			vueCopy(this.bodies[id], bodyData)
 		
 		}	
-
-		// for (const [key, value] of Object.entries(this.bodies)) {
-		// 	console.log(key, value)
-		// }
 	}
 
 	//=================================

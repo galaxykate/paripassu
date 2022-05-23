@@ -9,13 +9,21 @@ Vue.component("vr-body", {
 		</a-entity>
 		
 		<!--  HEAD AND TORSO -->
+		
 		<a-cylinder v-if="body.pos" 
 			change-color-on-hover="color: blue"
 			:position="body.pos.toAFrame(0, 1, 0)" radius="0.2" height=".5" :color="body.color.toHex()" shadow></a-cylinder>
+		
 		<a-entity v-if="body.head"
 			:position="body.head.pos.toAFrame()"  
 			:rotation="body.head.rot.toAFrame()"  
 			>
+			<a-entity 
+				look-at="#camera"
+				text="width: 10; value: Hello World;color:#000000; align:center" 
+				position="0 1 0">
+			</a-entity>
+
 			<a-sphere :radius="body.headSize" :color="body.color.toHex(.4)" shadow></a-sphere>
 			<a-cone 
 				:position="nosePos"

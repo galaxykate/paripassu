@@ -20,23 +20,27 @@ AFRAME.registerComponent('change-color-on-hover', {
 });
 
 
-
 Vue.component("room-scene", {
 	template: `<a-scene>
-
+		  <a-entity bmfont-text="text: HELLO!; color: #333" position="0 0 -5"></a-entity>
+    
+    
 		<!-- CAMERA -->
 		<a-camera>
 			<a-cursor></a-cursor>
 			
 		</a-camera>
 
+
+
 		<a-entity position="0 0 -4">
+		
 			<a-plane position="0 0 0" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" shadow></a-plane>
-			<vr-body v-for="body in room.bodies" :body="body" />
+			<vr-body v-for="body in room.bodies" :key="body.id" :body="body" />
 
 			<!-- SOME SCENERY -->
 			<a-entity>
-				<a-box v-for="b in boxes" :position="b.pos.toAFrame()" 
+				<a-box v-for="(b,bIndex) in boxes" :key="bIndex" :position="b.pos.toAFrame()" 
 					:rotation="b.rot.toAFrame()" 
 					depth="2" height="4" width="0.5"
 					change-color-on-hover="color: blue"

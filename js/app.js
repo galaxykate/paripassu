@@ -28,13 +28,13 @@ window.onload = (event) => {
 	new Vue({
 		template: `<div>
 
-			<div id="scenevector">
+			<div id="scene">
 				<room-scene :room="room" />
 			</div>
 
 			<div id="overlay">
 			 	<div v-for="body in room.bodies" :key="body.id">
-			 		{{body}}
+			 		
 			 		
 			 	</div>
 			</div>

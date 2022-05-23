@@ -1,4 +1,4 @@
-AFRAME.registerComponent('change-color-on-hover', {
+AFRAME.registerComponent('cheeseplate-behavior', {
 	schema: {
 	  color: {default: 'red'}
 	},
@@ -16,13 +16,19 @@ AFRAME.registerComponent('change-color-on-hover', {
 		el.addEventListener('mouseleave', function () {
 			el.setAttribute('color', previousColor);
 		});
-
-		el.addEventListener('click', function () {
-			el.setAttribute('color', 'black');
-		});
 	}
 });
 
 
+Vue.component("cheeseplate", {
+	template: `
+		<a-box color="blue" 
+			cheeseplate-behavior
+			depth="2" height="2" width="2"
+		>
+		</a-box>
+	`,
 
+	props: ["room"]
 
+})
