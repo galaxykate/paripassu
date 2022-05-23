@@ -72,6 +72,11 @@
 				arr = arguments[0]
 			}
 
+			if (arr[0] instanceof Vector) {
+				// Clone a vector?
+				arr = arguments[0].v
+			}
+
 
 			this.v = []
 			if (arr.length == 0) {
@@ -139,7 +144,11 @@
 		}
 
 		toAFrame() {
-			let s = this.v.map(v => v.toFixed(2)).join(" ")
+			let s = this.v.map((v,index) => {
+				if (arguments[index] !== undefined) 
+					v += arguments[index]
+				return v.toFixed(2)
+			}).join(" ")
 			return s
 		}
 
@@ -167,6 +176,13 @@
 			v.addPolar(r, theta)
 			return v
 		}
+
+		cloneSphericalOffset(r, theta, phi, axis) {
+			let v = new Vector(this)
+			v.addSpherical(r, theta, phi, axis)
+			return v
+		}
+
 
 		cloneOffset(x, y, z) {
 			if (isNaN(x))
@@ -202,9 +218,11 @@
 			// 	// this.v[i] = arr[i]
 			// }
 
+
 			// https://michaelnthiessen.com/debugging-guide-why-your-component-isnt-updating/
 			// Splice to handle Vue2 not tracking arrays
 			this.v.splice(0, arr.length, ...arr)
+
 			this.checkIfValid()
 			return this
 		}
@@ -296,39 +314,48 @@
 
 
 
-		setToPolar(r, theta) {
+		setToPolar(r, theta, axis) {
 			if (isNaN(r) || r === undefined)
 				throw(`Non-number radius: '${r}' type:${typeof r}`)
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
+			let x = r*Math.cos(theta)
+			let y = r*Math.sin(theta)
 			
-			return this.setTo(r*Math.cos(theta), r*Math.sin(theta))
+			if (axis === "y") {
+				return this.setTo(x, this.v[1], y)
+			}
+
+			if (axis === "x") {
+				return this.setTo(this.v[0], y, x)
+			}
+			
+			return this.setTo(x, y, this.v[2])
 			
 		}
 
-		setToZPolar(r, theta) {
+
+		setToPolarOffset(v, r, theta, axis) {
 			if (isNaN(r) || r === undefined)
 				throw(`Non-number radius: '${r}' type:${typeof r}`)
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
-			
-			return this.setTo(r*Math.cos(theta), this.v[1], r*Math.sin(theta))
+			let x = r*Math.cos(theta)
+			let y = r*Math.sin(theta)
+			if (axis === "x") 
+				return this.setTo(v[0], v[1] + y, v[2] + x)
+			if (axis === "y") 
+				return this.setTo(v[0] + x, v[1], v[2] + y)
+
+			return this.setTo(v[0] + x, v[1] + y, v[2] )
 			
 		}
 
 
-		setToPolarOffset(v, r, theta) {
-			if (isNaN(r) || r === undefined)
-				throw(`Non-number radius: '${r}' type:${typeof r}`)
-			if (isNaN(theta) ||  theta === undefined)
-				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
-			
-			return this.setTo(v[0] + r*Math.cos(theta), v[1] + r*Math.sin(theta) )
-		}
-
-		setToSpherical(r, theta, phi) {
+		
+		setToSpherical(r, theta, phi, axis) {
 			if (isNaN(r) || r === undefined)
 				throw(`Non-number radius: '${r}' type:${typeof r}`)
 			if (isNaN(theta) ||  theta === undefined)
@@ -336,14 +363,41 @@
 			if (isNaN(phi) ||  phi === undefined)
 				throw(`Non-number phi: '${phi}' type:${typeof phi} `)
 			
-			this.setTo(r*Math.cos(theta)*Math.cos(phi),
-				r*Math.cos(theta)*Math.cos(phi),
-				r*Math.sin(phi))
+			let x = r*Math.cos(theta)*Math.cos(phi)
+			let y = r*Math.sin(theta)*Math.cos(phi)
+			let z = r*Math.sin(phi)
+			if (axis === "x") 
+				return this.setTo(z, y, x)
+			if (axis === "y") 
+				return this.setTo(x, z, y)
 
-			return this
+			return this.setTo(x, y, z)
+
+			
 		}
 
-		
+		setToSphericalOffset(v, r, theta, phi, axis) {
+			if (isNaN(r) || r === undefined)
+				throw(`Non-number radius: '${r}' type:${typeof r}`)
+			if (isNaN(theta) ||  theta === undefined)
+				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
+			if (isNaN(phi) ||  phi === undefined)
+				throw(`Non-number phi: '${phi}' type:${typeof phi} `)
+			
+			let x = r*Math.cos(theta)*Math.cos(phi)
+			let y = r*Math.sin(theta)*Math.cos(phi)
+			let z = r*Math.sin(phi)
+			if (axis === "x") 
+				return this.setTo(v[0], v[1] + y, v[2] + x)
+			if (axis === "y") 
+				return this.setTo(v[0] + x, v[1], v[2] + y)
+
+			return this.setTo(v[0] + x, v[1] + y, v[2] )
+
+			
+		}
+
+
 		
 		//=============================================================
 		// Multiplications
@@ -352,7 +406,7 @@
 			if (isNaN(m))
 				throw(`Invalid NaN multiplier ${m}`)
 
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.v.length; i++) {
 				this.v[i] *= m
 			}
 			this.checkIfValid()
@@ -366,7 +420,7 @@
 				throw(`Can't divide by 0 `)
 			}
 
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.v.length; i++) {
 				this.v[i] /= m
 			}
 			this.checkIfValid()
@@ -387,7 +441,7 @@
 			return this
 		}
 
-		addSpherical(r, theta, phi) {
+		addSpherical(r, theta, phi, axis) {
 			if (isNaN(r) || r === undefined)
 				throw(`Non-number radius: '${r}' type:${typeof r}`)
 			if (isNaN(theta) ||  theta === undefined)
@@ -395,9 +449,24 @@
 			if (isNaN(phi) ||  phi === undefined)
 				throw(`Non-number phi: '${phi}' type:${typeof phi} `)
 			
-			this.v[0] += r*Math.cos(theta)*Math.cos(phi)
-			this.v[1] += r*Math.sin(theta)*Math.cos(phi)
-			this.v[2] += r*Math.sin(phi)
+			let x = r*Math.cos(theta)*Math.cos(phi)
+			let y = r*Math.sin(theta)*Math.cos(phi)
+			let z = r*Math.sin(phi)
+			if (axis === undefined || axis === "z") {
+				this.v[0] += x
+				this.v[1] += y
+				this.v[2] += z
+			}
+			if (axis === "y") {
+				this.v[0] += x
+				this.v[1] += z
+				this.v[2] += y
+			}
+			if (axis === "x") {
+				this.v[0] += z
+				this.v[1] += y
+				this.v[2] += x
+			}
 			
 			this.checkIfValid()
 			return this
@@ -443,7 +512,7 @@
 				let v = arr[i]
 				
 				// Only add what dimensions we both have
-				for (var j = 0; j < Math.min(this.length, v.length); j++) {
+				for (var j = 0; j < Math.min(this.v.length, v.length); j++) {
 					this.v[j] -= v[j]
 				}
 			}
@@ -458,11 +527,11 @@
 
 			let count = arguments.length/2
 
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.v.length; i++) {
 
 				for (var j = 0; j < count; j++) {
 
-					const v = arguments[j*2]
+					const v = arguments[j*2].v!== undefined?arguments[j*2].v:arguments[j*2]
 
 					// Ignore vectors that too short
 					//   assume they are 0 in this dimension
@@ -489,7 +558,7 @@
 
 		get magnitude() {
 			let sum = 0
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.v.length; i++) {
 				sum += this.v[i]**2
 			}
 			
@@ -518,7 +587,7 @@
 		normalize() {
 			let m = this.magnitude
 			if (m  > 0) {
-				for (var i = 0; i < this.length; i++) {
+				for (var i = 0; i < this.v.length; i++) {
 					this.v[i] /= m
 				}
 				

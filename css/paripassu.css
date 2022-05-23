@@ -1,94 +1,17 @@
-.widget-location {
-	display: flex;
-	flex-direction: column;
+#scene {
+	position: absolute;
+	left:  0px;
+	top:  0px;
+	width:  100%;
+	height:  100%;
 }
 
-.widget-location .map {
-	flex:  1;
-}
-
-.event-chip {
-	width:  90%;
-	margin:  5px;
-	position: relative;
-}
-
-.event-chip-host,.event-chip-leave,.event-chip-join  {
-	background-color: hsla(150, 100%, 90%, 1);
-}
-
-.event-chip-message {
-	background-color: hsla(150, 50%, 99%, 1);
-}
-
-
-.from-host {
-	border: 1px solid hsla(150, 100%, 40%, 1);
-	background-color: hsla(150, 100%, 80%, 1);
-}
-
-
-.message {
-	margin:  4px;
-	padding:  3px 4px;
-	border-radius: 10px;
-	display: inline-block;
-	background-color: white;
-	box-shadow: 1px 2px rgba(0, 0, 0, .4);
-}
-
-
-
-.event-chip.unsent {
-	border: 2px solid grey ;
-}
-.event-chip.unsent {
-	border: 2px dashed grey ;
-}
-
-.event-chip header {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.event-chip .event-type {
-	display: inline-block;
-	font-size: 70%;
-	padding: 2px 4px;
-	opacity: 50%;
-	font-style: italic;
-}
-
-.blackboard-array {
-	margin:  2px;
-	border:  1px solid cyan;
-	display: inline-block;
-	vertical-align: top;
-}
-.blackboard-array-item {
-	margin:  2px;
-	border:  1px solid green;
-	display: inline-block;
-	vertical-align: bottom;
-}
-.blackboard-val {
-	margin:  2px;
-	border:  1px solid purple;
-	display: inline-block;
-}
-
-.blackboard-dict {
-	margin:  2px;
-	border:  1px solid red;
-	display: inline-block;
-}
-
-
-.user-row {
-
-}
-
-.user-row.self {
-	background-color:  pink;
+#overlay {
+	position: absolute;
+	left:  0px;
+	top:  0px;
+	width:  100%;
+	height:  100%;
+	background-color:  hsla(150, 100%, 90%, .3);
+	pointer-events: none;
 }
