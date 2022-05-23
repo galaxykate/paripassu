@@ -11,7 +11,8 @@ class TestBody {
 		// Everyone has a head, with a direction
 		// Head-tracked are
 		this.head = {
-			pos: new Vector()
+			pos: new Vector(),
+			rot: new Vector()
 		}
 
 		this.height = 1.6 + Math.random()*.1
@@ -43,8 +44,7 @@ class TestBody {
 
 
 	update(t, dt) {
-		this.phi = Math.PI/2 - .1*noise(t*.1)
-	
+		
 		let wanderDir = 20*noise(this.idNumber + t*.1)
 		this.f.setToPolar(1, wanderDir, 'y')
 		this.f.addMultiples(this.pos, -.2)
@@ -53,6 +53,7 @@ class TestBody {
 		this.v.mult(.96)
 		this.pos.addMultiples(this.v, dt)
 		
+		this.phi = noise(t*.1)
 		this.theta = -Math.atan2(this.v.v[2], this.v.v[0]) + Math.PI/2
 		// console.log(this.theta)
 
@@ -80,8 +81,10 @@ class TestBody {
 
 	toBodyData() {
 
+		let rotTheta = this.theta*180/Math.PI
 		let head = {
-			pos: this.pos.cloneSphericalOffset(this.height, this.theta, this.phi, "y"),
+			pos: this.pos.cloneOffset(0, this.height, 0),
+			rot: [0,rotTheta,this.phi*180/Math.PI]
 		}
 
 		return {
@@ -96,7 +99,7 @@ class TestBody {
 			color: this.color.toArray(),
 			head: copyObject(head, {toArray: true}),
 			pos: this.pos.toArray(),
-			rot: [0, this.theta*180/Math.PI, 0]
+			rot: [0, rotTheta, 0]
 		}
 	}
 }

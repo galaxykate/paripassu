@@ -110,7 +110,7 @@
 			*
 			*	foo('hello')
 			*/
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.v.length; i++) {
 				if (this.v[i] === undefined || this.v[i] === null|| isNaN(this.v[i]))
 					return false
 			}
@@ -121,7 +121,7 @@
 			/**
 			* Throws an error if this is not valid
 			*/
-			for (var i = 0; i < this.length; i++) {
+			for (var i = 0; i < this.v.length; i++) {
 				if (this.v[i] === undefined || this.v[i] === null|| isNaN(this.v[i]))
 					throw(`Invalid vector: ${this}`)
 			}
@@ -148,6 +148,16 @@
 				if (arguments[index] !== undefined) 
 					v += arguments[index]
 				return v.toFixed(2)
+			}).join(" ")
+			return s
+		}
+
+		// Change radians to degrees for AFrame rotations
+		toAFrameRotation() {
+			let s = this.v.map((v,index) => {
+				if (arguments[index] !== undefined) 
+					v += arguments[index]
+				return (v*180/Math.PI).toFixed(2)
 			}).join(" ")
 			return s
 		}
@@ -268,7 +278,7 @@
 		}
 
 		setToAddMultiples( ) {
-			for (var j = 0; j < this.length; j++) {
+			for (var j = 0; j < this.v.length; j++) {
 				this.v[j] = 0
 				for (var i = 0; i < arguments.length/2; i++) {
 					let v = arguments[i*2] || arguments[i*2]
@@ -494,7 +504,7 @@
 				let v = arr[i]
 				
 				// Only add what dimensions we both have
-				for (var j = 0; j < Math.min(this.length, v.length); j++) {
+				for (var j = 0; j < Math.min(this.v.length, v.length); j++) {
 					this.v[j] += v[j]
 				}
 			}

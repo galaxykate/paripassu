@@ -13,3 +13,6 @@ Groups building meaning together around shared events (Blaseball, Wordle, r/plac
 A list of events (Lu, Fowler)
 Social structures like economies, guilds, friend groups (Project Horseshoe, Koster)
 Bodies with holdable, wearable, habitable objects (EleVR)
+
+
+Everything is done in radians (we convert them to degrees for AFrame)

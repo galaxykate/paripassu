@@ -47,6 +47,7 @@ window.onload = (event) => {
 		},
 
 		el:"#app"
-	}) 
+	})
+
 };
 

@@ -122,7 +122,11 @@ class Room {
 			// console.log("Body data", typeof bodyData.hands[0].pos)
 
 			Vue.set(this.bodies, id, copyObject(bodyData, {toVector:true}))
+
+			// Default values
 			this.bodies[id].color = new Vector(100, 50, 50)
+			this.bodies[id].headSize = .2
+			// console.log(this.bodies[id])
 			// console.log(this.bodies[id])
 		}
 
@@ -136,7 +140,7 @@ class Room {
 			// console.log("Copy over pos", body)
 
 			vueCopy(this.bodies[id], bodyData)
-			// console.log(this.bodies[id], bodyData)
+		
 		}	
 
 		// for (const [key, value] of Object.entries(this.bodies)) {
