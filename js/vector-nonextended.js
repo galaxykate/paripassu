@@ -2,9 +2,7 @@
  * @namespace Vector
  */
 
- function test() {
 
- }
 
 // Define UMD module for both AMD and browser.
 ((root, factory) => {
@@ -288,6 +286,7 @@
 					if (isNaN(m))
 						throw(`Non-number m: '${m}' type:${typeof m} `)
 					
+					this.setIndex(j,)
 					this.v[j] += v[j]*m	
 				}
 			}
@@ -444,6 +443,7 @@
 			if (isNaN(theta) ||  theta === undefined)
 				throw(`Non-number theta: '${theta}' type:${typeof theta} `)
 			
+
 			this.v[0] += r*Math.cos(theta)
 			this.v[1] += r*Math.sin(theta)
 			
@@ -565,6 +565,17 @@
 
 		//=============================================================
 		// Magnitude operations
+		get x () {
+			return this.v[0]
+		}
+
+		get y () {
+			return this.v[1]
+		}
+
+		get z () {
+			return this.v[2]
+		}
 
 		get magnitude() {
 			let sum = 0
@@ -863,7 +874,7 @@
 			// https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
 			let c = this.shade(shadeAmt, fadeAmt)
 			
-			let h = c[0]/360
+			let h = ((c[0]%360 + 360)%360)/360
 			let s = c[1]/100
 			let l = c[2]/100
 			var r, g, b;
@@ -999,10 +1010,17 @@
 		return (new Vector()).setToPolar(...arguments)
 	}
 
+	Vector.spherical = function() {
+		return (new Vector()).setToSpherical(...arguments)
+	}
+
 	Vector.polarOffset = function() {
 		return (new Vector()).setToPolarOffset(...arguments)
 	}
 
+	Vector.sphericalOffset = function() {
+		return (new Vector()).setToSphericalOffset(...arguments)
+	}
 
 	// =================
 	

@@ -1,6 +1,7 @@
-try {
-	const simplex = new SimplexNoise()
 
+try {
+	let simplex = new SimplexNoise()
+	
 	function noise() {
 
 		switch(arguments.length) {
@@ -12,10 +13,29 @@ try {
 			default: console.warn("Too many arguments for noise, max 4", arguments)
 		}
 	}
+
+	noise.seed = function(seed) {
+		console.log("Set noise seed = ", seed)
+		simplex = new SimplexNoise(seed)
+		let s = []
+		for (var i = 0; i < 10; i++) {
+			s.push(noise(i).toFixed(2))
+		}
+		console.log("\tsample:" + s.join(" "))
+	}
+
+	
 } catch (err) {
 	console.warn(err)
 	console.warn("No noise implementation included")
 }
+
+// // https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
+// function uuidv4() {
+//   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+//     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+//   );
+// }
 
 
 function missingKeys(newObj, oldObj) {

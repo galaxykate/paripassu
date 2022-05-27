@@ -16,3 +16,71 @@ Bodies with holdable, wearable, habitable objects (EleVR)
 
 
 Everything is done in radians (we convert them to degrees for AFrame)
+
+
+noise goes from [0,1]
+obj.f.addSpherical(move, 10*noise(.1*t + i), 0, 'y')
+obj.v.addScaledVector(obj.f, .1)
+
+obj.position.addScaledVector(obj.v, .1)
+obj.lookAlong(obj.v)
+obj.v.multiplyScalar(.8)
+
+
+# 
+Removing Vector class in favor of extending Object3D and Vector3 from THREE
+(except keeping it for colors)
+
+LiveObject extends Object3D and will broadcast itself to the room
+* test liveobject updates
+
+
+LiveObject
+	lookAt(v)
+	lookAlong(v)
+
+
+Three kinds of objects:
+* Tracked objects: visible to all of us, have to stay in sync
+* Blaseball/Wordle(?) objects: we each have our own copy. They stay in sync because their behavior is driven by time on a fixed progression (ie, scripted or using noise)
+* Personal objects: visible only to the local user, may be generated differently for each user
+
+User enters a room....
+	...if they are the first, add any shared tracked objects
+	otherwise, add any self-visible objects
+
+
+# Recipe book
+
+LiveObjects
+If you don't need to track the object
+```
+let box = new LiveObject(undefined, { 
+	color: new Vector(Math.random()*360, 100, 50)
+})
+```
+If you do need to track the object, include a room
+```
+let box = new LiveObject(undefined, { 
+	color: new Vector(Math.random()*360, 100, 50)
+})
+```
+
+Random color: 
+`let c = new Vector(Math.random()*360, 100, 50)`
+
+```
+let c = new Vector(Math.random()*360, 100, 50)
+...
+<!-- lighter box -->
+<a-box :color="c.toHex(.5)"></a-box>
+<!-- darker box -->
+<a-box :color="c.toHex(-.5)"></a-box>
+
+```
+
+
+# Places to put geometry
+
+Scene geometry you don't care about tracking at all 
+v-customobjects

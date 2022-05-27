@@ -7,165 +7,197 @@
  * - a unique id identifying the room
  */
 
-// Deal with Vue setting data
-function vueSet(obj, key, val) {
-	try {
-		console.log("Vue set", obj, key, val)
-		Vue.set(obj, key, val)
-	} catch (err) {
-		obj[key] = val
-	}
-}
-
-function isVector(value) {
-
-	return Array.isArray(value) 
-		&& value.length === 3
-		&& !isNaN(value[0])
-		&& !isNaN(value[1])
-		&& !isNaN(value[2])
-}
-
-function copyObject(data, settings) {
-	if (typeof data === "object") {
-		// make a vector
-		if (data instanceof Vector && settings.toArray)
-			return data.toArray()
-
-		// are we making a copy of an array-vector?
-		if (isVector(data) && settings.toVector) {
-			// console.log("copy arrayvector into Vector")
-			return new Vector(data)
-		}
-
-		// make an array
-		if (Array.isArray(data)) 
-			return data.map(x => copyObject(x, settings))
-		 
-		// copy object
-		// console.log("Create a new object")
-		let obj = {}
-		for (const [key, value] of Object.entries(data)) {
-			// console.log("copy key", key, value)
-			obj[key] = copyObject(value, settings)
-		}
-		return obj
-	}
-	return data
-}
-
-function vueCopyKey(obj, data, key) {
-	// Copy the data at this key
-	let v0 = obj[key]
-	let v1 = data[key]
-
-	if (v0 === undefined) {
-		vueSet(obj, key, copyObject(v1, {toVector:true}))
-	} else {
-		// console.log("Copy key", key, v0, v1)
-		if (v0 instanceof Vector && Array.isArray(v1)) {
-			v0.setTo(v1)
-		} 
-
-		// Ok, have to actually copy the value at this key
-		else if (typeof v0 === "object" && typeof v1 === "object") {
-			// console.log("Copy an object")
-			vueCopy(v0, v1)
-		} else {
-			throw(`Unknown type to copy ${v0}, ${v1}`)
-		}
-
-		
-	}
-}
-
-
-function vueCopy(obj, data) {
-	
-	if (Array.isArray(obj)) {
-		// Remove extra length
-		toRemove = data.length - obj.length
-		if (toRemove > 0) 
-			obj.splice(obj.length - toRemove, toRemove)
-		
-		// Copy over and add the rest
-		for (var i = 0; i < Math.max(data.length, obj.length); i++) {
-			vueCopyKey(obj, data, i)
-		}
-	} else if (typeof obj == "object") {
-		for (const [key, value] of Object.entries(data)) {
-			// copy over all the values
-			vueCopyKey(obj, data, key)
-		}
-	} else {
-		throw("Unknown types")
-	}
-}
-
 
 class Room {
 	constructor() {
-		this.roomID = "test"
+		
+		this.setID("test")
+		
+		// Update loop runs regardless of roomID
+		// Initialize an update loop
+		// 20fps
+		let t = Date.now()*.001
+		this.time = {
+			start: t,
+			lastSim: t,
+			frameCount: 0,
+			t:  t,
+			dt: .01,
+			onSecondChange(fxn) {
+				this.onSecondChangeHandlers.push(fxn)
+			},
+			onSecondChangeHandlers: [],
+		}
+		
+		setInterval(() => {
+			this.sim()
+		}, 50)
+
+		this.fakeData()
+	}
+
+	
+
+	// Start a new room with this ID
+	setID(roomID) {
+		// Seed the noise 
+		this.roomID = roomID
+		this.idNumber = roomID.hashCode()
+
+		this.titleText = "Room: " + this.roomID
+		this.detailText = "some text here"
+
+		noise.seed(this.idNumber)
 		// Both uid->Obj maps
-		this.bodies = {}
+		this.objects = {}
 		this.events = {}
 
-		this.simulate()
+		initializeRoom(this)
+
 	}
-	//=================================
-	// Handling changes
 
-	onBodyUpdate(id, bodyData) {
-		// Is this new?
-		if (this.bodies[id] === undefined) {
-			Vue.set(this.bodies, id, copyObject(bodyData, {toVector:true}))
-
-			// Default values
-			this.bodies[id].color = new Vector(100, 50, 50)
-			this.bodies[id].headSize = .2
-			this.bodies[id].id = id
-			
-		}
-
-		// Do we have new body data?
-		// Copy it over
-		else {
-			let body = this.bodies[id]
-			vueCopy(this.bodies[id], bodyData)
+	sim() {
 		
-		}	
-	}
+		// Time updates
+		this.time.t =  Date.now()*.001
+		this.time.dt = this.time.lastSim - this.time.t
+		
+		this.time.lastSim = this.time.t
+		this.time.frameCount += 1
 
-	//=================================
-
-	simulate() {
-
-
-		let testBodies = []
-		for (var i = 0; i < 1; i++) {
-			testBodies.push(new TestBody())
+		// Set up a timed event
+		let second = Math.floor(this.time.t)
+	
+		if (second !== this.time.second) {
+			// The second has changed!
+			this.time.second = second
+			this.time.onSecondChangeHandlers.forEach(fxn => fxn(this.time.second))
 		}
 
-		let t = Date.now()*.001
-		let count = 100
-		setInterval(() => {
-			if (count > 0) {
-				let t2 = Date.now()*.001
-				let dt = t2 - t
-				testBodies.forEach(b => {
-					b.update(t, dt)
-					this.onBodyUpdate(b.id, b.toBodyData())
-				})
-				
-				t = t2
-				count--
+
+
+		for (const [uid, obj] of Object.entries(this.objects)) {
+			// console.log(obj)
+			obj.updateObject(this.time)
+
+		}
+	}
+
+
+	//=================================
+	// Events
+
+	onAuth(authID) {
+		this.userHead = new LiveObject(this, {
+			type: "head",
+			authID: authID,
+			displayName: words.getUserName()
+		})
+
+	}
+
+	post(event) {
+
+	}
+
+	handleUpdate(data) {
+		
+		// Which are we missing?
+		for (const [uid, objData] of Object.entries(data)) {
+			if (this.objects[uid] === undefined) {
+				console.log("Create new local object from server data", uid.slice(-4), objData.paritype)
+				let localObj = new LiveObject(this, objData)
 			}
-		}, 100) 
 
-		
-		// Make a bunch of fake events and body movements
+			// Copy over the data
+			this.objects[uid].handleUpdate(objData)
+		}
 	}
 
+
+
+	
+	//=================================
+	// Fakedata
+
+	fakeData() {
+
+		
+		// Fake people moving and generating data
+
+		// let grammar = new tracery.createGrammar(  {
+		// 	origin : "[myPlace:#path#]#line#",
+		// 	line : ["#mood.capitalize# and #mood#, the #myPlace# was #mood# with #substance#", "#nearby.capitalize# #myPlace.a# #move.ed# through the #path#, filling me with #substance#"],
+
+		// 	nearby : ["beyond the #path#", "far away", "ahead", "behind me"],
+		// 	substance : ["light", "reflections", "mist", "shadow", "darkness", "brightness", "gaiety", "merriment"],
+		// 	mood : ["overcast", "alight", "clear", "darkened", "blue", "shadowed", "illuminated", "silver", "cool", "warm", "summer-warmed"],
+		// 	path : ["stream", "brook", "path", "ravine", "forest", "fence", "stone wall"],
+		// 	move : ["spiral", "twirl", "curl", "dance", "twine", "weave", "meander", "wander", "flow"],
+		// }, {})
+		// grammar.addModifiers(baseEngModifiers)
+
+		let fakeBodies = []
+
+		let count = 0
+
+		setInterval(() => {
+			count++
+			if (count < fakeBodySteps) {
+
+				if (fakeBodies.length < fakeBodyCount && Math.random() < .1) {
+					
+					console.log("New fake user")
+					// Create a fake head object
+					let head = new LiveObject(undefined, {
+						paritype: "head",
+						authID: "FAKE_" + uuidv4(),
+						displayName: words.getUserName(),
+						height: 1.6 + Math.random()*.2,
+						label: "fake",
+						color: new Vector(Math.random()*360, 100, 50),
+						setForce({t, dt, frameCount}) {
+							let idNumber = this.uid.hashCode()
+							this.f.set(0,0,0)
+
+							let move = Math.max(0,2*noise(t*.12 + idNumber - 1))
+							this.f.addPolar(move,20*noise(t*.2 + idNumber))
+
+
+							if (this.position.length() > 4) {
+								this.f.addScaledVector(this.position, -.02)
+							}
+							this.position.z = this.height
+						}
+					})
+					head.position.setToCylindrical(3, 4 + Math.random(), 1)
+					fakeBodies.push(head)
+				
+
+				}
+
+
+				// Simulate all the current fakebodies
+				fakeBodies.forEach((fb,index) => {
+					fb.updateObject(this.time)
+
+				})
+
+				let update = {}
+				fakeBodies.forEach(fb => {
+					update[fb.uid] = fb.toPost()
+				})
+
+				this.handleUpdate(update)
+			}
+		}, 20)
+
+		this.onAuth("FAKE_USER_AUTHID")
+	}
+
+	//=================================
+
+	
 	connectToFirebase(realtimeDatabaseRef) {
 
 	}

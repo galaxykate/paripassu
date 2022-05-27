@@ -1,96 +1,86 @@
-AFRAME.registerComponent('change-color-on-hover', {
-	schema: {
-	  color: {default: 'red'}
-	},
 
-	init: function () {
-		let data = this.data;
-		let el = this.el;  // The element we are looking at
+AFRAME.registerComponent('rotation-reader', {
+  /**
+   * We use IIFE (immediately-invoked function expression) to only allocate one
+   * vector or euler and not re-create on every tick to save memory.
+   */
+	tick: (function () {
 		
-		let previousColor = el.getAttribute('material').color;
-		el.addEventListener('mouseenter', function () {
-			previousColor = el.getAttribute('material').color;
-			el.setAttribute('color', data.color);
-		});
+		return function () {
+			if (room.userHead) {
+				room.userHead.position.copy(this.el.object3D.position)
+				room.userHead.rotation.copy(this.el.object3D.rotation)
+			}
 
-		el.addEventListener('mouseleave', function () {
-			el.setAttribute('color', previousColor);
-		});
-
-		el.addEventListener('click', function () {
-			previousColor = "black"
-			el.setAttribute('color', previousColor);
-		});
-	}
+		};
+	})()
 });
-
-
 
 Vue.component("room-scene", {
 	template: `<a-scene>
+
+		
 		<!--------- ASSETS ---------->
 		<a-assets>
 			<img id="sky" src="img/textures/sky-night.png">
 		</a-assets>
 
 		<!--------- CAMERA --------->
-		<a-camera>
+
+		<a-camera id="camera" rotation-reader>
 			<a-cursor></a-cursor>
+
+			<!-------- Output text ----->
+			<a-text 
+				v-if="room.userHead"
+				width=".8"
+				color="black"
+				:value="room.userHead.position.toFixed(2)" 
+				position="-.7 .7 -1">
+			</a-text>
+			
+			<a-text 
+				width="2"
+				color="black"
+				:value="room.titleText" 
+				position="-.7 .6 -1">
+			</a-text>
+			<a-text 
+				width="1"
+				color="black"
+				:value="room.detailText" 
+				position="-.7 .5 -1">
+			</a-text>
 			
 		</a-camera>
 		
-		<!--------- SKYBOX --------->
-		<a-sky src="#sky"></a-sky>
-
-		<a-entity position="0 0 -4">
+		<obj-world :room="room" />
 
 
-			<a-plane position="0 0 0" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" shadow></a-plane>
+		
+				
+		<a-entity position="0 0 0">
+			<a-entity text="value:hello;font:/fonts/helvetica-sdf.fnt; fontImage:/fonts/helvetica-sdf.png;width:10;color:black" position="0 1 0"></a-entity>
 			
-
-			<vr-body v-for="body in room.bodies" :body="body" />
-			
-			<a-entity text="font: mozillavr; value: Via stock font name."></a-entity>
-
-			<!--------- SOME SCENERY --------->
-			<a-entity>
-				<a-box v-for="b in boxes" :position="b.pos.toAFrame()" 
-					:rotation="b.rot.toAFrame()" 
-					depth="2" height="4" width="0.5"
-					change-color-on-hover="color: blue"
-			
-					>
-				</a-box>
-			</a-entity>
-
-			<cheeseplate :room="room" />
+			<!--------- ALL THE OBJECTS YOU'VE MADE --------->
+			<live-object  v-for="obj in room.objects" :key="obj.uid" :obj="obj" v-if="obj.room.userHead !== obj" />
 		</a-entity>
 
 
 	</a-scene>`,
 
-	mounted() {
-		console.log("BODIES", this.room.bodies)
-		let count = 10
-
-		for (var i = 0; i < count; i++) {
-			let r = 5
-			let theta = Math.PI*2*i/count
-
-			this.boxes.push({
-				pos: Vector.polar(r, theta, "y"),
-				rot: new Vector(0, -theta*180/Math.PI, 0),
-				size: Math.random()*1
-			})
-
-
+	methods: {
+		camtick() {
+			console.log("cam")
 		}
-		console.log(this.boxes)
+	},
+	mounted() {
+		// Create 
 	},
 
 	data() {
 		return  {
-			boxes: []
+			
 		}
 	},
 

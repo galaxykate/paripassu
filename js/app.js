@@ -13,13 +13,27 @@
 */
 
 let room = new Room()
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+let paused = false
+
+// Pause on space
+document.onkeyup = function(e) {
+  if (e.key == " " ||
+      e.code == "Space" ||      
+      e.keyCode == 32      
+  ) {
+    paused = !paused
+  }
+}
 
 window.onload = (event) => {
 
 	console.log("START APP")
 
-	Vue.config.ignoredElements = [/^a-/];
 
+
+	Vue.config.ignoredElements = [/^a-/];
 	Vue.component("vector", {
 		template: `<div class="vector">{{label}}:{{v}}</div>`,
 		props: ["v", "label"]
@@ -27,21 +41,38 @@ window.onload = (event) => {
 
 	new Vue({
 		template: `<div>
-
+		
 			<div id="scene">
-				<room-scene :room="room" />
+				<room-scene :room="room" v-if="!params.noaframe" />
 			</div>
 
 			<div id="overlay">
-			 	<div v-for="body in room.bodies" :key="body.id">
-			 		
+			 	<div v-for="obj in room.objects" :key="obj.uid">
+			 		<table>
+			 			<tr>
+				 			<td>
+				 				{{obj.uid.slice(-4)}}
+				 			</td>
+				 			<td>
+				 				pos:{{obj.position.toFixed(2)}}
+				 			</td>
+				 			<td>
+				 				rot:{{obj.rotation.toFixed(2)}}
+				 			</td>
+				 			
+			 				
+			 			</tr>
+			 			
+			 		</table>
 			 		
 			 	</div>
+
 			</div>
 		</div>`, 
 
 		data() {
 			return {
+				params: params,
 				room: room // Give Vue access to the room and its data
 			}
 		},
