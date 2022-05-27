@@ -1,17 +1,29 @@
-const fakeBodyCount = 4
-const fakeBodySteps = 1000
+const fakeBodyCount = 10
+const fakeBodySteps = 500
 
 // Decorate the head of our guests
 Vue.component("obj-head", {
 	template: `<a-entity>
 		<a-sphere 
-		shadow
-		:radius="headSize"
-		:color="obj.color.toHex()" 
-			
-		>
-		<obj-axes scale=".1 .1 .1" v-if="false" />
-	</a-sphere>
+			shadow
+			:radius="headSize"
+			:color="obj.color.toHex()" 
+				
+			>
+			<obj-axes scale=".1 .1 .1" v-if="true" />
+		</a-sphere>
+
+		<a-box v-for="(spike,index) in spikes"
+			:depth="headSize*2"
+			:height="headSize*.2"
+			:width="headSize*2"
+			:position="spike.position.toAFrame(0, .2, 0)"
+			:rotation="spike.rotation.toAFrame()"
+			:color="obj.color.toHex(Math.sin(index))" 
+				
+			>
+		
+		</a-box>
 	</a-entity>
 	`,
 	computed: {
@@ -21,6 +33,34 @@ Vue.component("obj-head", {
 		headSize() {
 			return this.obj.size instanceof Vector ? this.obj.size.x : this.obj.size
 		},
+	},
+
+	data() {
+		let spikeCount = 5
+		let spikes = []
+
+		for (var i = 0; i < spikeCount; i++) {
+			let h = .1
+			let spike = new LiveObject(undefined, { 
+				size: new THREE.Vector3(h*.2, h, h*.2),
+				color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
+			})
+			let r = .2
+			// Put them on the other side
+			let theta = 2*noise(i*10) + 3
+			spike.position.setToCylindrical(r, theta, h*.3)
+			// Look randomly
+			spike.lookAt(0, 3, 0)
+			spikes.push(spike)
+		}
+
+		return {
+			spikes: spikes
+		}
+	},
+
+	mounted() {
+		console.log(this.headSize)
 	},
 	props: ["obj"]
 })
@@ -151,6 +191,8 @@ Vue.component("obj-world", {
 			:position="tree.position.toAFrame()">
 		</a-cone>
 
+		
+
 		<a-box 
 			v-for="(rock,index) in rocks"
 			:key="'rock' + index"
@@ -171,6 +213,8 @@ Vue.component("obj-world", {
 		`,
 
 	data() {
+		// Where we setup the data that this *rendered scene needs*
+
 		// EXAMPLE: Generated landscape
 		// Make some random trees and rocks
 		// Create a lot of LiveObjects (just as a way 
@@ -220,8 +264,10 @@ Vue.component("obj-world", {
 
 	mounted() {
 		// Create a fire object
+		// Attach this liveobject to the ROOM
+		// and then the room deals with drawing it to AFRAME
 		let fire = new LiveObject(this.room, {
-			paritype: "fire",
+			paritype: "fire",  // Tells it which type to use
 			uid: "fire0",
 			onUpdate({t, dt, frameCount}) {
 				let hue = (noise(t*.02)+1)*180
@@ -233,6 +279,20 @@ Vue.component("obj-world", {
 
 		fire.position.set(1, 0, -2)
 		fire.fireStrength = 1
+
+		// let fire2 = new LiveObject(this.room, {
+		// 	paritype: "fire",  // Tells it which type to use
+		// 	uid: "fire2",
+		// 	onUpdate({t, dt, frameCount}) {
+		// 		let hue = (noise(t*.02)+1)*180
+		// 		Vue.set(this.color.v, 0, hue)
+				
+		// 		// console.log(this.color[0] )
+		// 	}
+		// })
+
+		// fire2.position.set(3, 0, -4)
+		// fire2.fireStrength = 7
 
 		
 		let grammar = new tracery.createGrammar(  {

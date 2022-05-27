@@ -55,7 +55,7 @@ class LiveObject extends THREE.Object3D {
  		
  		// Give me a uid and add me to the room
  		if (!room) {
- 			console.warn(`No room provided for LiveObject of type ${data.type}`)
+ 			// console.warn(`No room provided for LiveObject of type ${data.type}`)
  		} else {
  			this.room = room
  			Vue.set(this.room.objects, this.uid, this)
@@ -66,7 +66,7 @@ class LiveObject extends THREE.Object3D {
  		this.lastUpdate = {}
  		this.cameraFacing = new THREE.Object3D()
 
- 		console.warn(data, this)
+ 		// console.warn(data, this)
  		
  	}
 
