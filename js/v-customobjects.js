@@ -1,5 +1,5 @@
 const fakeBodyCount = 10
-const fakeBodySteps = 500
+const fakeBodySteps = 1000
 
 // Decorate the head of our guests
 Vue.component("obj-head", {
@@ -10,7 +10,7 @@ Vue.component("obj-head", {
 			:color="obj.color.toHex()" 
 				
 			>
-			<obj-axes scale=".1 .1 .1" v-if="true" />
+			
 		</a-sphere>
 		
 		<a-sphere 
@@ -180,7 +180,7 @@ Vue.component("obj-world", {
 		<a-plane 
 			roughness="1"
 			shadow 
-			color="hsl(140,40%,40%)"
+			color="hsla(300, 70%, 67%, 1)"
 			height="100" 
 			width="100" 
 			rotation="-90 0 0">
@@ -211,6 +211,19 @@ Vue.component("obj-world", {
 			:rotation="tree.rotation.toAFrame()"
 			:position="tree.position.toAFrame()">
 		</a-cone>
+
+		// <a-sphere 
+		// 	v-for="(tree,index) in trees"
+		// 	:key="'tree' + index"
+		// 	shadow 
+
+		// 	:color = "tree.color"
+		// 	:radius="tree.size.z + 2"
+
+			
+		// 	:rotation="tree.rotation.toAFrame()"
+		// 	:position="tree.position.toAFrame()">
+		// </a-sphere>
 
 		
 
@@ -246,7 +259,7 @@ Vue.component("obj-world", {
 
 			roughness="1"
 
-			:color="rock.color.toHex()"
+			:color="rock.color"
 			:width="rock.size.x" 
 			:depth="rock.size.z" 
 			:height="rock.size.y" 
@@ -299,13 +312,14 @@ Vue.component("obj-world", {
 			trees.push(tree)
 		}
 
+
 		let rocks = []
-		let rockCount = 20
+		let rockCount = 25
 		for (var i = 0; i < rockCount; i++) {
 			let h = 1.2 + noise(i*100) // Size from 1 to 3
 			let rock = new LiveObject(undefined, { 
 				size: new THREE.Vector3(h, h, h),
-				color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
+				color: generateRandomColor()//new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
 			})
 			let r = 4 + 1*noise(i*1)
 			// Put them on the other side
