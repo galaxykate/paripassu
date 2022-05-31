@@ -12,18 +12,39 @@ Vue.component("obj-head", {
 			>
 			<obj-axes scale=".1 .1 .1" v-if="true" />
 		</a-sphere>
-
-		<a-box v-for="(spike,index) in spikes"
-			:depth="headSize*2"
-			:height="headSize*.2"
-			:width="headSize*2"
-			:position="spike.position.toAFrame(0, .2, 0)"
-			:rotation="spike.rotation.toAFrame()"
-			:color="obj.color.toHex(Math.sin(index))" 
-				
-			>
 		
-		</a-box>
+		<a-sphere 
+		:color="obj.color.toHex()"  
+		position="0 0 0" 
+		:depth="headSize" 
+		:height="headSize" 
+		:radius="headSize">
+		</a-sphere>
+
+		<a-sphere 
+		:color="obj.color.toHex()"  
+		position="0 0 -.2" 
+		:depth="headSize*.5" 
+		:height="headSize*.3" 
+		:radius="headSize*.2">
+		</a-sphere>
+
+		<a-cylinder 
+		:color="obj.color.toHex()"
+		position="0 .16 0" 
+		:depth="headSize" 
+		:height="headSize*.3" 
+		:radius="headSize*1.1">
+		</a-cylinder>
+
+		<a-cylinder 
+		:color="obj.color.toHex()" 
+		position="0 .18 0" 
+		:depth="headSize*.5" 
+		:height="headSize*2" 
+		:radius="headSize*.75">
+		</a-cylinder>
+		
 	</a-entity>
 	`,
 	computed: {
@@ -35,29 +56,29 @@ Vue.component("obj-head", {
 		},
 	},
 
-	data() {
-		let spikeCount = 5
-		let spikes = []
+	// data() {
+	// 	let spikeCount = 5
+	// 	let spikes = []
 
-		for (var i = 0; i < spikeCount; i++) {
-			let h = .1
-			let spike = new LiveObject(undefined, { 
-				size: new THREE.Vector3(h*.2, h, h*.2),
-				color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
-			})
-			let r = .2
-			// Put them on the other side
-			let theta = 2*noise(i*10) + 3
-			spike.position.setToCylindrical(r, theta, h*.3)
-			// Look randomly
-			spike.lookAt(0, 3, 0)
-			spikes.push(spike)
-		}
+	// 	for (var i = 0; i < spikeCount; i++) {
+	// 		let h = .1
+	// 		let spike = new LiveObject(undefined, { 
+	// 			size: new THREE.Vector3(h*.2, h, h*.2),
+	// 			color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
+	// 		})
+	// 		let r = .2
+	// 		// Put them on the other side
+	// 		let theta = 2*noise(i*10) + 3
+	// 		spike.position.setToCylindrical(r, theta, h*.3)
+	// 		// Look randomly
+	// 		spike.lookAt(0, 3, 0)
+	// 		spikes.push(spike)
+	// 	}
 
-		return {
-			spikes: spikes
-		}
-	},
+	// 	return {
+	// 		spikes: spikes
+	// 	}
+	// },
 
 	mounted() {
 		console.log(this.headSize)
@@ -154,7 +175,7 @@ Vue.component("obj-world", {
 	template: `
 	<a-entity>
 		<!--------- SKYBOX --------->
-		<a-sky color="lightblue"></a-sky>
+		<a-sky color="lightblue" change-image></a-sky>
 
 		<a-plane 
 			roughness="1"
@@ -208,6 +229,20 @@ Vue.component("obj-world", {
 			:rotation="rock.rotation.toAFrame()"
 			:position="rock.position.toAFrame()">
 		</a-box>
+
+
+		<!--------- SOME SCENERY --------->
+			<a-entity>
+				<a-box v-for="b in boxes" :position="b.pos.toAFrame()" 
+					:rotation="b.rot.toAFrame()" 
+					depth="2" height="4" width="0.5"
+					change-color-on-hover="color: blue"
+			
+					>
+				</a-box>
+			</a-entity>
+
+			<cheeseplate :room="room" />
 
 	</a-entity>
 		`,
