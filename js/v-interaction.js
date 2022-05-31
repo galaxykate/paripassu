@@ -62,7 +62,7 @@ Vue.component("cheeseplate", {
 
 let cheeseplateCubes = []
 for (var i = 0; i < 40; i++) {
-  cheeseplateCubes.push(new Vector(Math.random(), 1, Math.random()))
+  cheeseplateCubes.push(new Vector(Math.random(), 1.07, Math.random()))
 }
 
 AFRAME.registerComponent('plate-behavior', {
@@ -84,15 +84,22 @@ AFRAME.registerComponent('plate-behavior', {
 			el.setAttribute('color', previousColor);
 		});
     el.addEventListener('click', function () {
-		 cheeseplateCubes.pop()
+		if (cheeseplateCubes.length <= 0){
+			for (var i = 0; i < 40; i++) {
+				cheeseplateCubes.push(new Vector(Math.random(), 1.1, Math.random()))
+				}
+		}
+		else
+			cheeseplateCubes.pop()
 		});
+	
     
-    let colors = ["2 0 1", "-1 0 3", "-2 0 3"]
+    let positions = ["2 0 -5", "1 0 1", "-1 0 2", "-1 0 3", "1 0 -7"]
 		 // el.setAttribute('color',"black");
     setInterval(() => {
 //       Do something every N milliseconds
-        let c = getRandom(colors)
-         el.setAttribute('position', c);
+        let p = getRandom(positions)
+         el.setAttribute('position', p);
     }, 5000)
 	}
 });
@@ -102,7 +109,7 @@ Vue.component("plate", {
 	template: `
 		<a-box color="blue" 
 			plate-behavior
-			depth="2" height="2" width="2" position="0 0 0"
+			depth="2" height="2" width="2" position="1 0 -5"
 		>
     
     <!-- make all the cheese cubes -->

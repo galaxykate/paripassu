@@ -108,7 +108,7 @@ Vue.component("obj-fire", {
 			:animation="heightAnimation"
 			:color="obj.color.toHex()"
 			height=.2
-			radius-bottom=".2"
+			radius-bottom=".4"
 
 			:scale="(obj.fireStrength*.2 + 1) + ' ' + .1*obj.fireStrength + ' ' + (obj.fireStrength*.2 + 1)"
 			:material="fireMaterial">
@@ -231,18 +231,7 @@ Vue.component("obj-world", {
 		</a-box>
 
 
-		<!--------- SOME SCENERY --------->
-			<a-entity>
-				<a-box v-for="b in boxes" :position="b.pos.toAFrame()" 
-					:rotation="b.rot.toAFrame()" 
-					depth="2" height="4" width="0.5"
-					change-color-on-hover="color: blue"
-			
-					>
-				</a-box>
-			</a-entity>
-
-			<cheeseplate :room="room" />
+		<plate>
 
 	</a-entity>
 		`,
@@ -294,6 +283,7 @@ Vue.component("obj-world", {
 		return {
 			trees: trees,
 			rocks: rocks
+			// boxes: []
 		}
 	},
 
@@ -356,6 +346,24 @@ Vue.component("obj-world", {
 				this.room.detailText =  song + grammar.flatten("#songStyle#")
 			}
 		})
+
+		// let count = 10
+
+		// for (var i = 0; i < count; i++) {
+		// 	let r = 5
+		// 	let theta = Math.PI*2*i/count
+
+		// 	this.boxes.push({
+		// 		pos: Vector.polar(r, theta, "y"),
+		// 		rot: new Vector(0, -theta*180/Math.PI, 0),
+		// 		size: Math.random()*1
+		// 	})
+
+
+		// }
+		// console.log(this.boxes)
+
+
 	},
 
 	props: ["room"]
