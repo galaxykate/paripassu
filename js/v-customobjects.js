@@ -201,7 +201,7 @@ Vue.component("obj-world", {
 			:key="'tree' + index"
 			shadow 
 
-			:color="tree.color.toHex()"
+			:color = "tree.color"
 			:base-radius="tree.size.z" 
 			:height="tree.size.y" 
 
@@ -213,6 +213,31 @@ Vue.component("obj-world", {
 		</a-cone>
 
 		
+
+		<a-entity>
+            <a-cylinder color="green" height="7" radius=".05" position="4 0 0" ></a-cylinder>
+            <a-cylinder color="blue" height="7" radius=".05" position="0 0 -4" ></a-cylinder>
+            <a-cylinder color="crimson" height="9" radius=".05" position="0 0 4" ></a-cylinder>
+            <a-cylinder color="yellow" height="5" radius=".05" position="-4 0 0" ></a-cylinder>
+
+            <a-triangle 
+                color="orange" 
+                roughness="1"
+                vertex-a = "4 3.5 0"
+                vertex-b = "0 4.5 4"
+                vertex-c = "0 3.5 -4"
+                material="side:double">
+            </a-triangle>
+
+			<a-triangle 
+                color="purple" 
+                roughness="1"
+                vertex-a = "-4 2.5 0"
+                vertex-b = "4 3.5 0"
+                vertex-c = "0 3.5 -4"
+                material="side:double">
+            </a-triangle>
+        </a-entity>
 
 		<a-box 
 			v-for="(rock,index) in rocks"
@@ -247,13 +272,25 @@ Vue.component("obj-world", {
 		// Cones, spheres, entities with multiple ...things?
 		// If you only use "noise" and not "random", 
 		// everyone will have the same view. (Wordle-style!)
+
+		function generateRandomColor() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+
+		console.log(generateRandomColor())
 		let trees = []
 		let count = 30
 		for (var i = 0; i < count; i++) {
 			let h = 6 + 4*noise(i) // Size from 1 to 3
 			let tree = new LiveObject(undefined, { 
 				size: new THREE.Vector3(.3, h, .3),
-				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+				color: generateRandomColor()//new Vector(noise(i*50)*30 + 40, 200, 160 + 10*noise(i*10))
+				
 			})
 			let r = 20 + 10*noise(i*40)
 			let theta = 2*noise(i*10)
