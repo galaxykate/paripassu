@@ -220,6 +220,9 @@
 			// Deal with getting an array as an argument, rather than arg-style
 			let arr = Array.isArray(arguments[0])?arguments[0]:arguments
 			
+			if (arguments[0] instanceof Vector) {
+				arr = arguments[0].v
+			}
 			// for (var i = 0; i < Math.max(this.length, arr.length); i++) {
 			// 	// Splice so that Vue can track
 			// 	this.v.splice(i, 1, arr[i])

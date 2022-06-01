@@ -12,15 +12,23 @@
 	<link rel="stylesheet" href="css/page.css">
 	<link rel="stylesheet" href="css/paripassu.css">
 	
+	<!-- Firebase --> 
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+	
+
+
+
 
 	<!-- External libs -->
 	<script  src="js/vendor/uuidv4.min.js"></script>
-	
 	<script  src="js/vendor/aframe.min.js"></script>
-	<!-- <script  src="js/vendor/aframe-clickdrag-jesstelford.js"></script> -->
-  	<!-- <script src="https://unpkg.com/aframe-click-drag-component"></script> -->
-  	<!--   <script src="https://jesstelford.github.io/aframe-click-drag-component/build.js"></script> -->
- 
 	<script  src="js/vendor/simplex-noise.js"></script>
 	<script  src="js/vendor/uuidv4.min.js"></script>
 	<script  src="js/vendor/vue.js"></script>
@@ -48,7 +56,7 @@
 	<script  src="js/room.js" ></script>
 	<script  src="js/app.js" ></script>
 
-	<!-- <script type="module">
+	<script type="module">
 	// Import the functions you need from the SDKs you need
 		console.log("CONNECTING TO FIREBASE")
 		// TODO: Add SDKs for Firebase products that you want to use
@@ -68,20 +76,17 @@
 
 		// Initialize Firebase
 		firebase.initializeApp(firebaseConfig);
+		console.log("FIREBASE INIT")
 
 		// Subscribing to auth changes
 		firebase.auth().onAuthStateChanged((user) => {
+			console.log("FIREBASE AUTH")
+
 			if (user) {
 				// User is signed in, see docs for a list of available properties
 				// https://firebase.google.com/docs/reference/js/firebase.User
 				var uid = user.uid;
-				console.log(`Firebase: ${uid} user just signed in`)
-				room.connectToFirebase({
-					user: user,
-					authID: uid, 
-					databaseRef: firebase.database()
-				})
-
+				room.onAuth(uid, firebase.database())
 
 				// ...
 			} else {
@@ -94,9 +99,10 @@
 		});
 
 		// Attempting authenticate anonymously
+		console.log("FIREBASE SIGNIN...")
 		firebase.auth().signInAnonymously()
 		.then(() => {
-			console.log("Firebase auth: Signed in anonynmously")
+			console.log("...Firebase auth: Signed in anonynmously")
 		})
 		.catch((error) => {
 			var errorCode = error.code;
@@ -107,7 +113,7 @@
 		  
 
 
-	</script> -->
+	</script>
 
 </head>
 <body>

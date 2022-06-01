@@ -4,11 +4,13 @@
  * Hopefully, we heard about that as part of an event? or part of a value change?
  */
 
+
+
 Vue.component("live-object", {
 	template: `<a-entity>
 	
 		<a-text 
-			v-if="obj.label"
+			v-if="obj.label && !isUser"
 			:value="obj.label"
 			:width="obj.labelWidth || 1"
 			:color="obj.labelColor||obj.labelColor||'black'"
@@ -18,10 +20,31 @@ Vue.component("live-object", {
 		</a-text>
 
 		<component :is="'obj-' + (obj.paritype || 'cube')" 
+			v-if="!isUser"
 			:obj="obj" 
 			:position="obj.position.toAFrame(0,0,0)" 
 			:rotation="obj.rotation.toAFrame()" />
+
+		<!-- Mirror test! -->
+		<a-entity v-else scale="1 1 -1">
+			<component :is="'obj-' + (obj.paritype || 'cube')" 
+				v-if="mirrorself"
+				:obj="obj" 
+				:position="obj.position.toAFrame(0,0,mirrorself)" 
+				:rotation="obj.rotation.toAFrame()" />
+		</a-entity>
 	</a-entity>`,
+	computed: {
+		isUser() {
+			// console.log("Is user", this.obj.room.userHead === this.obj, this.objuid)
+			return this.obj.room.userHead == this.obj
+		}
+	},
+	data() {
+		return {
+			mirrorself: parseFloat(params.mirrorself || 0)
+		}
+	},
 	props: ["obj"]
 })
 
@@ -44,14 +67,25 @@ class LiveObject extends THREE.Object3D {
  		this.drag = .01
  		
  		
- 		this.handleUpdate(data)
-
  		// Particle things
  		this.v = new THREE.Vector3()
  		this.v = new THREE.Vector3()
  		this.f = new THREE.Vector3()
 
- 		
+
+ 		// Updatable values
+ 		this.lastUpdate = {}
+ 		this.cameraFacing = new THREE.Object3D()
+
+ 		// console.warn(data, this)
+ 		this.lastPost = {}
+ 		this.lastPostTime = Date.now()
+
+
+ 		// Copy over all the data
+ 		// this needs to set the UID *before* we add this to the room
+ 		this.handleUpdate(data)
+
  		
  		// Give me a uid and add me to the room
  		if (!room) {
@@ -59,15 +93,32 @@ class LiveObject extends THREE.Object3D {
  		} else {
  			this.room = room
  			Vue.set(this.room.objects, this.uid, this)
+
+
+ 			this.room.post("createLO", {
+ 				uid: this.uid,
+ 				paritype: this.paritype
+ 			})
+
+ 			if (this.room.objectRef)
+ 				this.setRef()
  		}
  		
 
- 		// Updatable values
- 		this.lastUpdate = {}
- 		this.cameraFacing = new THREE.Object3D()
 
- 		// console.warn(data, this)
- 		
+
+ 		// console.warn("Created", this.paritype, this.uid)
+
+ 	}
+
+ 	screenPosition() {
+ 		/*
+ 		* Get the screen position of a 3D object
+ 		*/
+		// var vector = new THREE.Vector3();
+		// var projector = new THREE.Projector();
+		// projector.projectVector( vector.setFromMatrixPosition( object.matrixWorld ), camera );
+
  	}
 
  	updateObject(time) {
@@ -96,7 +147,7 @@ class LiveObject extends THREE.Object3D {
  	// Update the camera-facing angle to be towards the current camera
  	setCameraFacing() {
  		this.cameraFacing.position.copy(this.position)
- 		if (room.userHead && this.label) {
+ 		if (this.room && this.room.userHead && this.label) {
  			// Look at the user's head if they have one
 	 		// console.log(this.label, "Look at", room.userHead.position.toFixed(2))
 	 		this.cameraFacing.lookAt(room.userHead.position)
@@ -107,68 +158,119 @@ class LiveObject extends THREE.Object3D {
 	 	}
  	}
 
- 	connect(ref) {
- 		ref.child(this.id).on("value", (snapshot) => {
- 			// When this value changes
- 			if (snapshot.exists()) {
- 				snapshot.val()
- 			}
- 		})
- 	}
 
  	handleUpdate(data) {
+ 		// if (this.paritype || data.paritype)
+ 		// 	console.warn(`${this} Handle data`, data)
+
 		for (const [key, value] of Object.entries(data)) {
 			// console.log(key, value)
- 				
-			if (key === "position" || key === "rotation") {
-				this[key].set(...value)
+ 			let current = this[key]
+
+			if (current instanceof THREE.Vector3 || current instanceof THREE.Euler) {
+				
+				current.set(...value)
+
+ 			}
+ 			else if (current instanceof Vector) {
+ 				current.setTo(value)
  			}
  			else
 				this[key] = value
 		}
  	}
 
- 	toPost() {
- 		// TODO: reduce post to only stuff that changed
-		return {
-			label: this.label,
-			position: this.position.toArray(),
-			rotation: this.rotation.toArray(),
-			uid: this.uid,
-			paritype: this.paritype
-		}
+
+	setRef() {
+		this.ref = this.room.objectRef.child(this.uid)
+		this.ref.on("value", (snapshot) => {
+			// Subscribe to value changes
+			if (snapshot.exists())
+				this.handleUpdate( snapshot.val())
+		})
 	}
 
- 	post() {
- 	// 	let minRot = .01
-		// let minPos = .01
-		// let minTime = .1
- 	// 	// Decide whether to post this data
- 	// 	let deltaPos = getDistance(this.lastPosted.pos, this.pos)
- 	// 	let deltaRot = getDistance(this.lastPosted.rot, this.rot)
+	getUpdateData(postAll=false) {
+		let minRot = .01
+		let minPos = .01
+		
+		let update = {}
 
- 	// 	// Create the update, what should we add?
-	 // 	let update = {}
-	 	
-	 // 	if (deltaPos > minPos) 
-	 // 		update["pos"] = this.pos.toArray()
-	 // 	if (deltaRot > minRot) 
-	 // 		update["rot"] = this.rot.toArray()
+ 		for (const key of trackedKeys) {
+ 			let v = this[key]
+ 			if (v !== undefined) {
+ 				let changed = (this.lastPost[key] !== v)
+ 				// Vectors are fancy
+	 			if (v instanceof Vector || v instanceof THREE.Vector3 || v instanceof THREE.Euler) {
+	 				v = v.toArray()
+	 			}
+	 			
+	 			if (Array.isArray(v)) {
+	 				changed = getDistance(v, this.lastPost[key]) > .1
+	 			}
 
- 	// 	if (Object.keys(update).length > 0) {
- 	// 		console.log(`Update ${this}, Δt=${this.timeSinceUpdate.toFixed(3)}s, Δpos=${deltaPos.toFixed(3)}, Δrot=${deltaRot.toFixed(3)}`)
- 	// 		Object.assign(this.lastUpdate, update)
- 	// 	} else {
- 	// 		console.log(`Skip update for ${this}, Δt=${this.timeSinceUpdate.toFixed(3)}s, Δpos=${deltaPos.toFixed(3)}, Δrot=${deltaRot.toFixed(3)}`)
- 	// 	}
+	 			// Is this key on this object?
+	 			// Has it changed? update!
+	 			if (changed || postAll) {
+	 				// console.log(key, "Changed")
+	 				update[key] = v
+	 			}
+	 		}
+	 	}
+	 	return update
+
+	}
+
+ 	post(postAll=false) {
+ 		let t = Date.now()
+ 		let minTime = params.rate?1000/params.rate:50
+
+		this.timeSinceUpdate = t - this.lastPostTime
+ 		
+ 		let update = this.getUpdateData(postAll)
+
+	 	// Decide whether to post this data
+ 		if (Object.keys(update).length > 0 && this.timeSinceUpdate > minTime) {
+ 			// console.log(`Update ${this}, Δt=${this.timeSinceUpdate.toFixed(3)}s, Δpos=${deltaPos.toFixed(3)}, Δrot=${deltaRot.toFixed(3)}`, Object.keys(update))
+ 			
+ 			// Make the Firebase post
+ 			if (this.ref) {
+ 				Object.assign(this.lastPost, update)
+ 				this.lastPostTime = t
+
+ 				console.log("post to FB", update)
+ 				this.ref.update(update)
+ 			}
+ 		} else {
+ 			// console.log(`Skip update for ${this}, Δt=${this.timeSinceUpdate.toFixed(3)}s, Δpos=${deltaPos.toFixed(3)}, Δrot=${deltaRot.toFixed(3)}`)
+ 		}
+
+ 		
+ 	}
+
+ 	// setUID(uid) {
+ 	// 	let oldUID = this.uid
+ 		
+ 	// 	Vue.delete(this.room.objects, oldUID)
+ 	// 	Vue.set(this.room.objects, uid, this)
+ 		
+ 	// 	this.uid = uid
+ 	// }
+
+ 	toString() {
+ 		return `${this.paritype}${this.uid.slice(-4)}`
  	}
  }
 
 
+
  function getDistance(a, b) {
- 	return Math.sqrt((a.x-b.x)**2
- 		 + (a.y-b.y)**2
- 		 + (a.y-b.y)**2)
+ 	if (a === undefined || b === undefined) {
+ 		return 999999
+ 	}
+ 	return Math.sqrt((a[0]-b[0])**2
+ 		 + (a[1]-b[1])**2
+ 		 + (a[2]-b[2])**2)
  }
 
 

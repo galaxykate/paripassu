@@ -27,12 +27,23 @@ obj.lookAlong(obj.v)
 obj.v.multiplyScalar(.8)
 
 
-# 
+# LiveObjects
+
 Removing Vector class in favor of extending Object3D and Vector3 from THREE
 (except keeping it for colors)
 
+### Networking
+On creation, send "created" message
+LiveObjects that share a uid will all be synced
+If you create a LiveObject without a UID, a unique one will be created.
+So if you want all users to have a copy of the campfire, 
+
 LiveObject extends Object3D and will broadcast itself to the room
-* test liveobject updates
+* TODO test liveobject updates only on need
+* Subscribe to liveobjects
+* isTracked on liveobject
+* trackedKeys const trackedKeys = ["size", "color", "fireStrength", "rotation", "position", "paritype"]
+* params: http://[::]:8000/?mirrorself=1&name=kate
 
 
 LiveObject
@@ -84,3 +95,6 @@ let c = new Vector(Math.random()*360, 100, 50)
 
 Scene geometry you don't care about tracking at all 
 v-customobjects
+
+
+# To track an object

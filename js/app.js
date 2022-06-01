@@ -12,10 +12,14 @@
 	"Something happened here, please send this to everyone"
 */
 
-let room = new Room()
+const LOCAL_UID = localStorage.getItem("local_uid") || "USER_" + uuidv4()
+localStorage.setItem("local_uid", LOCAL_UID)
+
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 let paused = false
+
+let room = new Room()
 
 // Pause on space
 document.onkeyup = function(e) {
@@ -46,12 +50,39 @@ window.onload = (event) => {
 				<room-scene :room="room" v-if="!params.noaframe" />
 			</div>
 
-			<div id="overlay">
+			<div id="overlay" v-if="params.debug">
+				<div>
+					Name:<input v-model="room.tempDisplayName" />
+				</div>
+				<div>
+					Auth: {{room.authID?room.authID.slice(0,7):"no auth"}}
+				</div>
+
+				<!-- LIVE OBJECTS --> 
+			 	<div v-for="ev in room.events" :key="ev.uid" v-if="false">
+			 		<table>
+			 			<tr>
+				 			<td>
+				 				{{ev.type}}
+				 			</td>
+				 			<td>
+				 				{{ev.data}}
+				 			</td>
+				 			
+			 				
+			 			</tr>
+			 			
+			 		</table>
+			 		
+			 	</div>
+
+			 	<!-- LIVE OBJECTS --> 
 			 	<div v-for="obj in room.objects" :key="obj.uid">
 			 		<table>
 			 			<tr>
 				 			<td>
-				 				{{obj.uid.slice(-4)}}
+				 				{{obj.uid.slice(0,7)}}
+				 				{{obj.paritype}}
 				 			</td>
 				 			<td>
 				 				pos:{{obj.position.toFixed(2)}}
