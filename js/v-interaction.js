@@ -1,54 +1,52 @@
-AFRAME.registerComponent('change-color-on-hover', {
-	schema: {
-	  color: {default: 'red'}
-	},
+AFRAME.registerComponent("change-color-on-hover", {
+  schema: {
+    color: { default: "red" },
+  },
 
-	init: function () {
-		let data = this.data;
-		let el = this.el;  // The element we are looking at
-		
-		let previousColor = el.getAttribute('material').color;
-		el.addEventListener('mouseenter', function () {
-			previousColor = el.getAttribute('material').color;
-			el.setAttribute('color', data.color);
-		});
+  init: function () {
+    let data = this.data;
+    let el = this.el; // The element we are looking at
 
-		el.addEventListener('mouseleave', function () {
-			el.setAttribute('color', previousColor);
-		});
+    let previousColor = el.getAttribute("material").color;
+    el.addEventListener("mouseenter", function () {
+      previousColor = el.getAttribute("material").color;
+      el.setAttribute("color", data.color);
+    });
 
-		el.addEventListener('click', function () {
-			previousColor = "black"
-			el.setAttribute('color', previousColor);
-		});
-	}
+    el.addEventListener("mouseleave", function () {
+      el.setAttribute("color", previousColor);
+    });
+
+    el.addEventListener("click", function () {
+      previousColor = "black";
+      el.setAttribute("color", previousColor);
+    });
+  },
 });
 
+AFRAME.registerComponent("cheeseplate-behavior", {
+  schema: {
+    color: { default: "red" },
+  },
 
-AFRAME.registerComponent('cheeseplate-behavior', {
-	schema: {
-	  color: {default: 'red'}
-	},
+  init: function () {
+    let data = this.data;
+    let el = this.el; // The element we are looking at
 
-	init: function () {
-		let data = this.data;
-		let el = this.el;  // The element we are looking at
-		
-		let previousColor = el.getAttribute('material').color;
-		el.addEventListener('mouseenter', function () {
-			previousColor = el.getAttribute('material').color;
-			el.setAttribute('color', data.color);
-		});
+    let previousColor = el.getAttribute("material").color;
+    el.addEventListener("mouseenter", function () {
+      previousColor = el.getAttribute("material").color;
+      el.setAttribute("color", data.color);
+    });
 
-		el.addEventListener('mouseleave', function () {
-			el.setAttribute('color', previousColor);
-		});
-	}
+    el.addEventListener("mouseleave", function () {
+      el.setAttribute("color", previousColor);
+    });
+  },
 });
-
 
 Vue.component("cheeseplate", {
-	template: `
+  template: `
 		<a-box color="blue" 
 			cheeseplate-behavior
 			depth="2" height="2" width="2"
@@ -56,6 +54,5 @@ Vue.component("cheeseplate", {
 		</a-box>
 	`,
 
-	props: ["room"]
-
-})
+  props: ["room"],
+});

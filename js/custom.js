@@ -1,11 +1,11 @@
 function initializeRoom(room) {
   //   Add things to the room
   //   Give everyone the same rocks
-  let rockCount = 10;
+  let rockCount = 5;
   let objFocus = new LiveObject(room, {
-    type: "cube",
+    type: "cube-center",
     color: new Vector(360, 100, 50),
-    size: new Vector(0.5, 0.5, 0.5),
+    size: new Vector(0.05, 0.05, 0.05),
     onUpdate({ t, dt, frameCount }) {
       let x = 1.4 * noise(t * 0.5);
       let y = 2.4 * noise(t * 0.3);
@@ -21,8 +21,8 @@ function initializeRoom(room) {
       label: "cube",
       labelColor: new Vector(noise(i * 0.01) * 360, 100, 50).toHex(),
       type: "cube",
-      color: new Vector(noise(i * 0.01) * 360, 100, 50),
-      size: new Vector(0.1, 0.2, h),
+      color: new Vector(Math.random() * 360, 100, 50),
+      size: new Vector(h, h, h),
       onUpdate({ t, dt, frameCount }) {
         this.lookAt(objFocus.position);
       },
