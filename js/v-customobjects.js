@@ -230,10 +230,10 @@ Vue.component("obj-world", {
 			:position="rock.position.toAFrame()">
 		</a-box>
 
-		// <a-entity gltf-model="url(models/beach_ball/scene.gltf)" 
- 		// 	position="0 0 4"
- 		// 	scale = "0.3 0.3 0.3"
- 		// 	rotation = "0 0 0">
+		// <a-entity gltf-model="url(models/beach_ball/scene.gltf)"
+		// 	position="0 0 4"
+		// 	scale = "0.3 0.3 0.3"
+		// 	rotation = "0 0 0"> 
  		// </a-entity>
 
 	</a-entity>

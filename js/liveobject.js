@@ -11,18 +11,28 @@ AFRAME.registerComponent("cube-behavior", {
 
   init: function () {
     let data = this.data;
-    let el = this.el; // The element we are looking at
+    let el = this.el.children[0]; // The element we are looking at
+    let index = 0;
+    let rainbowColors = [
+      "white",
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "blue",
+      "purple",
+    ];
 
-    let previousColor = el.getAttribute("color");
     el.addEventListener("mouseenter", function () {
       //   previousColor = el.getAttribute("color");
       console.log(el);
-      el.setAttribute("color", data.color);
+      el.setAttribute("color", rainbowColors[index]);
+      index = (index + 1) % 7;
     });
 
-    el.addEventListener("mouseleave", function () {
-      el.setAttribute("color", previousColor);
-    });
+    // el.addEventListener("mouseleave", function () {
+    //   el.setAttribute("color", previousColor);
+    // });
   },
 });
 
