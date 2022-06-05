@@ -49,17 +49,28 @@ Vue.component("live-object", {
 			>
 		</a-text>
 
+    <a-light
+      v-if="obj.type == 'cube'"
+			:position="obj.position.toAFrame(0,.2 + (obj.size.y||obj.size),0)"
+			:intensity="0.1"
+      type="point"
+      >
+		</a-light>
+
 		<component :is="'obj-' + (obj.paritype || 'cube')" 
-			v-if="obj.label == 'cube'"
+			v-if="obj.type == 'cube'"
 			cube-behavior
 			:obj="obj" 
-			:position="obj.position.toAFrame(0,3,0)" 
+			:position="obj.position.toAFrame(0,2.5,0)" 
 			:rotation="obj.rotation.toAFrame()" />
 		<component :is="'obj-' + (obj.paritype || 'cube')" 
 			v-else-if="!isUser"
 			:obj="obj" 
 			:position="obj.position.toAFrame(0,0,0)" 
 			:rotation="obj.rotation.toAFrame()" />
+    
+    
+    
 
 		<!-- Mirror test! -->
 		<a-entity v-else scale="1 1 -1">
