@@ -1,0 +1,11 @@
+Model Information:
+* title:	chill lounge
+* source:	https://sketchfab.com/3d-models/chill-lounge-e7df19fcd05b4ea695f75832e15a3feb
+* author:	CioJay (https://sketchfab.com/CioJay)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "chill lounge" (https://sketchfab.com/3d-models/chill-lounge-e7df19fcd05b4ea695f75832e15a3feb) by CioJay (https://sketchfab.com/CioJay) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

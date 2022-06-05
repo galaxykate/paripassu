@@ -1,0 +1,11 @@
+Model Information:
+* title:	Kirby
+* source:	https://sketchfab.com/3d-models/kirby-feeec0f123924c2a99f6505a30b66043
+* author:	Miaru3d (https://sketchfab.com/miaru3d)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Kirby" (https://sketchfab.com/3d-models/kirby-feeec0f123924c2a99f6505a30b66043) by Miaru3d (https://sketchfab.com/miaru3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

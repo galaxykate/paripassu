@@ -230,11 +230,30 @@ Vue.component("obj-world", {
 			:position="rock.position.toAFrame()">
 		</a-box>
 
-		// <a-entity gltf-model="url(models/beach_ball/scene.gltf)"
-		// 	position="0 0 4"
-		// 	scale = "0.3 0.3 0.3"
-		// 	rotation = "0 0 0"> 
- 		// </a-entity>
+		<a-entity gltf-model="url(models/beach_ball/scene.gltf)" 
+			position="-1.5 2.5 -6"
+			rotation = "0 30 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="-1.5 0 0"
+			rotation = "0 30 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/albany_daybed_gray__light_gray_-_100880/scene.gltf)" 
+			position="1.5 2.5 -6"
+			rotation = "0 30 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/chill_lounge/scene.gltf)" 
+			position="10.5 2.5 -6"
+			rotation = "0 30 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/kirby/scene.gltf)" 
+			position="-5 0 -6"
+			rotation = "0 30 0">
+		</a-entity>
 
 	</a-entity>
 		`,
