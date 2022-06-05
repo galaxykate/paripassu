@@ -4,6 +4,28 @@
  * Hopefully, we heard about that as part of an event? or part of a value change?
  */
 
+AFRAME.registerComponent("cube-behavior", {
+  schema: {
+    color: { default: "white" },
+  },
+
+  init: function () {
+    let data = this.data;
+    let el = this.el; // The element we are looking at
+
+    let previousColor = el.getAttribute("color");
+    el.addEventListener("mouseenter", function () {
+      //   previousColor = el.getAttribute("color");
+      console.log(el);
+      el.setAttribute("color", data.color);
+    });
+
+    el.addEventListener("mouseleave", function () {
+      el.setAttribute("color", previousColor);
+    });
+  },
+});
+
 Vue.component("live-object", {
   template: `<a-entity>
 	
@@ -19,6 +41,7 @@ Vue.component("live-object", {
 
 		<component :is="'obj-' + (obj.paritype || 'cube')" 
 			v-if="obj.label == 'cube'"
+			cube-behavior
 			:obj="obj" 
 			:position="obj.position.toAFrame(0,3,0)" 
 			:rotation="obj.rotation.toAFrame()" />
