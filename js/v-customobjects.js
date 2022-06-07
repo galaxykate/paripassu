@@ -232,12 +232,14 @@ Vue.component("obj-world", {
 
 		<a-entity gltf-model="url(models/beach_ball/scene.gltf)" 
 			position="-1.5 2.5 -6"
-			rotation = "0 30 0">
+			rotation = "0 30 0"
+      scale="0.5 0.5 0.5">
 		</a-entity>
 
 		<a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
-			position="-1.5 0 0"
-			rotation = "0 30 0">
+			position="2 0 -2"
+			rotation = "0 30 0"
+      scale="0.15 0.15 0.15">
 		</a-entity>
 
 		<a-entity gltf-model="url(models/albany_daybed_gray__light_gray_-_100880/scene.gltf)" 
@@ -246,13 +248,14 @@ Vue.component("obj-world", {
 		</a-entity>
 
 		<a-entity gltf-model="url(models/chill_lounge/scene.gltf)" 
-			position="10.5 2.5 -6"
+			position="10.5 0 -6"
 			rotation = "0 30 0">
 		</a-entity>
 
 		<a-entity gltf-model="url(models/kirby/scene.gltf)" 
 			position="-5 0 -6"
-			rotation = "0 30 0">
+			rotation = "0 30 0"
+      scale="0.2 0.2 0.2">
 		</a-entity>
 
 	</a-entity>
