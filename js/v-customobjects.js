@@ -26,23 +26,31 @@ Vue.component("obj-head", {
 			<obj-axes scale=".1 .1 .1" v-if="false" />
 		</a-sphere>
 
-		<a-cone v-for="(spike,index) in spikes"
-			:key="index"
-			:height="spike.size"
-			:radius-bottom="headSize*.2"
-			:position="spike.position.toAFrame(0, .2, 0)"
-			:rotation="spike.rotation.toAFrame()"
-			:color="obj.color.toHex(.5*Math.sin(index))" 
+    <!-- Hat -->
+    <a-cone
+			:height="headSize*3"
+			:radius-bottom="headSize*1"
+			position="0 0.3 0"
+			:color="obj.color.toHex(.3)" 
+		></a-cone>
+    
+		// <a-cone v-for="(spike,index) in spikes"
+		// 	:key="index"
+		// 	:height="spike.size"
+		// 	:radius-bottom="headSize*.2"
+		// 	:position="spike.position.toAFrame(0, .2, 0)"
+		// 	:rotation="spike.rotation.toAFrame()"
+		// 	:color="obj.color.toHex(.5*Math.sin(index))" 
 				
-			>
+		// 	>
 		
-		</a-cone>
+		// </a-cone>
 
 		<!-- NOSE -->
 		<a-cone
 		
 			:height="headSize*.6"
-			:radius-bottom="headSize*.4"
+			:radius-bottom="headSize*.3"
 			position="0 0 -.18"
 			
 			:color="obj.color.toHex(.3)" 
@@ -50,6 +58,25 @@ Vue.component("obj-head", {
 		>
 	
 		</a-cone>
+
+    <!-- Body -->
+    <a-cone
+			:height="headSize*3"
+			:radius-bottom="headSize*2"
+			position="0 -0.4 0"
+			:color="obj.color.toHex(.3)" 
+		>
+		</a-cone>
+
+    <!-- Legs -->
+    <a-cylinder
+      :height="headSize*4"
+      :radius="headSize*0.4"
+      position="0 -0.8 0"
+      :color="obj.color.toHex(.3)" 
+    >
+    </a-cylinder>
+
 	</a-entity>
 	`,
   computed: {
