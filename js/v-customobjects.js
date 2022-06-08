@@ -89,7 +89,7 @@ Vue.component("obj-head", {
   },
 
   data() {
-    let spikeCount = Math.random() * 10 + 10;
+    let spikeCount = 1;
     let spikes = [];
     let h2 = Math.random() - 0.5;
 
@@ -204,10 +204,11 @@ Vue.component("obj-world", {
 		<!--------- SKYBOX --------->
 		<a-sky color="lightblue"></a-sky>
 
+    <!--------- ground (sand) --------->
 		<a-plane 
-			roughness="1"
+			roughness="10"
 			shadow 
-			color="hsl(140,40%,40%)"
+			color="hsla(40, 97%, 77%, 1)"
 			height="100" 
 			width="100" 
 			rotation="-90 0 0">
@@ -300,7 +301,7 @@ Vue.component("obj-world", {
     // If you only use "noise" and not "random",
     // everyone will have the same view. (Wordle-style!)
     let trees = [];
-    let count = 30;
+    let count = 10; //tree count
     for (var i = 0; i < count; i++) {
       let h = 6 + 4 * noise(i); // Size from 1 to 3
       let tree = new LiveObject(undefined, {
