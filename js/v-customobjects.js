@@ -202,7 +202,7 @@ Vue.component("obj-world", {
   template: `
 	<a-entity>
 		<!--------- SKYBOX --------->
-		<a-sky color="lightblue"></a-sky>
+		<a-sky src="url(img/textures/sunset.png)"></a-sky>
 
     <!--------- ground (sand) --------->
 		<a-plane 
@@ -215,14 +215,14 @@ Vue.component("obj-world", {
 		</a-plane>
 
 		<!---- lights ----> 
-		<a-entity light="type: ambient; intensity: 0.4;" color="white"></a-entity>
-		<a-light type="directional" 
-			position="0 0 0" 
-			rotation="-90 0 0" 
-			intensity="0.4"
-			castShadow target="#directionaltarget">
-			<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
-		</a-light>
+		// <a-entity light="type: ambient; intensity: 0.4;" color="white"></a-entity>
+		// <a-light type="directional" 
+		// 	position="0 0 0" 
+		// 	rotation="-90 0 0" 
+		// 	intensity="0.4"
+		// 	castShadow target="#directionaltarget">
+		// 	<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
+		// </a-light>
 
 		<a-cone 
 			v-for="(tree,index) in trees"
@@ -334,7 +334,7 @@ Vue.component("obj-world", {
 			position="10 0 -16"
 			rotation = "0 180 0"
       scale="0.15 0.15 0.15">
-		</a-entity>]
+		</a-entity>
 
     <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
 			position="10 0 -12"
