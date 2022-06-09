@@ -1,0 +1,11 @@
+Model Information:
+* title:	Outdoor set
+* source:	https://sketchfab.com/3d-models/outdoor-set-b30baf9c1332464aba8a6bc11698538e
+* author:	_simone.rizzi (https://sketchfab.com/simone_rizzi)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Outdoor set" (https://sketchfab.com/3d-models/outdoor-set-b30baf9c1332464aba8a6bc11698538e) by _simone.rizzi (https://sketchfab.com/simone_rizzi) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
