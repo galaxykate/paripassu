@@ -1,0 +1,11 @@
+Model Information:
+* title:	Beauty saloon
+* source:	https://sketchfab.com/3d-models/beauty-saloon-b72eb0b610094dc78e3e49687adc849c
+* author:	Home Design 3D (https://sketchfab.com/homedesign3d)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Beauty saloon" (https://sketchfab.com/3d-models/beauty-saloon-b72eb0b610094dc78e3e49687adc849c) by Home Design 3D (https://sketchfab.com/homedesign3d) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)

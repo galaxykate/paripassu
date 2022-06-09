@@ -91,19 +91,15 @@ Vue.component("obj-head", {
 	`,
   computed: {
     color() {
-      console.log(this);
       return this.obj.color.toHex ? this.obj.color.toHex() : this.obj.color;
     },
     headSize() {
       return this.obj.size instanceof Vector ? this.obj.size.x : this.obj.size;
     },
-    fake() {
-      return this.obj.uid.slice(0, 5) === "FAKE_";
-    },
   },
 
   data() {
-    let spikeCount = 1;
+    let spikeCount = Math.random() * 10 + 10;
     let spikes = [];
     let h2 = Math.random() - 0.5;
 
@@ -216,27 +212,27 @@ Vue.component("obj-world", {
   template: `
 	<a-entity>
 		<!--------- SKYBOX --------->
-		<a-sky color="lightblue"></a-sky>
+		<a-sky src="url(img/textures/sunset.png)"></a-sky>
 
     <!--------- ground (sand) --------->
 		<a-plane 
 			roughness="10"
 			shadow 
 			color="hsla(40, 97%, 77%, 1)"
-			height="100" 
-			width="100" 
+			height="200" 
+			width="200" 
 			rotation="-90 0 0">
 		</a-plane>
 
 		<!---- lights ----> 
-		<a-entity light="type: ambient; intensity: 0.1;" color="white"></a-entity>
-		<a-light type="directional" 
-			position="0 0 0" 
-			rotation="-90 0 0" 
-			intensity="0.2"
-			castShadow target="#directionaltarget">
-			<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
-		</a-light>
+		// <a-entity light="type: ambient; intensity: 0.4;" color="white"></a-entity>
+		// <a-light type="directional" 
+		// 	position="0 0 0" 
+		// 	rotation="-90 0 0" 
+		// 	intensity="0.4"
+		// 	castShadow target="#directionaltarget">
+		// 	<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
+		// </a-light>
 
 		<a-cone 
 			v-for="(tree,index) in trees"
@@ -278,29 +274,149 @@ Vue.component("obj-world", {
       scale="0.5 0.5 0.5">
 		</a-entity>
 
+    <a-entity gltf-model="url(models/beach_ball/scene.gltf)" 
+			position="35 1 -6"
+			rotation = "0 30 0"
+      scale="0.5 0.5 0.5">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/kayak/scene.gltf)" 
+			position="30 1.5 15"
+			rotation = "0 180 0"
+      scale="0.01 0.01 0.01">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/starbucks_coffee_house_cafe/scene.gltf)" 
+			position="-20 0 -50"
+			rotation = "0 0 0"
+      scale="1 1 1">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/sketchfab_store_in_mall/scene.gltf)" 
+			position="-80 0 -70"
+			rotation = "0 90 0"
+      scale="0.05 0.05 0.05">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beauty_saloon/scene.gltf)" 
+			position="-30 0 -50"
+			rotation = "0 0 0"
+      scale="1 1 1">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/ocean_model/scene.gltf)" 
+			position="40 1 -6"
+			rotation = "0 0 0"
+      scale="0.5 0.5 2">
+		</a-entity>
+
 		<a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
 			position="2 0 -2"
 			rotation = "0 30 0"
       scale="0.15 0.15 0.15">
 		</a-entity>
 
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -32"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -28"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -24"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -20"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -16"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -12"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 -8"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 2"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 6"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 10"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 14"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+    <a-entity gltf-model="url(models/beach_chair/scene.gltf)" 
+			position="10 0 18"
+			rotation = "0 180 0"
+      scale="0.15 0.15 0.15">
+		</a-entity>
+
+
 		<a-entity gltf-model="url(models/albany_daybed_gray__light_gray_-_100880/scene.gltf)" 
 			position="1.5 2.5 -6"
 			rotation = "0 30 0">
 		</a-entity>
 
-		<a-entity gltf-model="url(models/chill_lounge/scene.gltf)" 
-			position="1 0 2"
-			rotation = "0 120 0">
+    <a-entity gltf-model="url(models/outdoor_set/scene.gltf)" 
+			position="10 0 -2"
+			rotation = "0 30 0">
 		</a-entity>
 
-    <!---
+    <a-entity gltf-model="url(models/outdoor_set/scene.gltf)" 
+			position="10 0 -5"
+			rotation = "0 30 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/chill_lounge/scene.gltf)" 
+			position="10 0 -50"
+			rotation = "0 270 0">
+      scale="1.5 1.5 1.5">
+		</a-entity>
+
 		<a-entity gltf-model="url(models/kirby/scene.gltf)" 
 			position="-5 0 -6"
 			rotation = "0 30 0"
       scale="0.2 0.2 0.2">
 		</a-entity>
     --->
+
 
 	</a-entity>
 		`,
@@ -365,7 +481,7 @@ Vue.component("obj-world", {
   mounted() {
     // Create a fire object
     // Attach this liveobject to the ROOM
-    // and then the room deals with drawing it to AFRAME
+    // and then the  deals with drawing it to AFRAME
     let fire = new LiveObject(this.room, {
       paritype: "fire", // Tells it which type to use
       uid: "fire0",
@@ -534,5 +650,5 @@ Vue.component("obj-world", {
     });
   },
 
-  props: ["room"],
+  props: [""],
 });

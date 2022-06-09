@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sketchfab Store in Mall
+* source:	https://sketchfab.com/3d-models/sketchfab-store-in-mall-957c1d65e6db4598a198f7ac3888fed1
+* author:	jimbogies (https://sketchfab.com/jimbogies)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sketchfab Store in Mall" (https://sketchfab.com/3d-models/sketchfab-store-in-mall-957c1d65e6db4598a198f7ac3888fed1) by jimbogies (https://sketchfab.com/jimbogies) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
