@@ -126,7 +126,6 @@ Vue.component("obj-head", {
 
   mounted() {
     // console.log(this.headSize)
-    console.log(this.fake);
   },
   props: ["obj"],
 });
@@ -226,11 +225,11 @@ Vue.component("obj-world", {
 		</a-plane>
 
 		<!---- lights ----> 
-		<a-entity light="type: ambient; intensity: 0.4;" color="white"></a-entity>
+		<a-entity light="type: ambient; intensity: 0.1;" color="white"></a-entity>
 		<a-light type="directional" 
 			position="0 0 0" 
 			rotation="-90 0 0" 
-			intensity="0.4"
+			intensity="0.2"
 			castShadow target="#directionaltarget">
 			<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
 		</a-light>
@@ -287,15 +286,17 @@ Vue.component("obj-world", {
 		</a-entity>
 
 		<a-entity gltf-model="url(models/chill_lounge/scene.gltf)" 
-			position="10.5 0 -6"
-			rotation = "0 30 0">
+			position="1 0 2"
+			rotation = "0 120 0">
 		</a-entity>
 
+    <!---
 		<a-entity gltf-model="url(models/kirby/scene.gltf)" 
 			position="-5 0 -6"
 			rotation = "0 30 0"
       scale="0.2 0.2 0.2">
 		</a-entity>
+    --->
 
 	</a-entity>
 		`,

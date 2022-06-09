@@ -52,7 +52,7 @@ Vue.component("live-object", {
     <a-light
       v-if="obj.type == 'cube'"
 			:position="obj.position.toAFrame(0,.2 + (obj.size.y||obj.size),0)"
-			:intensity="0.1"
+			:intensity="0.2"
       type="point"
       >
 		</a-light>
