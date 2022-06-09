@@ -15,7 +15,13 @@ const trackedKeys = [
 
 // Decorate the head of our guests
 Vue.component("obj-head", {
-  template: `<a-entity>
+  template: `
+  <a-entity 
+      v-if="fake"
+      gltf-model="url(models/kirby/scene.gltf)" 
+      scale="0.2 0.2 0.2">
+	</a-entity>
+  <a-entity v-else>
 
 		<a-sphere 
 			shadow
@@ -81,10 +87,14 @@ Vue.component("obj-head", {
 	`,
   computed: {
     color() {
+      console.log(this);
       return this.obj.color.toHex ? this.obj.color.toHex() : this.obj.color;
     },
     headSize() {
       return this.obj.size instanceof Vector ? this.obj.size.x : this.obj.size;
+    },
+    fake() {
+      return this.obj.uid.slice(0, 5) === "FAKE_";
     },
   },
 
@@ -116,6 +126,7 @@ Vue.component("obj-head", {
 
   mounted() {
     // console.log(this.headSize)
+    console.log(this.fake);
   },
   props: ["obj"],
 });
