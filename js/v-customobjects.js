@@ -18,8 +18,12 @@ Vue.component("obj-head", {
   template: `
   <a-entity 
       v-if="fake"
-      gltf-model="url(models/kirby/scene.gltf)" 
-      scale="0.2 0.2 0.2">
+  >
+      <a-entity 
+        gltf-model="url(models/kirby/scene.gltf)"
+        scale="0.2 0.2 0.2"
+        rotation="0 180 0"
+      ></a-entity>
 	</a-entity>
   <a-entity v-else>
 

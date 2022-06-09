@@ -4,6 +4,17 @@
  * Hopefully, we heard about that as part of an event? or part of a value change?
  */
 
+// specify paritype
+// create Vue component and customize it
+// reference the paritype head & hand and how they move around
+
+// how to have people move around? using Oculus
+// watch head object from camera online and move it around
+
+// more to do in AR/VR
+// Learning three.js
+// learn more about Vue.js
+
 AFRAME.registerComponent("cube-behavior", {
   schema: {
     color: { default: "white" },
